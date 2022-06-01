@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class EditTrack extends StatefulWidget {
-  const EditTrack({Key? key}) : super(key: key);
+class Detail extends StatefulWidget {
+  const Detail({Key? key}) : super(key: key);
 
   @override
-  State<EditTrack> createState() => _EditTrackState();
+  State<Detail> createState() => _DetailState();
 }
 
-class _EditTrackState extends State<EditTrack> {
+class _DetailState extends State<Detail> {
   @override
   Widget build(BuildContext context) {
     return 
