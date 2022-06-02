@@ -11,6 +11,8 @@ class _CreateTrackState extends State<CreateTrack> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.lightBlue[100],
+
       body: Container(),
     );
   }
