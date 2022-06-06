@@ -46,6 +46,12 @@ class _CreateTrackState extends State<CreateTrack> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.lightBlue[100],
+       appBar: AppBar(
+            title: const Text(
+              "สร้างอุปกรณ์",
+              style: TextStyle(fontSize: 25),
+            ),
+            titleSpacing: 300),
       body: Center(
         child: Column(
           children: [

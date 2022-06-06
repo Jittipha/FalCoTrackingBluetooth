@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:form_field_validator/form_field_validator.dart';
 import 'package:intl/intl.dart';
 
 import 'model/track.dart';
@@ -17,18 +18,18 @@ class _EditTrackState extends State<EditTrack> {
   DateTime? dateTime;
   //DateTime? newDate;
   String getTextDateStart() {
-    if (track.Start_Enable_Date == null) {
-      return "Select Date";
-    } else {
-      return track.Start_Enable_Date!;
-    }
-  }
-
-  String getTextDateLast() {
     if (track.Last_Improve_Date == null) {
       return "Select Date";
     } else {
       return track.Last_Improve_Date!;
+    }
+  }
+
+  String getTextDateLast() {
+    if (track.End_Date == null) {
+      return "Select Date";
+    } else {
+      return track.End_Date!;
     }
   }
 
@@ -45,7 +46,8 @@ class _EditTrackState extends State<EditTrack> {
     String stDate = DateFormat('dd/MM/yyyy').format(newDate);
 
     setState(() {
-      track.Start_Enable_Date = stDate;
+      
+      track.Last_Improve_Date = stDate;
     });
   }
 
@@ -62,7 +64,7 @@ class _EditTrackState extends State<EditTrack> {
     String stDate = DateFormat('dd/MM/yyyy').format(newDate);
 
     setState(() {
-      track.Last_Improve_Date = stDate;
+      track.End_Date = stDate;
     });
   }
 
@@ -102,6 +104,12 @@ class _EditTrackState extends State<EditTrack> {
                   fillColor: Colors.white,
                   focusedBorder: OutlineInputBorder(),
                 ),
+                initialValue: track.Working_Condition,
+                validator:
+                    RequiredValidator(errorText: "กรุณาใส่สภาพการใช้งาน!"),
+                onSaved: (value) {
+                  setState(() => track.Working_Condition = value);
+                },
                 maxLines: 2,
               ),
               const SizedBox(
@@ -120,6 +128,12 @@ class _EditTrackState extends State<EditTrack> {
                   fillColor: Colors.white,
                   focusedBorder: OutlineInputBorder(),
                 ),
+                 initialValue: track.Location,
+                validator:
+                    RequiredValidator(errorText: "กรุณาใส่ตำเเหน่งที่ตั้ง!"),
+                onSaved: (value) {
+                   setState(() => track.Location = value);
+                },
                 maxLines: 2,
               ),
               const SizedBox(
@@ -131,14 +145,14 @@ class _EditTrackState extends State<EditTrack> {
                 children: [
                   Column(
                     children: [
-                      const Text('วันที่ปรับบปรุงล่าสุด',
+                      const Text('วันที่ปรับปรุงล่าสุด',
                           style: TextStyle(fontSize: 20)),
                       const SizedBox(
                         height: 10,
                       ),
                       SizedBox(
                         height: 45,
-                        width: 300,
+                        width: MediaQuery.of(context).size.width * 0.175,
                         child: ElevatedButton.icon(
                           onPressed: () => pickDateStart(context),
                           label: Text(
@@ -161,8 +175,8 @@ class _EditTrackState extends State<EditTrack> {
                       ),
                     ],
                   ),
-                  const SizedBox(
-                    width: 50,
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.025,
                   ),
                   Column(
                     children: [
@@ -173,7 +187,7 @@ class _EditTrackState extends State<EditTrack> {
                       ),
                       SizedBox(
                         height: 45,
-                        width: 300,
+                        width: MediaQuery.of(context).size.width * 0.175,
                         child: ElevatedButton.icon(
                           onPressed: () => pickDateLast(context),
                           label: Text(
@@ -212,10 +226,12 @@ class _EditTrackState extends State<EditTrack> {
                 decoration: const InputDecoration(
                   filled: true,
                   fillColor: Colors.white,
-                  focusedBorder: OutlineInputBorder(
-                    
-                  ),
+                  focusedBorder: OutlineInputBorder(),
                 ),
+                
+                onSaved: (value) {
+                  setState(() => track.Note = value);
+                },
                 maxLines: 5,
               ),
               const SizedBox(
@@ -230,13 +246,17 @@ class _EditTrackState extends State<EditTrack> {
                       width: 130,
                       child: ElevatedButton(
                         style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all<Color>(
-                                Colors.blue),
+                            backgroundColor:
+                                MaterialStateProperty.all<Color>(Colors.blue),
                             shape: MaterialStateProperty.all<
                                 RoundedRectangleBorder>(RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15),
                             ))),
-                        onPressed: () {},
+                        onPressed: () {
+                          if (updateTrack.currentState!.validate()) {
+        updateTrack.currentState!.save();
+                          print(track.Location);
+                         } },
                         child: const Text("ยืนยัน",
                             style: TextStyle(fontSize: 20, color: Colors.black),
                             textAlign: TextAlign.center),
@@ -249,8 +269,8 @@ class _EditTrackState extends State<EditTrack> {
                       width: 130,
                       child: ElevatedButton(
                         style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all<Color>(
-                                Colors.blue),
+                            backgroundColor:
+                                MaterialStateProperty.all<Color>(Colors.blue),
                             shape: MaterialStateProperty.all<
                                 RoundedRectangleBorder>(RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15),
