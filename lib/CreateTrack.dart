@@ -47,227 +47,46 @@ class _CreateTrackState extends State<CreateTrack> {
     return Scaffold(
       backgroundColor: Colors.lightBlue[100],
       body: Center(
-        child: Column(
-          children: [
-            Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  Padding(padding: EdgeInsets.all(16.16)),
-                  Expanded(
-                    child: Text(
-                      "รหัสเครื่อง",
-                      style: TextStyle(fontSize: 15),
-                    ),
-                  ),
-                  SizedBox(width: 0.0),
-                  Expanded(
-                    child: Text("ยี่ห้อ"),
-                  ),
-                ]),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                Padding(padding: EdgeInsets.all(16.16)),
-                Expanded(
-                  // optional flex property if flex is 1 because the default flex is 1
-                  flex: 1,
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                        filled: true,
-                        fillColor: Colors.white,
-                        border: const OutlineInputBorder(),
-                        hintText: 'กรอกรหัสเครื่อง'),
-                  ),
-                ),
-                SizedBox(width: 300.0),
-                Expanded(
-                  // optional flex property if flex is 1 because the default flex is 1
-                  flex: 1,
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                        filled: true,
-                        fillColor: Colors.white,
-                        border: const OutlineInputBorder(),
-                        hintText: 'ระบุยี่ห้อ'),
-                  ),
-                ),
-                SizedBox(width: 300.0),
-              ],
-            ),
-            Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  Padding(padding: EdgeInsets.all(16.16)),
-                  Expanded(
-                    child: Text(
-                      "รุ่น",
-                      style: TextStyle(fontSize: 15),
-                    ),
-                  ),
-                  SizedBox(width: 0.0),
-                  Expanded(
-                    child: Text("ผู้ผลิต"),
-                  ),
-                ]),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                Padding(padding: EdgeInsets.all(16.16)),
-                Expanded(
-                  // optional flex property if flex is 1 because the default flex is 1
-                  flex: 1,
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                        filled: true,
-                        fillColor: Colors.white,
-                        border: const OutlineInputBorder(),
-                        hintText: 'รุ่นของเครื่อง'),
-                  ),
-                ),
-                SizedBox(width: 300.0),
-                Expanded(
-                  // optional flex property if flex is 1 because the default flex is 1
-                  flex: 1,
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                        filled: true,
-                        fillColor: Colors.white,
-                        border: const OutlineInputBorder(),
-                        hintText: 'บริษัทผู้ผลิต'),
-                  ),
-                ),
-                SizedBox(width: 300.0),
-              ],
-            ),
-            Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  Padding(padding: EdgeInsets.all(16.16)),
-                  Expanded(
-                    child: Text(
-                      "ขนาดเครื่อง",
-                      style: TextStyle(fontSize: 15),
-                    ),
-                  ),
-                  SizedBox(width: 0.0),
-                  Expanded(
-                    child: Text("สภาพการใช้งาน"),
-                  ),
-                ]),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                Padding(padding: EdgeInsets.all(16.16)),
-                Expanded(
-                  // optional flex property if flex is 1 because the default flex is 1
-                  flex: 1,
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                        filled: true,
-                        fillColor: Colors.white,
-                        border: const OutlineInputBorder(),
-                        hintText: 'ขนาดของเครื่อง'),
-                  ),
-                ),
-                SizedBox(width: 300.0),
-                Expanded(
-                  // optional flex property if flex is 1 because the default flex is 1
-                  flex: 1,
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                        filled: true,
-                        fillColor: Colors.white,
-                        border: const OutlineInputBorder(),
-                        hintText: 'สภาพการใช้งานของเครื่อง'),
-                  ),
-                ),
-                SizedBox(width: 300.0),
-              ],
-            ),
-            Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  Padding(padding: EdgeInsets.all(16.16)),
-                  Expanded(
-                    child: Text(
-                      "ตำแหน่งที่ตั้ง",
-                      style: TextStyle(fontSize: 15),
-                    ),
-                  ),
-                  SizedBox(width: 0.0),
-                  Expanded(
-                    child: Text("ใช้ในการ"),
-                  ),
-                ]),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                Padding(padding: EdgeInsets.all(16.16)),
-                Expanded(
-                  // optional flex property if flex is 1 because the default flex is 1
-                  flex: 1,
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                        filled: true,
-                        fillColor: Colors.white,
-                        border: const OutlineInputBorder(),
-                        hintText: 'ตำแหน่งของเครื่อง'),
-                  ),
-                ),
-                SizedBox(width: 300.0),
-                Expanded(
-                  // optional flex property if flex is 1 because the default flex is 1
-                  flex: 1,
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                        filled: true,
-                        fillColor: Colors.white,
-                        border: const OutlineInputBorder(),
-                        hintText: 'ใช้ในการ'),
-                  ),
-                ),
-                SizedBox(width: 300.0),
-              ],
-            ),
-            Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  Padding(padding: EdgeInsets.all(16.16)),
-                  Expanded(
-                    child: Text(
-                      "วันเปิดใช้งาน",
-                      style: TextStyle(fontSize: 15),
-                    ),
-                  ),
-                  Expanded(
-                    child: Text("หมายเหตุ"),
-                  ),
-                ]),
-            Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  Padding(padding: EdgeInsets.all(16.16)),
-                  SizedBox(
-                    height: 45,
-                    width: 300,
-                    child: ElevatedButton.icon(
-                      onPressed: () => pickDate(context),
-                      label: Text(
-                        getTextDate(),
-                        style: const TextStyle(
-                          fontSize: 18,
-                          color: Colors.black,
-                        ),
+        child: Container(
+          padding: EdgeInsets.fromLTRB(200, 0, 0, 0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                "สร้างอุปกรณ์",
+                style: TextStyle(fontSize: 30),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    Padding(padding: EdgeInsets.all(16.16)),
+                    Expanded(
+                      child: Text(
+                        "รหัสเครื่อง",
+                        style: TextStyle(fontSize: 15),
                       ),
-                      style: ElevatedButton.styleFrom(
-                          primary: Color.fromARGB(255, 250, 248, 248),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(15))),
-                      icon: Icon(
-                        Icons.calendar_month_rounded,
-                        color: Colors.black,
-                        size: 30,
-                      ),
+                    ),
+                    SizedBox(width: 0.0),
+                    Expanded(
+                      child: Text("ยี่ห้อ"),
+                    ),
+                  ]),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  Padding(padding: EdgeInsets.all(16.16)),
+                  Expanded(
+                    // optional flex property if flex is 1 because the default flex is 1
+                    flex: 1,
+                    child: TextFormField(
+                      decoration: InputDecoration(
+                          filled: true,
+                          fillColor: Colors.white,
+                          border: const OutlineInputBorder(),
+                          hintText: 'กรอกรหัสเครื่อง'),
                     ),
                   ),
                   SizedBox(width: 300.0),
@@ -279,12 +98,228 @@ class _CreateTrackState extends State<CreateTrack> {
                           filled: true,
                           fillColor: Colors.white,
                           border: const OutlineInputBorder(),
-                          hintText: 'หมายเหตุ'),
+                          hintText: 'ระบุยี่ห้อ'),
                     ),
                   ),
                   SizedBox(width: 300.0),
-                ]),
-          ],
+                ],
+              ),
+              Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    Padding(padding: EdgeInsets.all(16.16)),
+                    Expanded(
+                      child: Text(
+                        "รุ่น",
+                        style: TextStyle(fontSize: 15),
+                      ),
+                    ),
+                    SizedBox(width: 0.0),
+                    Expanded(
+                      child: Text("ผู้ผลิต"),
+                    ),
+                  ]),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  Padding(padding: EdgeInsets.all(16.16)),
+                  Expanded(
+                    // optional flex property if flex is 1 because the default flex is 1
+                    flex: 1,
+                    child: TextFormField(
+                      decoration: InputDecoration(
+                          filled: true,
+                          fillColor: Colors.white,
+                          border: const OutlineInputBorder(),
+                          hintText: 'รุ่นของเครื่อง'),
+                    ),
+                  ),
+                  SizedBox(width: 300.0),
+                  Expanded(
+                    // optional flex property if flex is 1 because the default flex is 1
+                    flex: 1,
+                    child: TextFormField(
+                      decoration: InputDecoration(
+                          filled: true,
+                          fillColor: Colors.white,
+                          border: const OutlineInputBorder(),
+                          hintText: 'บริษัทผู้ผลิต'),
+                    ),
+                  ),
+                  SizedBox(width: 300.0),
+                ],
+              ),
+              Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    Padding(padding: EdgeInsets.all(16.16)),
+                    Expanded(
+                      child: Text(
+                        "ขนาดเครื่อง",
+                        style: TextStyle(fontSize: 15),
+                      ),
+                    ),
+                    SizedBox(width: 0.0),
+                    Expanded(
+                      child: Text("สภาพการใช้งาน"),
+                    ),
+                  ]),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  Padding(padding: EdgeInsets.all(16.16)),
+                  Expanded(
+                    // optional flex property if flex is 1 because the default flex is 1
+                    flex: 1,
+                    child: TextFormField(
+                      decoration: InputDecoration(
+                          filled: true,
+                          fillColor: Colors.white,
+                          border: const OutlineInputBorder(),
+                          hintText: 'ขนาดของเครื่อง'),
+                    ),
+                  ),
+                  SizedBox(width: 300.0),
+                  Expanded(
+                    // optional flex property if flex is 1 because the default flex is 1
+                    flex: 1,
+                    child: TextFormField(
+                      decoration: InputDecoration(
+                          filled: true,
+                          fillColor: Colors.white,
+                          border: const OutlineInputBorder(),
+                          hintText: 'สภาพการใช้งานของเครื่อง'),
+                    ),
+                  ),
+                  SizedBox(width: 300.0),
+                ],
+              ),
+              Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    Padding(padding: EdgeInsets.all(16.16)),
+                    Expanded(
+                      child: Text(
+                        "ตำแหน่งที่ตั้ง",
+                        style: TextStyle(fontSize: 15),
+                      ),
+                    ),
+                    SizedBox(width: 0.0),
+                    Expanded(
+                      child: Text("ใช้ในการ"),
+                    ),
+                  ]),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  Padding(padding: EdgeInsets.all(16.16)),
+                  Expanded(
+                    // optional flex property if flex is 1 because the default flex is 1
+                    flex: 1,
+                    child: TextFormField(
+                      decoration: InputDecoration(
+                          filled: true,
+                          fillColor: Colors.white,
+                          border: const OutlineInputBorder(),
+                          hintText: 'ตำแหน่งของเครื่อง'),
+                    ),
+                  ),
+                  SizedBox(width: 300.0),
+                  Expanded(
+                    // optional flex property if flex is 1 because the default flex is 1
+                    flex: 1,
+                    child: TextFormField(
+                      decoration: InputDecoration(
+                          filled: true,
+                          fillColor: Colors.white,
+                          border: const OutlineInputBorder(),
+                          hintText: 'ใช้ในการ'),
+                    ),
+                  ),
+                  SizedBox(width: 300.0),
+                ],
+              ),
+              Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    Padding(padding: EdgeInsets.all(16.16)),
+                    Expanded(
+                      child: Text(
+                        "วันเปิดใช้งาน",
+                        style: TextStyle(fontSize: 15),
+                      ),
+                    ),
+                    Expanded(
+                      child: Text("หมายเหตุ"),
+                    ),
+                  ]),
+              Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    Padding(padding: EdgeInsets.all(16.16)),
+                    SizedBox(
+                      height: 45,
+                      width: 300,
+                      child: ElevatedButton.icon(
+                        onPressed: () => pickDate(context),
+                        label: Text(
+                          getTextDate(),
+                          style: const TextStyle(
+                            fontSize: 18,
+                            color: Colors.black,
+                          ),
+                        ),
+                        style: ElevatedButton.styleFrom(
+                            primary: Color.fromARGB(255, 250, 248, 248),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15))),
+                        icon: Icon(
+                          Icons.calendar_month_rounded,
+                          color: Colors.black,
+                          size: 30,
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: 300.0),
+                    Expanded(
+                      // optional flex property if flex is 1 because the default flex is 1
+                      flex: 1,
+                      child: TextFormField(
+                        decoration: InputDecoration(
+                            filled: true,
+                            fillColor: Colors.white,
+                            border: const OutlineInputBorder(),
+                            hintText: 'หมายเหตุ'),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 300.0,
+                      height: 50,
+                    ),
+                  ]),
+              SizedBox(
+                height: 50,
+              ),
+              SizedBox(
+                  height: 40,
+                  width: 130,
+                  child: ElevatedButton(
+                    style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all<Color>(
+                            Color.fromARGB(255, 4, 211, 225)),
+                        shape:
+                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          side: BorderSide(width: 2),
+                        ))),
+                    onPressed: () {},
+                    child: const Text("ยืนยัน",
+                        style: TextStyle(fontSize: 20, color: Colors.black),
+                        textAlign: TextAlign.center),
+                  )),
+            ],
+          ),
         ),
       ),
     );
