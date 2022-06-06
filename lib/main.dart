@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-
-
+import 'package:trackingbluetooth/Detail.dart';
 
 import 'package:trackingbluetooth/ListData.dart';
-
 
 import 'package:trackingbluetooth/CreateTrack.dart';
 import 'package:trackingbluetooth/EditTrack.dart';
@@ -34,7 +32,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const Listdata(),
+      home: const mainmenu(),
     );
   }
 }

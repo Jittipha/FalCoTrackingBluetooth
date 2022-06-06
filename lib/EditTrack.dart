@@ -48,7 +48,6 @@ class _EditTrackState extends State<EditTrack> {
     String stDate = DateFormat('dd/MM/yyyy').format(newDate);
 
     setState(() {
-      
       track.Last_Improve_Date = stDate;
     });
   }
@@ -90,9 +89,9 @@ class _EditTrackState extends State<EditTrack> {
               //   'เเก้ไขข้อมูลอุปกรณ์',
               //   style: TextStyle(fontSize: 25),
               // ),
-              // const SizedBox(
-              //   height: 20,
-              // ),
+               const SizedBox(
+                 height: 50,
+               ),
               const Text(
                 'สภาพการใช้งาน',
                 style: TextStyle(fontSize: 20),
@@ -112,6 +111,7 @@ class _EditTrackState extends State<EditTrack> {
                 onSaved: (value) {
                   setState(() => track.Working_Condition = value);
                 },
+                maxLength: 50,
                 maxLines: 2,
               ),
               const SizedBox(
@@ -130,12 +130,13 @@ class _EditTrackState extends State<EditTrack> {
                   fillColor: Colors.white,
                   focusedBorder: OutlineInputBorder(),
                 ),
-                 initialValue: track.Location,
+                initialValue: track.Location,
                 validator:
                     RequiredValidator(errorText: "กรุณาใส่ตำเเหน่งที่ตั้ง!"),
                 onSaved: (value) {
-                   setState(() => track.Location = value);
+                  setState(() => track.Location = value);
                 },
+                maxLength: 100,
                 maxLines: 2,
               ),
               const SizedBox(
@@ -230,10 +231,10 @@ class _EditTrackState extends State<EditTrack> {
                   fillColor: Colors.white,
                   focusedBorder: OutlineInputBorder(),
                 ),
-                
                 onSaved: (value) {
                   setState(() => track.Note = value);
                 },
+                maxLength: 500,
                 maxLines: 5,
               ),
               const SizedBox(
@@ -256,9 +257,10 @@ class _EditTrackState extends State<EditTrack> {
                             ))),
                         onPressed: () {
                           if (updateTrack.currentState!.validate()) {
-        updateTrack.currentState!.save();
-                          print(track.Location);
-                         } },
+                            updateTrack.currentState!.save();
+                            print(track.Location);
+                          }
+                        },
                         child: const Text("ยืนยัน",
                             style: TextStyle(fontSize: 20, color: Colors.black),
                             textAlign: TextAlign.center),

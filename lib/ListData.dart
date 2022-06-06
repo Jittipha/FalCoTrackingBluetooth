@@ -102,7 +102,7 @@ class _ListdataState extends State<Listdata> {
               width: 800,
               height: 500,
               color: const Color(0x003A94FB),
-              padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
+              padding: const EdgeInsets.fromLTRB(10, 20, 10, 10),
               child: Column(children: <Widget>[
                 const Text(
                   "อุปกรณ์ทั้งหมด",
@@ -206,13 +206,11 @@ class _ListdataState extends State<Listdata> {
               body: {'Track_ID': Track_id});
           if (response.statusCode == 200) {
             setState(() {
-             Navigator.pop(context);
-              
+              Navigator.pop(context);
             });
           } else {
             return print("Delete Fail!");
           }
-          
         });
 
     Widget cancleButton = FlatButton(
