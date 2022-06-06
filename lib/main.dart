@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:trackingbluetooth/Detail.dart';
 
 import 'package:trackingbluetooth/ListData.dart';
 
