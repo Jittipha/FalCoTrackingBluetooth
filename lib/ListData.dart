@@ -19,7 +19,7 @@ class _ListdataState extends State<Listdata> {
             child: Container(
               width: 800,
               height: 500,
-              color: Color(0x003A94FB),
+              color: const Color(0x003A94FB),
               padding: const EdgeInsets.fromLTRB(10, 20, 10, 10),
               child: Column(children: <Widget>[
                 const Text(
