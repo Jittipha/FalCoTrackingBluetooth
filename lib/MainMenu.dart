@@ -3,6 +3,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:trackingbluetooth/CreateTrack.dart';
+import 'package:trackingbluetooth/EditTrack.dart';
 import 'package:trackingbluetooth/ListData.dart';
 
 class mainmenu extends StatefulWidget {
@@ -62,7 +63,7 @@ class _mainmenuState extends State<mainmenu> {
             GestureDetector(
               onTap: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const Listdata()));
+                    MaterialPageRoute(builder: (context) => const EditTrack()));
               },
               child: Container(
                 padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
