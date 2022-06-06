@@ -53,7 +53,7 @@ class _CreateTrackState extends State<CreateTrack> {
             titleSpacing: 300),
       body: Center(
         child: Container(
-          padding: EdgeInsets.fromLTRB(200, 0, 0, 0),
+          padding: const EdgeInsets.fromLTRB(200, 0, 0, 0),
           key: _formKey,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -61,7 +61,7 @@ class _CreateTrackState extends State<CreateTrack> {
             children: [
               Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
+                  children: const <Widget>[
                     Padding(padding: EdgeInsets.all(16.16)),
                     Expanded(
                       child: Text(
@@ -81,10 +81,10 @@ class _CreateTrackState extends State<CreateTrack> {
                     // optional flex property if flex is 1 because the default flex is 1
                     flex: 1,
                     child: TextFormField(
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                           filled: true,
                           fillColor: Colors.white,
-                          border: const OutlineInputBorder(),
+                          border: OutlineInputBorder(),
                           hintText: 'กรอกรหัสเครื่อง'),
                       validator: (Value) {
                         if (Value == null || Value.isEmpty) {
@@ -101,10 +101,10 @@ class _CreateTrackState extends State<CreateTrack> {
                     // optional flex property if flex is 1 because the default flex is 1
                     flex: 1,
                     child: TextFormField(
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                           filled: true,
                           fillColor: Colors.white,
-                          border: const OutlineInputBorder(),
+                          border: OutlineInputBorder(),
                           hintText: 'ระบุยี่ห้อ'),
                     ),
                   ),
@@ -115,7 +115,7 @@ class _CreateTrackState extends State<CreateTrack> {
               ),
               Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
+                  children: const <Widget>[
                     Padding(padding: EdgeInsets.all(16.16)),
                     Expanded(
                       child: Text(
@@ -130,11 +130,12 @@ class _CreateTrackState extends State<CreateTrack> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
-                  Padding(padding: EdgeInsets.all(16.16)),
+                  const Padding(padding: EdgeInsets.all(16.16)),
                   Expanded(
                     // optional flex property if flex is 1 because the default flex is 1
                     flex: 1,
                     child: TextFormField(
+                      // ignore: prefer_const_constructors
                       decoration: InputDecoration(
                           filled: true,
                           fillColor: Colors.white,
@@ -149,10 +150,10 @@ class _CreateTrackState extends State<CreateTrack> {
                     // optional flex property if flex is 1 because the default flex is 1
                     flex: 1,
                     child: TextFormField(
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                           filled: true,
                           fillColor: Colors.white,
-                          border: const OutlineInputBorder(),
+                          border: OutlineInputBorder(),
                           hintText: 'บริษัทผู้ผลิต'),
                     ),
                   ),
@@ -163,7 +164,7 @@ class _CreateTrackState extends State<CreateTrack> {
               ),
               Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
+                  children: const <Widget>[
                     Padding(padding: EdgeInsets.all(16.16)),
                     Expanded(
                       child: Text(
@@ -178,15 +179,15 @@ class _CreateTrackState extends State<CreateTrack> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
-                  Padding(padding: EdgeInsets.all(16.16)),
+                  const Padding(padding: EdgeInsets.all(16.16)),
                   Expanded(
                     // optional flex property if flex is 1 because the default flex is 1
                     flex: 1,
                     child: TextFormField(
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                           filled: true,
                           fillColor: Colors.white,
-                          border: const OutlineInputBorder(),
+                          border: OutlineInputBorder(),
                           hintText: 'ขนาดของเครื่อง'),
                     ),
                   ),
@@ -197,10 +198,10 @@ class _CreateTrackState extends State<CreateTrack> {
                     // optional flex property if flex is 1 because the default flex is 1
                     flex: 1,
                     child: TextFormField(
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                           filled: true,
                           fillColor: Colors.white,
-                          border: const OutlineInputBorder(),
+                          border: OutlineInputBorder(),
                           hintText: 'สภาพการใช้งานของเครื่อง'),
                     ),
                   ),
@@ -211,7 +212,7 @@ class _CreateTrackState extends State<CreateTrack> {
               ),
               Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
+                  children: const <Widget>[
                     Padding(padding: EdgeInsets.all(16.16)),
                     Expanded(
                       child: Text(
@@ -226,15 +227,15 @@ class _CreateTrackState extends State<CreateTrack> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
-                  Padding(padding: EdgeInsets.all(16.16)),
+                  const Padding(padding: EdgeInsets.all(16.16)),
                   Expanded(
                     // optional flex property if flex is 1 because the default flex is 1
                     flex: 1,
                     child: TextFormField(
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                           filled: true,
                           fillColor: Colors.white,
-                          border: const OutlineInputBorder(),
+                          border: OutlineInputBorder(),
                           hintText: 'ตำแหน่งของเครื่อง'),
                     ),
                   ),
@@ -245,10 +246,10 @@ class _CreateTrackState extends State<CreateTrack> {
                     // optional flex property if flex is 1 because the default flex is 1
                     flex: 1,
                     child: TextFormField(
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                           filled: true,
                           fillColor: Colors.white,
-                          border: const OutlineInputBorder(),
+                          border: OutlineInputBorder(),
                           hintText: 'ใช้ในการ'),
                     ),
                   ),
@@ -259,7 +260,7 @@ class _CreateTrackState extends State<CreateTrack> {
               ),
               Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
+                  children: const <Widget>[
                     Padding(padding: EdgeInsets.all(16.16)),
                     Expanded(
                       child: Text(
@@ -274,7 +275,7 @@ class _CreateTrackState extends State<CreateTrack> {
               Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
-                    Padding(padding: EdgeInsets.all(16.16)),
+                    const Padding(padding: EdgeInsets.all(16.16)),
                     SizedBox(
                       width: MediaQuery.of(context).size.width * 0.2,
                       height: MediaQuery.of(context).size.height * 0.07,
@@ -288,10 +289,10 @@ class _CreateTrackState extends State<CreateTrack> {
                           ),
                         ),
                         style: ElevatedButton.styleFrom(
-                            primary: Color.fromARGB(255, 250, 248, 248),
+                            primary: const Color.fromARGB(255, 250, 248, 248),
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(15))),
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.calendar_month_rounded,
                           color: Colors.black,
                           size: 30,
@@ -305,10 +306,10 @@ class _CreateTrackState extends State<CreateTrack> {
                       // optional flex property if flex is 1 because the default flex is 1
                       flex: 1,
                       child: TextFormField(
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                             filled: true,
                             fillColor: Colors.white,
-                            border: const OutlineInputBorder(),
+                            border: OutlineInputBorder(),
                             hintText: 'หมายเหตุ'),
                         maxLines: 5,
                       ),
@@ -317,7 +318,7 @@ class _CreateTrackState extends State<CreateTrack> {
                       width: MediaQuery.of(context).size.width * 0.2,
                     ),
                   ]),
-              SizedBox(
+              const SizedBox(
                 height: 50,
               ),
               SizedBox(
@@ -326,12 +327,12 @@ class _CreateTrackState extends State<CreateTrack> {
                   child: ElevatedButton(
                     style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all<Color>(
-                            Color.fromARGB(255, 4, 211, 225)),
+                            const Color.fromARGB(255, 4, 211, 225)),
                         shape:
                             MaterialStateProperty.all<RoundedRectangleBorder>(
                                 RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(15),
-                          side: BorderSide(width: 2),
+                          side: const BorderSide(width: 2),
                         ))),
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
