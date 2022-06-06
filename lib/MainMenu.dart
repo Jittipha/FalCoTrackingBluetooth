@@ -1,6 +1,9 @@
+// ignore_for_file: file_names, camel_case_types, prefer_const_literals_to_create_immutables, unnecessary_const
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:trackingbluetooth/CreateTrack.dart';
+import 'package:trackingbluetooth/EditTrack.dart';
 import 'package:trackingbluetooth/ListData.dart';
 
 class mainmenu extends StatefulWidget {
@@ -31,11 +34,12 @@ class _mainmenuState extends State<mainmenu> {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   color: Colors.white,
-                  boxShadow: const [
-                    BoxShadow(
+
+                  boxShadow: [
+                    const BoxShadow(
                       color: Colors.grey,
                       blurRadius: 4,
-                      offset: Offset(4, 8), // Shadow position
+                      offset: const Offset(4, 8), // Shadow position
                     ),
                   ],
                 ),
@@ -60,7 +64,7 @@ class _mainmenuState extends State<mainmenu> {
             GestureDetector(
               onTap: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const Listdata()));
+                    MaterialPageRoute(builder: (context) => const EditTrack()));
               },
               child: Container(
                 padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
@@ -70,10 +74,10 @@ class _mainmenuState extends State<mainmenu> {
                   borderRadius: BorderRadius.circular(10),
                   color: Colors.white,
                   boxShadow: [
-                    BoxShadow(
+                    const BoxShadow(
                       color: Colors.grey,
                       blurRadius: 4,
-                      offset: Offset(4, 8), // Shadow position
+                      offset: const Offset(4, 8), // Shadow position
                     ),
                   ],
                 ),
