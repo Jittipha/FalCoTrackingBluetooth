@@ -16,6 +16,7 @@ class _CreateTrackState extends State<CreateTrack> {
   Track track = Track();
   DateTime date = DateTime(2022, 01, 01);
   DateTime? dateTime;
+  final _formKey = GlobalKey<FormState>();
   //DateTime? newDate;
   String getTextDate() {
     if (track.Start_Enable_Date == null) {
@@ -46,19 +47,18 @@ class _CreateTrackState extends State<CreateTrack> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.lightBlue[100],
+      appBar: AppBar(
+          title:
+              const Text("เเก้ไขข้อมูลอุปกรณ์", style: TextStyle(fontSize: 25)),
+          titleSpacing: 300),
       body: Center(
         child: Container(
           padding: EdgeInsets.fromLTRB(200, 0, 0, 0),
+          key: _formKey,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text(
-                "สร้างอุปกรณ์",
-                style: TextStyle(fontSize: 30),
-              ),
-              SizedBox(
-                height: 20,
-              ),
               Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
@@ -69,7 +69,6 @@ class _CreateTrackState extends State<CreateTrack> {
                         style: TextStyle(fontSize: 15),
                       ),
                     ),
-                    SizedBox(width: 0.0),
                     Expanded(
                       child: Text("ยี่ห้อ"),
                     ),
@@ -87,9 +86,17 @@ class _CreateTrackState extends State<CreateTrack> {
                           fillColor: Colors.white,
                           border: const OutlineInputBorder(),
                           hintText: 'กรอกรหัสเครื่อง'),
+                      validator: (Value) {
+                        if (Value == null || Value.isEmpty) {
+                          return 'กรุณากรอกรหัสเครื่อง';
+                        }
+                        return null;
+                      },
                     ),
                   ),
-                  SizedBox(width: 300.0),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.2,
+                  ),
                   Expanded(
                     // optional flex property if flex is 1 because the default flex is 1
                     flex: 1,
@@ -101,7 +108,9 @@ class _CreateTrackState extends State<CreateTrack> {
                           hintText: 'ระบุยี่ห้อ'),
                     ),
                   ),
-                  SizedBox(width: 300.0),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.2,
+                  ),
                 ],
               ),
               Row(
@@ -114,7 +123,6 @@ class _CreateTrackState extends State<CreateTrack> {
                         style: TextStyle(fontSize: 15),
                       ),
                     ),
-                    SizedBox(width: 0.0),
                     Expanded(
                       child: Text("ผู้ผลิต"),
                     ),
@@ -134,7 +142,9 @@ class _CreateTrackState extends State<CreateTrack> {
                           hintText: 'รุ่นของเครื่อง'),
                     ),
                   ),
-                  SizedBox(width: 300.0),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.2,
+                  ),
                   Expanded(
                     // optional flex property if flex is 1 because the default flex is 1
                     flex: 1,
@@ -146,7 +156,9 @@ class _CreateTrackState extends State<CreateTrack> {
                           hintText: 'บริษัทผู้ผลิต'),
                     ),
                   ),
-                  SizedBox(width: 300.0),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.2,
+                  ),
                 ],
               ),
               Row(
@@ -159,7 +171,6 @@ class _CreateTrackState extends State<CreateTrack> {
                         style: TextStyle(fontSize: 15),
                       ),
                     ),
-                    SizedBox(width: 0.0),
                     Expanded(
                       child: Text("สภาพการใช้งาน"),
                     ),
@@ -179,7 +190,9 @@ class _CreateTrackState extends State<CreateTrack> {
                           hintText: 'ขนาดของเครื่อง'),
                     ),
                   ),
-                  SizedBox(width: 300.0),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.2,
+                  ),
                   Expanded(
                     // optional flex property if flex is 1 because the default flex is 1
                     flex: 1,
@@ -191,7 +204,9 @@ class _CreateTrackState extends State<CreateTrack> {
                           hintText: 'สภาพการใช้งานของเครื่อง'),
                     ),
                   ),
-                  SizedBox(width: 300.0),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.2,
+                  ),
                 ],
               ),
               Row(
@@ -204,7 +219,6 @@ class _CreateTrackState extends State<CreateTrack> {
                         style: TextStyle(fontSize: 15),
                       ),
                     ),
-                    SizedBox(width: 0.0),
                     Expanded(
                       child: Text("ใช้ในการ"),
                     ),
@@ -224,7 +238,9 @@ class _CreateTrackState extends State<CreateTrack> {
                           hintText: 'ตำแหน่งของเครื่อง'),
                     ),
                   ),
-                  SizedBox(width: 300.0),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.2,
+                  ),
                   Expanded(
                     // optional flex property if flex is 1 because the default flex is 1
                     flex: 1,
@@ -236,7 +252,9 @@ class _CreateTrackState extends State<CreateTrack> {
                           hintText: 'ใช้ในการ'),
                     ),
                   ),
-                  SizedBox(width: 300.0),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.2,
+                  ),
                 ],
               ),
               Row(
@@ -258,8 +276,8 @@ class _CreateTrackState extends State<CreateTrack> {
                   children: <Widget>[
                     Padding(padding: EdgeInsets.all(16.16)),
                     SizedBox(
-                      height: 45,
-                      width: 300,
+                      width: MediaQuery.of(context).size.width * 0.2,
+                      height: MediaQuery.of(context).size.height * 0.07,
                       child: ElevatedButton.icon(
                         onPressed: () => pickDate(context),
                         label: Text(
@@ -280,7 +298,9 @@ class _CreateTrackState extends State<CreateTrack> {
                         ),
                       ),
                     ),
-                    SizedBox(width: 300.0),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.225,
+                    ),
                     Expanded(
                       // optional flex property if flex is 1 because the default flex is 1
                       flex: 1,
@@ -290,19 +310,19 @@ class _CreateTrackState extends State<CreateTrack> {
                             fillColor: Colors.white,
                             border: const OutlineInputBorder(),
                             hintText: 'หมายเหตุ'),
+                        maxLines: 5,
                       ),
                     ),
                     SizedBox(
-                      width: 300.0,
-                      height: 50,
+                      width: MediaQuery.of(context).size.width * 0.2,
                     ),
                   ]),
               SizedBox(
                 height: 50,
               ),
               SizedBox(
-                  height: 40,
-                  width: 130,
+                  height: MediaQuery.of(context).size.height * 0.05,
+                  width: MediaQuery.of(context).size.width * 0.2,
                   child: ElevatedButton(
                     style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all<Color>(
@@ -313,7 +333,13 @@ class _CreateTrackState extends State<CreateTrack> {
                           borderRadius: BorderRadius.circular(15),
                           side: BorderSide(width: 2),
                         ))),
-                    onPressed: () {},
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('Processing Data')),
+                        );
+                      }
+                    },
                     child: const Text("ยืนยัน",
                         style: TextStyle(fontSize: 20, color: Colors.black),
                         textAlign: TextAlign.center),
