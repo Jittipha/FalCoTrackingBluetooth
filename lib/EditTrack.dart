@@ -112,6 +112,7 @@ class _EditTrackState extends State<EditTrack> {
                 onSaved: (value) {
                   setState(() => track.Working_Condition = value);
                 },
+                maxLength: 50,
                 maxLines: 2,
               ),
               const SizedBox(
@@ -136,6 +137,7 @@ class _EditTrackState extends State<EditTrack> {
                 onSaved: (value) {
                    setState(() => track.Location = value);
                 },
+                maxLength: 100,
                 maxLines: 2,
               ),
               const SizedBox(
@@ -234,6 +236,7 @@ class _EditTrackState extends State<EditTrack> {
                 onSaved: (value) {
                   setState(() => track.Note = value);
                 },
+                maxLength: 500,
                 maxLines: 5,
               ),
               const SizedBox(

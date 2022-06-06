@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:trackingbluetooth/Detail.dart';
 
 
 
@@ -34,7 +35,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const Listdata(),
+      home: const Detail(),
     );
   }
 }
