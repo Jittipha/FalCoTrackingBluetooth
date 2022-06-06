@@ -34,6 +34,7 @@ class _mainmenuState extends State<mainmenu> {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   color: Colors.white,
+
                   boxShadow: [
                     const BoxShadow(
                       color: Colors.grey,
