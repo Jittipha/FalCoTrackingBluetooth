@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -47,10 +45,12 @@ class _CreateTrackState extends State<CreateTrack> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.lightBlue[100],
-      appBar: AppBar(
-          title:
-              const Text("เเก้ไขข้อมูลอุปกรณ์", style: TextStyle(fontSize: 25)),
-          titleSpacing: 300),
+       appBar: AppBar(
+            title: const Text(
+              "สร้างอุปกรณ์",
+              style: TextStyle(fontSize: 25),
+            ),
+            titleSpacing: 300),
       body: Center(
         child: Container(
           padding: EdgeInsets.fromLTRB(200, 0, 0, 0),

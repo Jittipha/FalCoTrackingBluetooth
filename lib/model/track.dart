@@ -14,6 +14,7 @@ class Track {
   int? Count_Improve;
   String? End_Date;
   String? Note;
+  String? Working_Condition;
 
   Track({
     this.Track_ID,
@@ -29,5 +30,6 @@ class Track {
     this.Count_Improve,
     this.End_Date,
     this.Note,
+    this.Working_Condition
   });
 }
