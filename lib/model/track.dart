@@ -31,5 +31,9 @@ class Track {
     this.End_Date,
     this.Note,
     this.Working_Condition
+    
   });
+  Track.fromSnapshot(result) {
+    Track_ID = result['Track_ID'];
+  }
 }

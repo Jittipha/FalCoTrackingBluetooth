@@ -32,7 +32,7 @@ class _CreateTrackState extends State<CreateTrack> {
     final newDate = await showDatePicker(
       context: context,
       initialDate: dateTime ?? initialDate,
-      firstDate: DateTime.now().subtract(Duration(days: 0)),
+      firstDate: DateTime.now().subtract(const Duration(days: 0)),
       // firstDate: DateTime.utc(yyyy, mm, dd),
       lastDate: DateTime(DateTime.now().year + 5),
     );
@@ -64,8 +64,8 @@ class _CreateTrackState extends State<CreateTrack> {
                 Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
-                      Padding(padding: EdgeInsets.all(16.16)),
-                      Expanded(
+                      const Padding(padding: EdgeInsets.all(16.16)),
+                      const Expanded(
                         child: Text(
                           "รหัสเครื่อง",
                           style: TextStyle(fontSize: 15),
@@ -74,14 +74,14 @@ class _CreateTrackState extends State<CreateTrack> {
                       SizedBox(
                         width: MediaQuery.of(context).size.width * 0.2,
                       ),
-                      Expanded(
+                      const Expanded(
                         child: Text("ยี่ห้อ"),
                       ),
                     ]),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
-                    Padding(padding: EdgeInsets.all(16.16)),
+                    const Padding(padding: EdgeInsets.all(16.16)),
                     Expanded(
                       // optional flex property if flex is 1 because the default flex is 1
                       flex: 1,
@@ -92,6 +92,7 @@ class _CreateTrackState extends State<CreateTrack> {
                             border: OutlineInputBorder(),
                             hintText: 'กรอกรหัสเครื่อง'),
                         initialValue: track.Track_ID,
+                        maxLength: 50,
                         validator: RequiredValidator(
                             errorText: "กรุณากรอกรหัสเครื่อง"),
                         onSaved: (value) {
@@ -106,12 +107,13 @@ class _CreateTrackState extends State<CreateTrack> {
                       // optional flex property if flex is 1 because the default flex is 1
                       flex: 1,
                       child: TextFormField(
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                             filled: true,
                             fillColor: Colors.white,
-                            border: const OutlineInputBorder(),
+                            border: OutlineInputBorder(),
                             hintText: 'ระบุยี่ห้อ'),
                         initialValue: track.Brand,
+                        maxLength: 50,
                         validator:
                             RequiredValidator(errorText: "กรุณาระบุยี่ห้อ"),
                         onSaved: (value) {
@@ -124,8 +126,8 @@ class _CreateTrackState extends State<CreateTrack> {
                 Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
-                      Padding(padding: EdgeInsets.all(16.16)),
-                      Expanded(
+                      const Padding(padding: EdgeInsets.all(16.16)),
+                      const Expanded(
                         child: Text(
                           "รุ่น",
                           style: TextStyle(fontSize: 15),
@@ -134,24 +136,25 @@ class _CreateTrackState extends State<CreateTrack> {
                       SizedBox(
                         width: MediaQuery.of(context).size.width * 0.2,
                       ),
-                      Expanded(
+                      const Expanded(
                         child: Text("ผู้ผลิต"),
                       ),
                     ]),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
-                    Padding(padding: EdgeInsets.all(16.16)),
+                    const Padding(padding: EdgeInsets.all(16.16)),
                     Expanded(
                       // optional flex property if flex is 1 because the default flex is 1
                       flex: 1,
                       child: TextFormField(
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                             filled: true,
                             fillColor: Colors.white,
-                            border: const OutlineInputBorder(),
+                            border: OutlineInputBorder(),
                             hintText: 'รุ่นของเครื่อง'),
                         initialValue: track.Generation,
+                        maxLength: 20,
                         validator: RequiredValidator(
                             errorText: "กรุณากรอกรุ่นของเครื่อง"),
                         onSaved: (value) {
@@ -166,12 +169,13 @@ class _CreateTrackState extends State<CreateTrack> {
                       // optional flex property if flex is 1 because the default flex is 1
                       flex: 1,
                       child: TextFormField(
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                             filled: true,
                             fillColor: Colors.white,
-                            border: const OutlineInputBorder(),
+                            border: OutlineInputBorder(),
                             hintText: 'บริษัทผู้ผลิต'),
                         initialValue: track.Menufacurer,
+                        maxLength: 30,
                         validator: RequiredValidator(
                             errorText: "กรุณากรอกชื่อ บริษัท"),
                         onSaved: (value) {
@@ -184,8 +188,8 @@ class _CreateTrackState extends State<CreateTrack> {
                 Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
-                      Padding(padding: EdgeInsets.all(16.16)),
-                      Expanded(
+                      const Padding(padding: EdgeInsets.all(16.16)),
+                      const Expanded(
                         child: Text(
                           "ขนาดเครื่อง",
                           style: TextStyle(fontSize: 15),
@@ -194,24 +198,25 @@ class _CreateTrackState extends State<CreateTrack> {
                       SizedBox(
                         width: MediaQuery.of(context).size.width * 0.2,
                       ),
-                      Expanded(
+                      const Expanded(
                         child: Text("สภาพการใช้งาน"),
                       ),
                     ]),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
-                    Padding(padding: EdgeInsets.all(16.16)),
+                    const Padding(padding: EdgeInsets.all(16.16)),
                     Expanded(
                       // optional flex property if flex is 1 because the default flex is 1
                       flex: 1,
                       child: TextFormField(
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                             filled: true,
                             fillColor: Colors.white,
-                            border: const OutlineInputBorder(),
+                            border: OutlineInputBorder(),
                             hintText: 'ขนาดของเครื่อง'),
                         initialValue: track.Size,
+                        maxLength: 50,
                         validator: RequiredValidator(
                             errorText: "กรุณากรอกขนาดของเครื่อง"),
                         onSaved: (value) {
@@ -226,12 +231,13 @@ class _CreateTrackState extends State<CreateTrack> {
                       // optional flex property if flex is 1 because the default flex is 1
                       flex: 1,
                       child: TextFormField(
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                             filled: true,
                             fillColor: Colors.white,
-                            border: const OutlineInputBorder(),
+                            border: OutlineInputBorder(),
                             hintText: 'สภาพการใช้งานของเครื่อง'),
                         initialValue: track.Working_Condition,
+                        maxLength: 50,
                         validator: RequiredValidator(
                             errorText: "กรุณากรอกสภาพการใช้งาน"),
                         onSaved: (value) {
@@ -244,8 +250,8 @@ class _CreateTrackState extends State<CreateTrack> {
                 Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
-                      Padding(padding: EdgeInsets.all(16.16)),
-                      Expanded(
+                      const Padding(padding: EdgeInsets.all(16.16)),
+                      const Expanded(
                         child: Text(
                           "ตำแหน่งที่ตั้ง",
                           style: TextStyle(fontSize: 15),
@@ -254,24 +260,25 @@ class _CreateTrackState extends State<CreateTrack> {
                       SizedBox(
                         width: MediaQuery.of(context).size.width * 0.2,
                       ),
-                      Expanded(
+                      const Expanded(
                         child: Text("ใช้ในการ"),
                       ),
                     ]),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
-                    Padding(padding: EdgeInsets.all(16.16)),
+                    const Padding(padding: EdgeInsets.all(16.16)),
                     Expanded(
                       // optional flex property if flex is 1 because the default flex is 1
                       flex: 1,
                       child: TextFormField(
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                             filled: true,
                             fillColor: Colors.white,
-                            border: const OutlineInputBorder(),
+                            border: OutlineInputBorder(),
                             hintText: 'ตำแหน่งของเครื่อง'),
                         initialValue: track.Location,
+                        maxLength: 100,
                         validator: RequiredValidator(
                             errorText: "กรุณาระบุตำแหน่งของเครื่อง"),
                         onSaved: (value) {
@@ -286,12 +293,13 @@ class _CreateTrackState extends State<CreateTrack> {
                       // optional flex property if flex is 1 because the default flex is 1
                       flex: 1,
                       child: TextFormField(
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                             filled: true,
                             fillColor: Colors.white,
-                            border: const OutlineInputBorder(),
+                            border: OutlineInputBorder(),
                             hintText: 'ใช้ในการ'),
                         initialValue: track.Work_for,
+                        maxLength: 100,
                         validator: RequiredValidator(
                             errorText: "กรุณาระบุว่าเครื่องใช้ทำอะไร"),
                         onSaved: (value) {
@@ -304,8 +312,8 @@ class _CreateTrackState extends State<CreateTrack> {
                 Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
-                      Padding(padding: EdgeInsets.all(16.16)),
-                      Expanded(
+                      const Padding(padding: EdgeInsets.all(16.16)),
+                      const Expanded(
                         child: Text(
                           "วันเปิดใช้งาน",
                           style: TextStyle(fontSize: 15),
@@ -314,7 +322,7 @@ class _CreateTrackState extends State<CreateTrack> {
                       SizedBox(
                         width: MediaQuery.of(context).size.width * 0.2,
                       ),
-                      Expanded(
+                      const Expanded(
                         child: Text("หมายเหตุ"),
                       ),
                     ]),
@@ -335,10 +343,10 @@ class _CreateTrackState extends State<CreateTrack> {
                             ),
                           ),
                           style: ElevatedButton.styleFrom(
-                              primary: Color.fromARGB(255, 250, 248, 248),
+                              primary: const Color.fromARGB(255, 250, 248, 248),
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(15))),
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.calendar_month_rounded,
                             color: Colors.black,
                             size: 30,
@@ -352,11 +360,12 @@ class _CreateTrackState extends State<CreateTrack> {
                         // optional flex property if flex is 1 because the default flex is 1
                         flex: 1,
                         child: TextFormField(
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                               filled: true,
                               fillColor: Colors.white,
-                              border: const OutlineInputBorder(),
+                              border: OutlineInputBorder(),
                               hintText: 'หมายเหตุ'),
+                          maxLength: 500,
                           maxLines: 5,
                           initialValue: track.Note,
                           validator:
@@ -373,12 +382,12 @@ class _CreateTrackState extends State<CreateTrack> {
                     child: ElevatedButton(
                       style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all<Color>(
-                              Color.fromARGB(255, 4, 211, 225)),
+                              const Color.fromARGB(255, 4, 211, 225)),
                           shape:
                               MaterialStateProperty.all<RoundedRectangleBorder>(
                                   RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(15),
-                            side: BorderSide(width: 2),
+                            side: const BorderSide(width: 2),
                           ))),
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {

@@ -64,7 +64,7 @@ class _mainmenuState extends State<mainmenu> {
             GestureDetector(
               onTap: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const EditTrack()));
+                    MaterialPageRoute(builder: (context) =>const  Listdata()));
               },
               child: Container(
                 padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
