@@ -182,7 +182,7 @@ class _ListdataState extends State<Listdata> {
                                 GestureDetector(
                                     onTap: () {
                                       showAlertDialog(context,
-                                          _resultList[index]['Track_ID']);
+                                          _resultList[index]['Track_ID'],index);
                                     },
                                     child: const Icon(
                                       Icons.delete,
@@ -200,7 +200,7 @@ class _ListdataState extends State<Listdata> {
         ));
   }
 
-  showAlertDialog(BuildContext context, String Track_id) {
+  showAlertDialog(BuildContext context, String Track_id, index) {
     // set up the button
     Widget okButton = FlatButton(
         child: const Text("OK"),
@@ -209,9 +209,9 @@ class _ListdataState extends State<Listdata> {
               Uri.parse('http://localhost:3000/track'),
               body: {'Track_ID': Track_id});
           if (response.statusCode == 200) {
-            setState(() {
-              Navigator.pop(context);
-            });
+            _resultList.remove(_resultList[index]);
+            Navigator.pop(context);
+            setState(() {});
           } else {
             return print("Delete Fail!");
           }
