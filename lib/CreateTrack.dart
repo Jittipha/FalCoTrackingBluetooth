@@ -1,3 +1,5 @@
+// ignore_for_file: file_names, prefer_const_constructors, avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:intl/intl.dart';
@@ -326,8 +328,8 @@ class _CreateTrackState extends State<CreateTrack> {
                     ]),
                 Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: <Widget>[
-                      const Padding(padding: EdgeInsets.all(16.16)),
+                    children: [
+                      Padding(padding: EdgeInsets.all(16.16)),
                       SizedBox(
                         width: MediaQuery.of(context).size.width * 0.2,
                         height: MediaQuery.of(context).size.height * 0.07,

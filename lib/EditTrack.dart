@@ -85,14 +85,14 @@ class _EditTrackState extends State<EditTrack> {
               ),
             ),
             titleSpacing: 300),
-        body: Padding(
+        body: SingleChildScrollView(
           padding: const EdgeInsets.only(left: 300, right: 300, top: 30),
           child: Form(
             key: updateTrack,
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               // const Text(
-              //   'เเก้ไขข้อมูลอุปกรณ์',
+              //   'เเก้ไขข้อมูลอุปกFรณ์',
               //   style: TextStyle(fontSize: 25),
               // ),
               const SizedBox(
