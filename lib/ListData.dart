@@ -28,9 +28,7 @@ class _ListdataState extends State<Listdata> {
   @override
   void initState() {
     super.initState();
-    setState(() {
-      
-    });
+    setState(() {});
     // Getdata();
     // getheightforlength();
     _searchController.addListener((_onSearchChanged));
@@ -170,14 +168,16 @@ class _ListdataState extends State<Listdata> {
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
-                                              builder: (context) =>
-                                                   EditTrack(result: _resultList[index],)),
+                                              builder: (context) => EditTrack(
+                                                    result: _resultList[index],
+                                                  )),
                                         );
                                       },
                                       child: const Icon(Icons.edit)),
                                 ),
                                 const SizedBox(
-                                  width: 30,
+                                  width: 20,
+                                  // height: 10,
                                 ),
                                 GestureDetector(
                                     onTap: () {
