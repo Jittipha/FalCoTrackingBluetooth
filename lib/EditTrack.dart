@@ -1,13 +1,16 @@
 // ignore_for_file: file_names
 
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:intl/intl.dart';
-
+import 'package:http/http.dart ' as http;
 import 'model/track.dart';
 
 class EditTrack extends StatefulWidget {
-  const EditTrack({Key? key}) : super(key: key);
+  EditTrack({Key? key, required this.result}) : super(key: key);
+  Map<String, dynamic> result;
 
   @override
   State<EditTrack> createState() => _EditTrackState();
@@ -20,18 +23,19 @@ class _EditTrackState extends State<EditTrack> {
   DateTime? dateTime;
   //DateTime? newDate;
   String getTextDateStart() {
-    if (track.Last_Improve_Date == null) {
+    if (widget.result['Last_Improve_Date'] == null ||
+        widget.result['Last_Improve_Date'] == '') {
       return "Select Date";
     } else {
-      return track.Last_Improve_Date!;
+      return widget.result['Last_Improve_Date']!;
     }
   }
 
   String getTextDateLast() {
-    if (track.End_Date == null) {
+    if (widget.result['End_Date'] == "" || widget.result['End_Date'] == null) {
       return "Select Date";
     } else {
-      return track.End_Date!;
+      return widget.result['End_Date']!;
     }
   }
 
@@ -48,7 +52,7 @@ class _EditTrackState extends State<EditTrack> {
     String stDate = DateFormat('dd/MM/yyyy').format(newDate);
 
     setState(() {
-      track.Last_Improve_Date = stDate;
+      widget.result['Last_Improve_Date'] = stDate;
     });
   }
 
@@ -65,7 +69,7 @@ class _EditTrackState extends State<EditTrack> {
     String stDate = DateFormat('dd/MM/yyyy').format(newDate);
 
     setState(() {
-      track.End_Date = stDate;
+      widget.result['End_Date'] = stDate;
     });
   }
 
@@ -74,9 +78,11 @@ class _EditTrackState extends State<EditTrack> {
     return Scaffold(
         backgroundColor: Colors.lightBlue[100],
         appBar: AppBar(
-            title: const Text(
-              "เเก้ไขข้อมูลอุปกรณ์",
-              style: TextStyle(fontSize: 25),
+            title: const Center(
+              child: Text(
+                "เเก้ไขข้อมูลอุปกรณ์",
+                style: TextStyle(fontSize: 25),
+              ),
             ),
             titleSpacing: 300),
         body: Padding(
@@ -89,9 +95,9 @@ class _EditTrackState extends State<EditTrack> {
               //   'เเก้ไขข้อมูลอุปกรณ์',
               //   style: TextStyle(fontSize: 25),
               // ),
-               const SizedBox(
-                 height: 50,
-               ),
+              const SizedBox(
+                height: 50,
+              ),
               const Text(
                 'สภาพการใช้งาน',
                 style: TextStyle(fontSize: 20),
@@ -105,11 +111,11 @@ class _EditTrackState extends State<EditTrack> {
                   fillColor: Colors.white,
                   focusedBorder: OutlineInputBorder(),
                 ),
-                initialValue: track.Working_Condition,
+                initialValue: widget.result['Working_Condition'],
                 validator:
                     RequiredValidator(errorText: "กรุณาใส่สภาพการใช้งาน!"),
                 onSaved: (value) {
-                  setState(() => track.Working_Condition = value);
+                  setState(() => widget.result['Working_Condition'] = value);
                 },
                 maxLength: 50,
                 maxLines: 2,
@@ -130,11 +136,11 @@ class _EditTrackState extends State<EditTrack> {
                   fillColor: Colors.white,
                   focusedBorder: OutlineInputBorder(),
                 ),
-                initialValue: track.Location,
+                initialValue: widget.result['Location'],
                 validator:
                     RequiredValidator(errorText: "กรุณาใส่ตำเเหน่งที่ตั้ง!"),
                 onSaved: (value) {
-                  setState(() => track.Location = value);
+                  setState(() => widget.result['Location'] = value);
                 },
                 maxLength: 100,
                 maxLines: 2,
@@ -155,7 +161,7 @@ class _EditTrackState extends State<EditTrack> {
                       ),
                       SizedBox(
                         height: 45,
-                        width: MediaQuery.of(context).size.width * 0.175,
+                        width: MediaQuery.of(context).size.width * 0.168,
                         child: ElevatedButton.icon(
                           onPressed: () => pickDateStart(context),
                           label: Text(
@@ -179,7 +185,7 @@ class _EditTrackState extends State<EditTrack> {
                     ],
                   ),
                   SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.025,
+                    width: MediaQuery.of(context).size.width * 0.020,
                   ),
                   Column(
                     children: [
@@ -190,7 +196,7 @@ class _EditTrackState extends State<EditTrack> {
                       ),
                       SizedBox(
                         height: 45,
-                        width: MediaQuery.of(context).size.width * 0.175,
+                        width: MediaQuery.of(context).size.width * 0.168,
                         child: ElevatedButton.icon(
                           onPressed: () => pickDateLast(context),
                           label: Text(
@@ -229,10 +235,11 @@ class _EditTrackState extends State<EditTrack> {
                 decoration: const InputDecoration(
                   filled: true,
                   fillColor: Colors.white,
-                  focusedBorder: OutlineInputBorder(),
+                  focusedBorder: const OutlineInputBorder(),
                 ),
+                initialValue: widget.result['Note'],
                 onSaved: (value) {
-                  setState(() => track.Note = value);
+                  setState(() => widget.result['Note'] = value);
                 },
                 maxLength: 500,
                 maxLines: 5,
@@ -255,10 +262,10 @@ class _EditTrackState extends State<EditTrack> {
                                 RoundedRectangleBorder>(RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15),
                             ))),
-                        onPressed: () {
+                        onPressed: () async {
                           if (updateTrack.currentState!.validate()) {
                             updateTrack.currentState!.save();
-                            print(track.Location);
+                            showAlertDialog(context);
                           }
                         },
                         child: const Text("ยืนยัน",
@@ -280,7 +287,9 @@ class _EditTrackState extends State<EditTrack> {
                               borderRadius: BorderRadius.circular(15),
                               //side: const BorderSide(width: 2),
                             ))),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
                         child: const Text("ยกเลิก",
                             style: TextStyle(fontSize: 20, color: Colors.black),
                             textAlign: TextAlign.center),
@@ -325,5 +334,61 @@ class _EditTrackState extends State<EditTrack> {
         //      ),
 
         );
+  }
+
+  showAlertDialog(BuildContext context) {
+    // set up the button
+    Widget okButton = FlatButton(
+        child: const Text("OK"),
+        onPressed: () async {
+          print(widget.result['Count_Improve']);
+          // int Count_Improve = widget.result['Count_Improve'];
+          // Count_Improve = Count_Improve + 1;
+          print("asdasdasdas");
+          print(widget.result['Track_ID'] +
+              widget.result['Location'] +
+              widget.result['Working_Condition'] +
+              widget.result['Last_Improve_Date'] +
+              widget.result['Count_Improve'] +
+              widget.result['End_Date'] +
+              widget.result['Note']);
+          // var res =
+          //     await http.put(Uri.parse('http://localhost:3000/track'), body: {
+          //   'Track_ID': widget.result['Track_ID'],
+          //   'Location': widget.result['Location'],
+          //   'Working_Condition': widget.result['Working_Condition'],
+          //   'Last_Improve_Date': widget.result['Last_Improve_Date'],
+          //   'Count_Improver': '1',
+          //   'End_Date': widget.result['End_Date'],
+          //   'Note': widget.result['Note'],
+          // });
+          // if (res.statusCode == 200) {
+          //   print("true");
+          // }
+          // Navigator.pop(context);
+          // Navigator.pop(context);
+        });
+
+    Widget cancleButton = FlatButton(
+      child: const Text("CANCLE"),
+      onPressed: () {
+        Navigator.pop(context, 'Cancel');
+      },
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: const Text("Delete This Track !"),
+      content: const Text("Are you sure?"),
+      actions: [cancleButton, okButton],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
   }
 }
