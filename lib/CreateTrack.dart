@@ -46,18 +46,30 @@ class _CreateTrackState extends State<CreateTrack> {
     });
   }
 
+  String dropdownvalue = 'กำลังใช้งาน';
+
+  // List of items in our dropdown menu
+  var status = [
+    'กำลังใช้งาน',
+    'กำลังซ่อม',
+    'อยู่ระหว่างการดูแลรักษา',
+    'กำลังเปลี่ยนชิ้นส่วน',
+    'เครื่องปิด',
+    'เครื่องเสีย'
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-     backgroundColor: Colors.lightBlue[100],
-        appBar: AppBar(
-            title: const Center(
-              child: Text(
-                "สร้างอุปกรณ์",
-                style: TextStyle(fontSize: 30),
-              ),
+      backgroundColor: Colors.lightBlue[100],
+      appBar: AppBar(
+          title: const Center(
+            child: Text(
+              "สร้างอุปกรณ์",
+              style: TextStyle(fontSize: 30),
             ),
-            titleSpacing: 300),
+          ),
+          titleSpacing: 300),
       body: Background(
         child: SingleChildScrollView(
             padding: const EdgeInsets.only(left: 200, right: 200, top: 30),
@@ -380,37 +392,81 @@ class _CreateTrackState extends State<CreateTrack> {
                         const Padding(padding: EdgeInsets.all(16.16)),
                         const Expanded(
                           child: Text(
-                            "อายุการใช้งาน",
+                            "วันที่เปิดใช้งาน",
+                            style: TextStyle(fontSize: 15),
+                          ),
+                        ),
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.2,
+                        ),
+                        Expanded(
+                          child: Text(
+                            "สถานะการทำงาน",
                             style: TextStyle(fontSize: 15),
                           ),
                         ),
                       ]),
-                  Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                    const Padding(padding: EdgeInsets.all(16.16)),
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.2,
-                      height: MediaQuery.of(context).size.height * 0.07,
-                      child: ElevatedButton.icon(
-                        onPressed: () => pickDate(context),
-                        label: Text(
-                          getTextDate(),
-                          style: const TextStyle(
-                            fontSize: 18,
-                            color: Colors.black,
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        const Padding(padding: EdgeInsets.all(16.16)),
+                        Expanded(
+                          flex: 1,
+                          child: ElevatedButton.icon(
+                            onPressed: () => pickDate(context),
+                            label: Text(
+                              getTextDate(),
+                              style: const TextStyle(
+                                fontSize: 18,
+                                color: Colors.black,
+                              ),
+                            ),
+                            style: ElevatedButton.styleFrom(
+                                padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
+                                primary:
+                                    const Color.fromARGB(255, 250, 248, 248),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(15))),
+                            icon: const Icon(
+                              Icons.calendar_month_rounded,
+                              color: Colors.black,
+                              size: 30,
+                            ),
                           ),
                         ),
-                        style: ElevatedButton.styleFrom(
-                            primary: const Color.fromARGB(255, 250, 248, 248),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15))),
-                        icon: const Icon(
-                          Icons.calendar_month_rounded,
-                          color: Colors.black,
-                          size: 30,
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.2,
                         ),
-                      ),
-                    ),
-                  ]),
+                        Expanded(
+                            flex: 1,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  border: Border.all(),
+                                  color: Color.fromARGB(255, 241, 244, 244)),
+                              child: DropdownButtonHideUnderline(
+                                child: DropdownButton(
+                                  // Initial Value
+                                  value: dropdownvalue,
+                                  // Down Arrow Icon
+                                  icon: const Icon(Icons.keyboard_arrow_down),
+                                  // Array list of items
+                                  items: status.map((String status) {
+                                    return DropdownMenuItem(
+                                      value: status,
+                                      child: Text(' ' + status),
+                                    );
+                                  }).toList(),
+                                  // After selecting the desired option,it will
+                                  // change button value to selected value
+                                  onChanged: (String? newValue) {
+                                    setState(() {
+                                      dropdownvalue = newValue!;
+                                    });
+                                  },
+                                ),
+                              ),
+                            ))
+                      ]),
                   SizedBox(
                     height: 20,
                   ),
@@ -426,9 +482,7 @@ class _CreateTrackState extends State<CreateTrack> {
                               borderRadius: BorderRadius.circular(15),
                               side: const BorderSide(width: 2),
                             ))),
-
                         onPressed: () async {
-
                           if (_formKey.currentState!.validate()) {
                             _formKey.currentState!.save();
                             int Count_Improve = 0;
@@ -445,7 +499,7 @@ class _CreateTrackState extends State<CreateTrack> {
 
                             print(Count_Improve);
                             var res = await http.post(
-                                Uri.parse('http://localhost:3000/track'),
+                                Uri.parse('http://192.168.1.192:3000/track'),
                                 body: {
                                   'Track_ID': track.Track_ID,
                                   'Brand': track.Brand,
