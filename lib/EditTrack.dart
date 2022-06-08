@@ -75,6 +75,18 @@ class _EditTrackState extends State<EditTrack> {
     });
   }
 
+  String dropdownvalue = 'กำลังใช้งาน';
+
+  // List of items in our dropdown menu
+  var status = [
+    'กำลังใช้งาน',
+    'กำลังซ่อม',
+    'อยู่ระหว่างการดูแลรักษา',
+    'กำลังเปลี่ยนชิ้นส่วน',
+    'เครื่องปิด',
+    'เครื่องเสีย'
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -221,6 +233,50 @@ class _EditTrackState extends State<EditTrack> {
                       ),
                     ],
                   ),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.020,
+                  ),
+                  Column(
+                    children: [
+                      const Text('สถานะการทำงาน',
+                          style: TextStyle(fontSize: 20)),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8.0),
+                            border: Border.all(),
+                            color: Color.fromARGB(255, 255, 255, 255)),
+                        child: DropdownButtonHideUnderline(
+                          child: DropdownButton(
+                            // Initial Value
+                            value: track.Status,
+                            // Down Arrow Icon
+                            icon: const Icon(Icons.keyboard_arrow_down),
+                            hint: Text(
+                              "   " + "เลือกสถานะการทำงานของเครื่อง",
+                              style: TextStyle(color: Colors.black),
+                            ),
+                            // Array list of items
+                            items: status.map((String status) {
+                              return DropdownMenuItem(
+                                value: status,
+                                child: Text('   ' + status),
+                              );
+                            }).toList(),
+                            // After selecting the desired option,it will
+                            // change button value to selected value
+                            onChanged: (String? newValue) {
+                              setState(() {
+                                track.Status = newValue!;
+                              });
+                            },
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
                 ],
               ),
               const SizedBox(
@@ -295,7 +351,6 @@ class _EditTrackState extends State<EditTrack> {
                         },
                         child: const Text("ยกเลิก",
                             style: TextStyle(fontSize: 20, color: Colors.black),
-                            
                             textAlign: TextAlign.center),
                       )),
                 ],
@@ -347,12 +402,12 @@ class _EditTrackState extends State<EditTrack> {
         onPressed: () async {
           print(widget.result['Count_Improve']);
           int Count_Improve = widget.result['Count_Improve'];
-          
+
           Count_Improve = Count_Improve + 1;
           print(Count_Improve);
-        
-          var res =
-              await http.put(Uri.parse('http://192.168.1.192:3000/track'), body: {
+
+          var res = await http
+              .put(Uri.parse('http://192.168.1.192:3000/track'), body: {
             'Track_ID': widget.result['Track_ID'],
             'Location': widget.result['Location'],
             'Working_Condition': widget.result['Working_Condition'],
@@ -363,17 +418,13 @@ class _EditTrackState extends State<EditTrack> {
           });
           if (res.statusCode == 200) {
             print("true");
-             Navigator.pop(context);
-          // ignore: use_build_context_synchronously
-          Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>const Listdata(
-                                                    
-                                                  )),
-                                        );
+            Navigator.pop(context);
+            // ignore: use_build_context_synchronously
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const Listdata()),
+            );
           }
-         
         });
 
     Widget cancleButton = FlatButton(
