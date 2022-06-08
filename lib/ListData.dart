@@ -29,9 +29,7 @@ class _ListdataState extends State<Listdata> {
   @override
   void initState() {
     super.initState();
-    setState(() {
-      
-    });
+    setState(() {});
     // Getdata();
     // getheightforlength();
     _searchController.addListener((_onSearchChanged));
@@ -136,22 +134,23 @@ class _ListdataState extends State<Listdata> {
                           return Container(
                             padding: const EdgeInsets.fromLTRB(0, 0, 0, 5),
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
+                              borderRadius: BorderRadius.circular(1),
                               color: Colors.white,
                               boxShadow: const [
                                 BoxShadow(
                                   color: Colors.grey,
-                                  blurRadius: 4,
-                                  offset: Offset(2, 4), // Shadow position
-                                ),
+                                  blurRadius: 50,
+                                  offset: Offset(5, 4), // Shadow position
+                                ), 
                               ],
                             ),
                             child: ListTile(
                               contentPadding:
-                                  const EdgeInsets.symmetric(horizontal: 20.0),
+                                  const EdgeInsets.symmetric(horizontal: 100.30),
                               title: Text(
                                 // ignore: prefer_interpolation_to_compose_strings
-                                'รหัสเครื่อง : ' + _resultList[index]['Track_ID'],
+                                'รหัสเครื่อง : ' +
+                                    _resultList[index]['Track_ID'],
                                 style: const TextStyle(
                                     color: Colors.black, fontSize: 18),
                               ),
@@ -170,27 +169,30 @@ class _ListdataState extends State<Listdata> {
                                     child: GestureDetector(
                                         onTap: () {
                                           Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                   EditTrack(result: _resultList[index],)),
-                                        );
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) => EditTrack(
+                                                      result:
+                                                          _resultList[index],
+                                                    )),
+                                          );
                                         },
                                         child: const Icon(Icons.edit)),
                                   ),
                                   const SizedBox(
-                                    width: 30,
+                                    height: 5,
+                                    width: 10,
                                   ),
                                   GestureDetector(
                                       onTap: () {
-                                        showAlertDialog(context,
-                                            _resultList[index]['Track_ID'],index);
-
-
+                                        showAlertDialog(
+                                            context,
+                                            _resultList[index]['Track_ID'],
+                                            index);
                                       },
                                       child: const Icon(
                                         Icons.delete,
-                                      ))
+                                      )),
                                 ],
                               ),
                               onTap: () {},
@@ -205,7 +207,7 @@ class _ListdataState extends State<Listdata> {
         ));
   }
 
-  showAlertDialog(BuildContext context, String Track_id,index) {
+  showAlertDialog(BuildContext context, String Track_id, index) {
     // set up the button
     Widget okButton = FlatButton(
         child: const Text("OK"),
@@ -214,16 +216,12 @@ class _ListdataState extends State<Listdata> {
               Uri.parse('http://localhost:3000/track'),
               body: {'Track_ID': Track_id});
           if (response.statusCode == 200) {
-              _resultList.remove(_resultList[index]);
-              Navigator.pop(context);
-              setState(() {
-            
-          });
-            
+            _resultList.remove(_resultList[index]);
+            Navigator.pop(context);
+            setState(() {});
           } else {
             return print("Delete Fail!");
           }
-          
         });
 
     Widget cancleButton = FlatButton(

@@ -25,96 +25,96 @@ class _DetailState extends State<Detail> {
             child: Container(
               width: 800,
               height: 500,
-              color: const Color(0x003A94FB),
+              color: const Color.fromARGB(250, 255, 255, 255),
               padding: const EdgeInsets.fromLTRB(10, 20, 10, 10),
               child: ListView(children: const <Widget>[
                 Text(
                   'รหัสเครื่อง : ',
-                  style: TextStyle(color: Colors.black, fontSize: 18),
+                  style: TextStyle(color: Colors.black, fontSize: 20),
                 ),
                 SizedBox(
-                  height: 5,
+                  height: 8,
                 ),
                 Text(
                   'ยี่ห้อ : ',
-                  style: TextStyle(color: Colors.black, fontSize: 18),
+                  style: TextStyle(color: Colors.black, fontSize: 20),
                 ),
                 SizedBox(
-                  height: 5,
+                  height: 8,
                 ),
                 Text(
                   'รุ่น : ',
-                  style: TextStyle(color: Colors.black, fontSize: 18),
+                  style: TextStyle(color: Colors.black, fontSize: 20),
                 ),
                 SizedBox(
-                  height: 5,
+                  height: 8,
                 ),
                 Text(
                   'ผู้ผลิต : ',
-                  style: TextStyle(color: Colors.black, fontSize: 18),
+                  style: TextStyle(color: Colors.black, fontSize: 20),
                 ),
                 SizedBox(
-                  height: 5,
+                  height: 8,
                 ),
                 Text(
                   'ขนาดเครื่อง : ',
-                  style: TextStyle(color: Colors.black, fontSize: 18),
+                  style: TextStyle(color: Colors.black, fontSize: 20),
                 ),
                 SizedBox(
-                  height: 5,
+                  height: 8,
                 ),
                 Text(
                   'สภาพการใช้งาน : ',
-                  style: TextStyle(color: Colors.black, fontSize: 18),
+                  style: TextStyle(color: Colors.black, fontSize: 20),
                 ),
                 SizedBox(
-                  height: 5,
+                  height: 8,
                 ),
                 Text(
                   'อายุการใช้งาน : ',
-                  style: TextStyle(color: Colors.black, fontSize: 18),
+                  style: TextStyle(color: Colors.black, fontSize: 20),
                 ),
                 SizedBox(
-                  height: 5,
+                  height: 8,
                 ),
                 Text(
                   'ตำเเหน่งที่ตั้ง : ',
-                  style: TextStyle(color: Colors.black, fontSize: 18),
+                  style: TextStyle(color: Colors.black, fontSize: 20),
                 ),
                 SizedBox(
-                  height: 5,
+                  height: 8,
                 ),
                 Text(
                   'ใช้ในการ : ',
-                  style: TextStyle(color: Colors.black, fontSize: 18),
+                  style: TextStyle(color: Colors.black, fontSize: 20),
                 ),
                 SizedBox(
-                  height: 5,
+                  height: 8,
                 ),
                 Text(
                   'วันเปิดใช้งาน : ',
-                  style: TextStyle(color: Colors.black, fontSize: 18),
+                  style: TextStyle(color: Colors.black, fontSize: 20),
                 ),
                 SizedBox(
-                  height: 5,
+                  height: 8,
                 ),
                 Text(
                   'วันที่ปรับปรุงล่าสุด : ',
-                  style: TextStyle(color: Colors.black, fontSize: 18),
+                  style: TextStyle(color: Colors.black, fontSize: 20),
                 ),
                 SizedBox(
-                  height: 5,
+                  height: 8,
                 ),
                 Text(
                   'วันที่สิ้นสุดงาน : ',
-                  style: TextStyle(color: Colors.black, fontSize: 18),
+                  style: TextStyle(color: Colors.black, fontSize: 20),
                 ),
                 SizedBox(
-                  height: 5,
+                  height: 8,
                 ),
                 Text(
                   'หมายเหตุ : ',
-                  style: TextStyle(color: Colors.black, fontSize: 18),
+                  style: TextStyle(color: Colors.black, fontSize: 20),
                 ),
                 SizedBox(
                   height: 30,
