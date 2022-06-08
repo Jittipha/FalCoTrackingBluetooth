@@ -109,51 +109,51 @@ class _ListdataState extends State<Listdata> {
         body: Align(
           alignment: Alignment.topCenter,
           child: Container(
-           padding: const EdgeInsets.only(left: 400, right: 400, top: 70),
-            child: SingleChildScrollView(
-              child: Container(
-                width: 1000,
-                height: 800,
-                color: const Color(0x003A94FB),
-                padding: const EdgeInsets.fromLTRB(10, 20, 10, 10),
-                child: Column(children: <Widget>[
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  TextFormField(
-                    autofocus: false,
-                    controller: _searchController,
-                    decoration: const InputDecoration(
-                        filled: true,
-                        fillColor: Colors.white,
-                        border: OutlineInputBorder(),
-                        prefixIcon: Icon(Icons.search),
-                        hintText: 'ค้นหาด้วยรหัสอุปกรณ์..... '),
-                  ),
-                  const SizedBox(
-                    height: 50,
-                  ),
-                  Expanded(
-                    child: ListView.builder(
-                        itemCount: _resultList.length,
-                        itemBuilder: ((BuildContext context, int index) {
-                          return Container(
+           padding: const EdgeInsets.only(left: 400, right: 400, top: 70,),
+            child: Container(
+              width: 1000,
+              padding: const EdgeInsets.fromLTRB(10, 20, 10, 10),
+              child: Column(children: <Widget>[
+                const SizedBox(
+                  height: 30,
+                ),
+                TextFormField(
+                  autofocus: false,
+                  controller: _searchController,
+                  decoration: const InputDecoration(
+                      filled: true,
+                      fillColor: Colors.white,
+                      border: OutlineInputBorder(),
+                      prefixIcon: Icon(Icons.search),
+                      hintText: 'ค้นหาด้วยรหัสอุปกรณ์..... '),
+                ),
+                const SizedBox(
+                  height: 50,
+                ),
+                Expanded(
+                  child: ListView.builder(
+                      itemCount: _resultList.length,
+                      itemBuilder: ((BuildContext context, int index) {
+                        return Padding(
+                          padding: const EdgeInsets.all(3.0),
+                          child: Container(
                             padding: const EdgeInsets.fromLTRB(0, 0, 0, 5),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
                               color: Colors.white,
-                              boxShadow: const [
-                                BoxShadow(
-                                  color: Colors.grey,
-                                  blurRadius: 100,
-                                  offset: Offset(20, 10),
-                                   // Shadow position
-                                ),
-                              ],
+                              // boxShadow: const [
+                              //   BoxShadow(
+                              //     color: Colors.grey,
+                              //     blurRadius: 100,
+                              //     offset: Offset(20, 10),
+                              //      // Shadow position
+                              //   ),
+                              // ],
                             ),
                             child: ListTile(
                               contentPadding:
                                   const EdgeInsets.symmetric(horizontal: 20.0),
+                                  // const EdgeInsets.only(bottom: 20.0),
                               title: Text(
                                 // ignore: prefer_interpolation_to_compose_strings
                                 'รหัสเครื่อง : ' + _resultList[index]['Track_ID'],
@@ -210,11 +210,11 @@ class _ListdataState extends State<Listdata> {
                                 );
                               },
                             ),
-                          );
-                        })),
-                  )
-                ]),
-              ),
+                          ),
+                        );
+                      })),
+                )
+              ]),
             ),
           ),
         ));
