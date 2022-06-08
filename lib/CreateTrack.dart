@@ -111,7 +111,6 @@ class _CreateTrackState extends State<CreateTrack> {
                           initialValue: track.Track_ID,
                           maxLength: 50,
                           validator: RequiredValidator(
-                            
                               errorText: "กรุณากรอกรหัสเครื่อง"),
                           onSaved: (value) {
                             setState(() => track.Track_ID = value);
@@ -347,7 +346,6 @@ class _CreateTrackState extends State<CreateTrack> {
                   Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-
                         const Padding(padding: EdgeInsets.all(16.16)),
                         Expanded(
                           // optional flex property if flex is 1 because the default flex is 1
@@ -359,7 +357,6 @@ class _CreateTrackState extends State<CreateTrack> {
                                 border: OutlineInputBorder(),
                                 hintText: 'อายุการใช้งานของเครื่อง'),
                             maxLength: 100,
-                          
                             validator: RequiredValidator(
                                 errorText: "กรุณาระบุอายุการใช้งานของเครื่อง"),
                             onSaved: (value) {
@@ -380,7 +377,7 @@ class _CreateTrackState extends State<CreateTrack> {
                                 fillColor: Colors.white,
                                 border: OutlineInputBorder(),
                                 hintText: 'หมายเหตุ'),
-                                maxLines: 3,
+                            maxLines: 3,
                             maxLength: 500,
                             initialValue: track.Note,
                             validator: RequiredValidator(
@@ -398,7 +395,6 @@ class _CreateTrackState extends State<CreateTrack> {
                         const Expanded(
                           child: Text(
                             "วันที่เปิดใช้งาน",
-
                             style: TextStyle(fontSize: 15),
                           ),
                         ),
@@ -408,13 +404,10 @@ class _CreateTrackState extends State<CreateTrack> {
                         Expanded(
                           child: Text(
                             "สถานะการทำงาน",
-
-
                             style: TextStyle(fontSize: 15),
                           ),
                         ),
                       ]),
-
                   Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
@@ -441,7 +434,6 @@ class _CreateTrackState extends State<CreateTrack> {
                               color: Colors.black,
                               size: 30,
                             ),
-
                           ),
                         ),
                         SizedBox(
@@ -456,7 +448,7 @@ class _CreateTrackState extends State<CreateTrack> {
                               child: DropdownButtonHideUnderline(
                                 child: DropdownButton(
                                   // Initial Value
-                                  value: dropdownvalue,
+                                  value: track.Status,
                                   // Down Arrow Icon
                                   icon: const Icon(Icons.keyboard_arrow_down),
                                   // Array list of items
@@ -470,7 +462,7 @@ class _CreateTrackState extends State<CreateTrack> {
                                   // change button value to selected value
                                   onChanged: (String? newValue) {
                                     setState(() {
-                                      dropdownvalue = newValue!;
+                                      track.Status = newValue!;
                                     });
                                   },
                                 ),
@@ -493,7 +485,6 @@ class _CreateTrackState extends State<CreateTrack> {
                               side: const BorderSide(width: 0.1),
                             ))),
                         onPressed: () async {
-
                           if (_formKey.currentState!.validate()) {
                             _formKey.currentState!.save();
                             // ignore: non_constant_identifier_names
@@ -509,7 +500,8 @@ class _CreateTrackState extends State<CreateTrack> {
                             print(track.Work_for);
                             print(track.Start_Enable_Date);
                             print(track.Note);
-                           
+                            print(track.Status);
+
                             print(Count_Improve);
                             var res = await http.post(
                                 Uri.parse('http://192.168.1.192:3000/track'),
@@ -521,13 +513,12 @@ class _CreateTrackState extends State<CreateTrack> {
                                   'Start_Enable_Date': track.Start_Enable_Date,
                                   'Working_Condition': track.Working_Condition,
                                   'Generation': track.Generation,
-
-                                  'Menufacurer': track.Menufacturer,
+                                  'Menufacturer': track.Menufacturer,
                                   'Age_of_use': track.Age_of_use.toString(),
-
                                   'Work_for': track.Work_for,
                                   'Note': track.Note,
-                                  'Count_Improve': Count_Improve.toString()
+                                  'Count_Improve': Count_Improve.toString(),
+                                  'Status': track.Status,
                                 });
                             // ignore: unused_local_variable
                             var data = res.body;
