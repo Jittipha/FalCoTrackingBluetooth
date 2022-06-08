@@ -138,8 +138,9 @@ class _ListdataState extends State<Listdata> {
                             boxShadow: const [
                               BoxShadow(
                                 color: Colors.grey,
-                                blurRadius: 4,
-                                offset: Offset(2, 4), // Shadow position
+                                blurRadius: 100,
+                                offset: Offset(20, 10),
+                                 // Shadow position
                               ),
                             ],
                           ),

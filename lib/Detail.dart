@@ -30,103 +30,116 @@ class _DetailState extends State<Detail> {
               padding: const EdgeInsets.fromLTRB(10, 20, 10, 10),
               child: ListView(children: <Widget>[
                 Text(
+                  // ignore: prefer_interpolation_to_compose_strings
                   'รหัสเครื่อง : ' + widget.result['Track_ID'],
-                  style: TextStyle(color: Colors.black, fontSize: 18),
+                  style: const TextStyle(color: Colors.black, fontSize: 18),
                 ),
                 const SizedBox(
                   height: 5,
                 ),
                 Text(
+                  // ignore: prefer_interpolation_to_compose_strings
                   'ยี่ห้อ : ' + widget.result['Brand'],
-                  style: TextStyle(color: Colors.black, fontSize: 18),
+                  style: const TextStyle(color: Colors.black, fontSize: 18),
                 ),
                 const SizedBox(
                   height: 5,
                 ),
                 Text(
+                  // ignore: prefer_interpolation_to_compose_strings
                   'รุ่น : ' + widget.result['Generation'],
-                  style: TextStyle(color: Colors.black, fontSize: 18),
+                  style: const TextStyle(color: Colors.black, fontSize: 18),
                 ),
                 const SizedBox(
                   height: 5,
                 ),
                 Text(
+                  // ignore: prefer_interpolation_to_compose_strings
                   'ผู้ผลิต : ' + widget.result['Menufacurer'],
-                  style: TextStyle(color: Colors.black, fontSize: 18),
+                  style: const TextStyle(color: Colors.black, fontSize: 18),
                 ),
                 const SizedBox(
                   height: 5,
                 ),
                 Text(
+                  // ignore: prefer_interpolation_to_compose_strings
                   'ขนาดเครื่อง : ' + widget.result['Size'],
-                  style: TextStyle(color: Colors.black, fontSize: 18),
+                  style: const TextStyle(color: Colors.black, fontSize: 18),
                 ),
                 const SizedBox(
                   height: 5,
                 ),
                 Text(
+                  // ignore: prefer_interpolation_to_compose_strings
                   'สภาพการใช้งาน : ' + widget.result['Working_Condition'],
-                  style: TextStyle(color: Colors.black, fontSize: 18),
+                  style: const TextStyle(color: Colors.black, fontSize: 18),
                 ),
                 const SizedBox(
                   height: 5,
                 ),
                 Text(
+                  // ignore: prefer_interpolation_to_compose_strings
                   'อายุการใช้งาน : ' + widget.result['Age_of_use'].toString(),
-                  style: TextStyle(color: Colors.black, fontSize: 18),
+                  style: const TextStyle(color: Colors.black, fontSize: 18),
                 ),
                 const SizedBox(
                   height: 5,
                 ),
                 Text(
+                  // ignore: prefer_interpolation_to_compose_strings
                   'ตำเเหน่งที่ตั้ง : ' + widget.result['Location'],
-                  style: TextStyle(color: Colors.black, fontSize: 18),
+                  style: const TextStyle(color: Colors.black, fontSize: 18),
                 ),
                 const SizedBox(
                   height: 5,
                 ),
                 Text(
+                  // ignore: prefer_interpolation_to_compose_strings
                   'ใช้ในการ : ' + widget.result['Work_for'],
-                  style: TextStyle(color: Colors.black, fontSize: 18),
+                  style: const TextStyle(color: Colors.black, fontSize: 18),
                 ),
                 const SizedBox(
                   height: 5,
                 ),
                 Text(
+                  // ignore: prefer_interpolation_to_compose_strings
                   'วันเปิดใช้งาน : ' + widget.result['Start_Enable_Date'],
-                  style: TextStyle(color: Colors.black, fontSize: 18),
+                  style: const TextStyle(color: Colors.black, fontSize: 18),
                 ),
                 const SizedBox(
                   height: 5,
                 ),
                 Text(
+                  // ignore: prefer_interpolation_to_compose_strings
                   'จำนวนครั้งที่ซ่อม : ' +
                       (widget.result['Count_Improve'].toString()),
-                  style: TextStyle(color: Colors.black, fontSize: 18),
+                  style: const TextStyle(color: Colors.black, fontSize: 18),
                 ),
                 const SizedBox(
                   height: 5,
                 ),
                 Text(
+                  // ignore: prefer_interpolation_to_compose_strings
                   'วันที่ปรับปรุงล่าสุด : ' +
                       (widget.result['Last_Improve_Date'] ?? '- - -'),
-                  style: TextStyle(color: Colors.black, fontSize: 18),
+                  style: const TextStyle(color: Colors.black, fontSize: 18),
                 ),
                 const SizedBox(
                   height: 5,
                 ),
                 Text(
+                  // ignore: prefer_interpolation_to_compose_strings
                   'วันที่สิ้นสุดงาน : ' +
                       (widget.result['End_Date'] ?? '- - -'),
-                  style: TextStyle(color: Colors.black, fontSize: 18),
-
+                  style: const TextStyle(color: Colors.black, fontSize: 18),
                 ),
                 const SizedBox(
                   height: 5,
                 ),
                 Text(
+                  // ignore: prefer_interpolation_to_compose_strings
                   'หมายเหตุ : ' + (widget.result['Note'] ?? '- - -'),
-                  style: TextStyle(color: Colors.black, fontSize: 18),
+                  style: const TextStyle(color: Colors.black, fontSize: 18),
                 ),
                 const SizedBox(
                   height: 30,

@@ -6,7 +6,6 @@ import 'package:form_field_validator/form_field_validator.dart';
 import 'package:intl/intl.dart';
 import 'package:trackingbluetooth/Background/Bg-detail.dart';
 import 'package:http/http.dart ' as http;
-
 import 'model/track.dart';
 
 class CreateTrack extends StatefulWidget {
@@ -72,7 +71,7 @@ class _CreateTrackState extends State<CreateTrack> {
                         const Expanded(
                           child: Text(
                             "รหัสเครื่อง",
-                            style: TextStyle(fontSize: 20),
+                            style: TextStyle(fontSize: 15),
                           ),
                         ),
                         SizedBox(
@@ -347,8 +346,7 @@ class _CreateTrackState extends State<CreateTrack> {
                               ),
                             ),
                             style: ElevatedButton.styleFrom(
-                                primary:
-                                    const Color.fromARGB(255, 250, 248, 248),
+                                primary: const Color.fromARGB(255, 250, 248, 248),
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(15))),
                             icon: const Icon(
@@ -373,6 +371,10 @@ class _CreateTrackState extends State<CreateTrack> {
                             maxLength: 500,
                             maxLines: 5,
                             initialValue: track.Note,
+
+                            validator:
+                                RequiredValidator(errorText: "กรุณาระบุหมายเหตุ"),
+
                             onSaved: (value) {
                               setState(() => track.Note = value);
                             },
@@ -386,12 +388,13 @@ class _CreateTrackState extends State<CreateTrack> {
                         style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all<Color>(
                                 const Color.fromARGB(255, 4, 211, 225)),
-                            shape: MaterialStateProperty.all<
-                                RoundedRectangleBorder>(RoundedRectangleBorder(
+                            shape:
+                                MaterialStateProperty.all<RoundedRectangleBorder>(
+                                    RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15),
                               side: const BorderSide(width: 2),
                             ))),
-                        onPressed: () async {
+                        onPressed: ()async {
                           if (_formKey.currentState!.validate()) {
                             _formKey.currentState!.save();
                             int Count_Improve = 0;
@@ -405,6 +408,7 @@ class _CreateTrackState extends State<CreateTrack> {
                             print(track.Work_for);
                             print(track.Start_Enable_Date);
                             print(track.Note);
+
                             print(Count_Improve);
                             var res = await http.post(
                                 Uri.parse('http://192.168.1.192:3000/track'),
@@ -429,6 +433,7 @@ class _CreateTrackState extends State<CreateTrack> {
               msg: "เพิ่มอุปกรณ์แล้ว!", gravity: ToastGravity.CENTER);
                               Navigator.pop(context);
                             }
+
                           }
                         },
                         child: const Text("ยืนยัน",

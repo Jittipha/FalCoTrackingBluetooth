@@ -6,6 +6,7 @@ import 'package:form_field_validator/form_field_validator.dart';
 import 'package:intl/intl.dart';
 // ignore: unused_import
 import 'package:http/http.dart ' as http;
+import 'package:trackingbluetooth/ListData.dart';
 import 'model/track.dart';
 
 // ignore: must_be_immutable
@@ -347,13 +348,7 @@ class _EditTrackState extends State<EditTrack> {
           
           Count_Improve = Count_Improve + 1;
           print(Count_Improve);
-          // print(widget.result['Track_ID'] +
-          //     widget.result['Location'] +
-          //     widget.result['Working_Condition'] +
-          //     widget.result['Last_Improve_Date'] +
-          //     widget.result['Count_Improve'] +
-          //     widget.result['End_Date'] +
-          //     widget.result['Note']);
+        
           var res =
               await http.put(Uri.parse('http://192.168.1.192:3000/track'), body: {
             'Track_ID': widget.result['Track_ID'],
@@ -367,7 +362,14 @@ class _EditTrackState extends State<EditTrack> {
           if (res.statusCode == 200) {
             print("true");
              Navigator.pop(context);
-          Navigator.pop(context);
+          // ignore: use_build_context_synchronously
+          Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>const Listdata(
+                                                    
+                                                  )),
+                                        );
           }
          
         });
