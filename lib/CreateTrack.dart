@@ -46,18 +46,30 @@ class _CreateTrackState extends State<CreateTrack> {
     });
   }
 
+  String dropdownvalue = 'กำลังใช้งาน';
+
+  // List of items in our dropdown menu
+  var status = [
+    'กำลังใช้งาน',
+    'กำลังซ่อม',
+    'อยู่ระหว่างการดูแลรักษา',
+    'กำลังเปลี่ยนชิ้นส่วน',
+    'เครื่องปิด',
+    'เครื่องเสีย'
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-     backgroundColor: Colors.lightBlue[100],
-        appBar: AppBar(
-            title: const Center(
-              child: Text(
-                "สร้างอุปกรณ์",
-                style: TextStyle(fontSize: 30),
-              ),
+      backgroundColor: Colors.lightBlue[100],
+      appBar: AppBar(
+          title: const Center(
+            child: Text(
+              "สร้างอุปกรณ์",
+              style: TextStyle(fontSize: 30),
             ),
-            titleSpacing: 300),
+          ),
+          titleSpacing: 300),
       body: Background(
         child: SingleChildScrollView(
             padding: const EdgeInsets.only(left: 200, right: 200, top: 30),
@@ -99,6 +111,7 @@ class _CreateTrackState extends State<CreateTrack> {
                           initialValue: track.Track_ID,
                           maxLength: 50,
                           validator: RequiredValidator(
+                            
                               errorText: "กรุณากรอกรหัสเครื่อง"),
                           onSaved: (value) {
                             setState(() => track.Track_ID = value);
@@ -179,12 +192,12 @@ class _CreateTrackState extends State<CreateTrack> {
                               fillColor: Colors.white,
                               border: OutlineInputBorder(),
                               hintText: 'บริษัทผู้ผลิต'),
-                          initialValue: track.Menufacurer,
+                          initialValue: track.Menufacturer,
                           maxLength: 30,
                           validator: RequiredValidator(
                               errorText: "กรุณากรอกชื่อ บริษัท"),
                           onSaved: (value) {
-                            setState(() => track.Menufacurer = value);
+                            setState(() => track.Menufacturer = value);
                           },
                         ),
                       ),
@@ -334,6 +347,7 @@ class _CreateTrackState extends State<CreateTrack> {
                   Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
+
                         const Padding(padding: EdgeInsets.all(16.16)),
                         Expanded(
                           // optional flex property if flex is 1 because the default flex is 1
@@ -345,10 +359,12 @@ class _CreateTrackState extends State<CreateTrack> {
                                 border: OutlineInputBorder(),
                                 hintText: 'อายุการใช้งานของเครื่อง'),
                             maxLength: 100,
+                          
                             validator: RequiredValidator(
                                 errorText: "กรุณาระบุอายุการใช้งานของเครื่อง"),
                             onSaved: (value) {
-                              setState(() => track.Age_of_use);
+                              int Age = int.parse(value!);
+                              setState(() => track.Age_of_use = Age);
                             },
                           ),
                         ),
@@ -364,6 +380,7 @@ class _CreateTrackState extends State<CreateTrack> {
                                 fillColor: Colors.white,
                                 border: OutlineInputBorder(),
                                 hintText: 'หมายเหตุ'),
+                                maxLines: 3,
                             maxLength: 500,
                             initialValue: track.Note,
                             validator: RequiredValidator(
@@ -380,37 +397,86 @@ class _CreateTrackState extends State<CreateTrack> {
                         const Padding(padding: EdgeInsets.all(16.16)),
                         const Expanded(
                           child: Text(
-                            "อายุการใช้งาน",
+                            "วันที่เปิดใช้งาน",
+
+                            style: TextStyle(fontSize: 15),
+                          ),
+                        ),
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.2,
+                        ),
+                        Expanded(
+                          child: Text(
+                            "สถานะการทำงาน",
+
+
                             style: TextStyle(fontSize: 15),
                           ),
                         ),
                       ]),
-                  Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                    const Padding(padding: EdgeInsets.all(16.16)),
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.2,
-                      height: MediaQuery.of(context).size.height * 0.07,
-                      child: ElevatedButton.icon(
-                        onPressed: () => pickDate(context),
-                        label: Text(
-                          getTextDate(),
-                          style: const TextStyle(
-                            fontSize: 18,
-                            color: Colors.black,
+
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        const Padding(padding: EdgeInsets.all(16.16)),
+                        Expanded(
+                          flex: 1,
+                          child: ElevatedButton.icon(
+                            onPressed: () => pickDate(context),
+                            label: Text(
+                              getTextDate(),
+                              style: const TextStyle(
+                                fontSize: 18,
+                                color: Colors.black,
+                              ),
+                            ),
+                            style: ElevatedButton.styleFrom(
+                                padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
+                                primary:
+                                    const Color.fromARGB(255, 250, 248, 248),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(15))),
+                            icon: const Icon(
+                              Icons.calendar_month_rounded,
+                              color: Colors.black,
+                              size: 30,
+                            ),
+
                           ),
                         ),
-                        style: ElevatedButton.styleFrom(
-                            primary: const Color.fromARGB(255, 250, 248, 248),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15))),
-                        icon: const Icon(
-                          Icons.calendar_month_rounded,
-                          color: Colors.black,
-                          size: 30,
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.2,
                         ),
-                      ),
-                    ),
-                  ]),
+                        Expanded(
+                            flex: 1,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  border: Border.all(),
+                                  color: Color.fromARGB(255, 241, 244, 244)),
+                              child: DropdownButtonHideUnderline(
+                                child: DropdownButton(
+                                  // Initial Value
+                                  value: dropdownvalue,
+                                  // Down Arrow Icon
+                                  icon: const Icon(Icons.keyboard_arrow_down),
+                                  // Array list of items
+                                  items: status.map((String status) {
+                                    return DropdownMenuItem(
+                                      value: status,
+                                      child: Text(' ' + status),
+                                    );
+                                  }).toList(),
+                                  // After selecting the desired option,it will
+                                  // change button value to selected value
+                                  onChanged: (String? newValue) {
+                                    setState(() {
+                                      dropdownvalue = newValue!;
+                                    });
+                                  },
+                                ),
+                              ),
+                            ))
+                      ]),
                   SizedBox(
                     height: 20,
                   ),
@@ -424,28 +490,29 @@ class _CreateTrackState extends State<CreateTrack> {
                             shape: MaterialStateProperty.all<
                                 RoundedRectangleBorder>(RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15),
-                              side: const BorderSide(width: 2),
+                              side: const BorderSide(width: 0.1),
                             ))),
-
                         onPressed: () async {
 
                           if (_formKey.currentState!.validate()) {
                             _formKey.currentState!.save();
+                            // ignore: non_constant_identifier_names
                             int Count_Improve = 0;
                             print(track.Track_ID);
                             print(track.Brand);
                             print(track.Generation);
-                            print(track.Menufacurer);
+                            print(track.Menufacturer);
                             print(track.Size);
                             print(track.Working_Condition);
                             print(track.Location);
+                            print(track.Age_of_use);
                             print(track.Work_for);
                             print(track.Start_Enable_Date);
                             print(track.Note);
-
+                           
                             print(Count_Improve);
                             var res = await http.post(
-                                Uri.parse('http://localhost:3000/track'),
+                                Uri.parse('http://192.168.1.192:3000/track'),
                                 body: {
                                   'Track_ID': track.Track_ID,
                                   'Brand': track.Brand,
@@ -454,18 +521,22 @@ class _CreateTrackState extends State<CreateTrack> {
                                   'Start_Enable_Date': track.Start_Enable_Date,
                                   'Working_Condition': track.Working_Condition,
                                   'Generation': track.Generation,
-                                  'Menufacurer': track.Menufacurer,
+
+                                  'Menufacurer': track.Menufacturer,
                                   'Age_of_use': track.Age_of_use.toString(),
+
                                   'Work_for': track.Work_for,
                                   'Note': track.Note,
                                   'Count_Improve': Count_Improve.toString()
                                 });
+                            // ignore: unused_local_variable
                             var data = res.body;
                             if (res.statusCode == 200) {
                               print("true");
                               Fluttertoast.showToast(
                                   msg: "เพิ่มอุปกรณ์แล้ว!",
                                   gravity: ToastGravity.CENTER);
+                              // ignore: use_build_context_synchronously
                               Navigator.pop(context);
                             }
                           }
