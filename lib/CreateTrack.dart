@@ -1,10 +1,11 @@
 // ignore_for_file: file_names, prefer_const_constructors, avoid_print
 
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:intl/intl.dart';
 import 'package:trackingbluetooth/Background/Bg-detail.dart';
-
+import 'package:http/http.dart ' as http;
 import 'model/track.dart';
 
 class CreateTrack extends StatefulWidget {
@@ -33,7 +34,7 @@ class _CreateTrackState extends State<CreateTrack> {
     final newDate = await showDatePicker(
       context: context,
       initialDate: dateTime ?? initialDate,
-      firstDate: DateTime.now().subtract(const Duration(days: 0)),
+      firstDate: DateTime(2000),
       // firstDate: DateTime.utc(yyyy, mm, dd),
       lastDate: DateTime(DateTime.now().year + 5),
     );
@@ -193,7 +194,7 @@ class _CreateTrackState extends State<CreateTrack> {
                         const Padding(padding: EdgeInsets.all(16.16)),
                         const Expanded(
                           child: Text(
-                            "ขนาดเครื่อง",
+                            "ขนาดเครื่อง ( หน่วยเป็น cm เช่น 70*50 )",
                             style: TextStyle(fontSize: 15),
                           ),
                         ),
@@ -370,8 +371,10 @@ class _CreateTrackState extends State<CreateTrack> {
                             maxLength: 500,
                             maxLines: 5,
                             initialValue: track.Note,
+
                             validator:
                                 RequiredValidator(errorText: "กรุณาระบุหมายเหตุ"),
+
                             onSaved: (value) {
                               setState(() => track.Note = value);
                             },
@@ -391,9 +394,10 @@ class _CreateTrackState extends State<CreateTrack> {
                               borderRadius: BorderRadius.circular(15),
                               side: const BorderSide(width: 2),
                             ))),
-                        onPressed: () {
+                        onPressed: ()async {
                           if (_formKey.currentState!.validate()) {
                             _formKey.currentState!.save();
+                            int Count_Improve = 0;
                             print(track.Track_ID);
                             print(track.Brand);
                             print(track.Generation);
@@ -404,6 +408,32 @@ class _CreateTrackState extends State<CreateTrack> {
                             print(track.Work_for);
                             print(track.Start_Enable_Date);
                             print(track.Note);
+
+                            print(Count_Improve);
+                            var res = await http.post(
+                                Uri.parse('http://localhost:3000/track'),
+                                body: {
+                                  'Track_ID': track.Track_ID,
+                                  'Brand': track.Brand,
+                                  'Size': track.Size,
+                                  'Location': track.Location,
+                                  'Start_Enable_Date': track.Start_Enable_Date,
+                                  'Working_Condition': track.Working_Condition,
+                                  'Generation': track.Generation,
+                                  'Menufacurer': track.Menufacurer,
+                                  'Age_of_use': '3',
+                                  'Work_for': track.Work_for,
+                                  'Note': track.Note,
+                                  'Count_Improve': Count_Improve.toString()
+                                });
+                            var data = res.body;
+                            if (res.statusCode == 200) {
+                              print("true");
+                                Fluttertoast.showToast(
+              msg: "เพิ่มอุปกรณ์แล้ว!", gravity: ToastGravity.CENTER);
+                              Navigator.pop(context);
+                            }
+
                           }
                         },
                         child: const Text("ยืนยัน",
