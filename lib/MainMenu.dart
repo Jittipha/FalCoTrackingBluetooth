@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:trackingbluetooth/Background/Bg.dart';
 import 'package:trackingbluetooth/CreateTrack.dart';
 import 'package:trackingbluetooth/ListData.dart';
+import 'package:google_fonts/google_fonts.dart';
+
 
 class mainmenu extends StatefulWidget {
   const mainmenu({Key? key}) : super(key: key);
@@ -52,10 +54,14 @@ class _mainmenuState extends State<mainmenu> {
                       child: AutoSizeText(
                         'เพิ่มอุปกรณ์',
                         overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
+                        style:
+                         TextStyle(
                             color: Colors.black,
                             fontSize: 24,
-                            fontWeight: FontWeight.w500),
+                            fontWeight: FontWeight.w500,
+                           
+                            ),
+                            
                       )),
                 ),
               ),
