@@ -166,47 +166,6 @@ class _EditTrackState extends State<EditTrack> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text('สถานะ', 
-                  style: TextStyle(fontSize: 20)),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  SizedBox(height: 10,),
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: Colors.white,
-                      border: Border(
-                        left: BorderSide(
-                          color: Colors.black,
-                          width: 3,
-                        ),
-                      ),
-                    ),
-                    // color: const Color.fromARGB(255, 241, 244, 244)),
-                    child: DropdownButtonHideUnderline(
-                      child: DropdownButton(
-                        // Initial Value
-                        value: track.Status,
-                        // Down Arrow Icon
-                        icon: const Icon(Icons.keyboard_arrow_down),
-                        // Array list of items
-                        items: status.map((String status) {
-                          return DropdownMenuItem(
-                            value: status,
-                            child: Text(' ' + status),
-                          );
-                        }).toList(),
-                        // After selecting the desired option,it will
-                        // change button value to selected value
-                        onChanged: (String? newValue) {
-                          setState(() {
-                            track.Status = newValue!;
-                          });
-                        },
-                      ),
-                    ),
-                  ),
                   SizedBox(
                     width: MediaQuery.of(context).size.width * 0.020,
                   ),
@@ -232,7 +191,7 @@ class _EditTrackState extends State<EditTrack> {
                           style: ElevatedButton.styleFrom(
                               primary: Colors.white,
                               shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(15))),
+                                  borderRadius: BorderRadius.circular(20))),
                           icon: const Icon(
                             Icons.calendar_month_rounded,
                             color: Colors.black,
