@@ -194,7 +194,7 @@ class _CreateTrackState extends State<CreateTrack> {
                         const Padding(padding: EdgeInsets.all(16.16)),
                         const Expanded(
                           child: Text(
-                            "ขนาดเครื่อง",
+                            "ขนาดเครื่อง ( หน่วยเป็น cm เช่น 70*50 )",
                             style: TextStyle(fontSize: 15),
                           ),
                         ),
@@ -372,8 +372,6 @@ class _CreateTrackState extends State<CreateTrack> {
                             maxLength: 500,
                             maxLines: 5,
                             initialValue: track.Note,
-                            validator: RequiredValidator(
-                                errorText: "กรุณาระบุหมายเหตุ"),
                             onSaved: (value) {
                               setState(() => track.Note = value);
                             },
@@ -395,6 +393,7 @@ class _CreateTrackState extends State<CreateTrack> {
                         onPressed: () async {
                           if (_formKey.currentState!.validate()) {
                             _formKey.currentState!.save();
+                            int Count_Improve = 0;
                             print(track.Track_ID);
                             print(track.Brand);
                             print(track.Generation);
@@ -405,21 +404,24 @@ class _CreateTrackState extends State<CreateTrack> {
                             print(track.Work_for);
                             print(track.Start_Enable_Date);
                             print(track.Note);
-                            var res = await http.put(
+                            print(Count_Improve);
+                            var res = await http.post(
                                 Uri.parse('http://localhost:3000/track'),
                                 body: {
                                   'Track_ID': track.Track_ID,
                                   'Brand': track.Brand,
+                                  'Size': track.Size,
+                                  'Location': track.Location,
+                                  'Start_Enable_Date': track.Start_Enable_Date,
+                                  'Working_Condition': track.Working_Condition,
                                   'Generation': track.Generation,
                                   'Menufacurer': track.Menufacurer,
-                                  'Size': track.Size,
-                                  'Working_Condition': track.Working_Condition,
-                                  'Location': track.Location,
+                                  'Age_of_use': '3',
                                   'Work_for': track.Work_for,
-                                  'Start_Enable_Date': track.Start_Enable_Date,
                                   'Note': track.Note,
-                                  'Count_Improver': '0'
+                                  'Count_Improve': Count_Improve.toString()
                                 });
+                            var data = res.body;
                             if (res.statusCode == 200) {
                               print("true");
                             }

@@ -359,7 +359,7 @@ class _EditTrackState extends State<EditTrack> {
             'Location': widget.result['Location'],
             'Working_Condition': widget.result['Working_Condition'],
             'Last_Improve_Date': widget.result['Last_Improve_Date'],
-            'Count_Improve': '1',
+            'Count_Improve': Count_Improve.toString(),
             'End_Date': widget.result['End_Date'],
             'Note': widget.result['Note'],
           });
