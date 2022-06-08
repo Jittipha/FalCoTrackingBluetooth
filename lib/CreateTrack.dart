@@ -180,12 +180,12 @@ class _CreateTrackState extends State<CreateTrack> {
                               fillColor: Colors.white,
                               border: OutlineInputBorder(),
                               hintText: 'บริษัทผู้ผลิต'),
-                          initialValue: track.Menufacurer,
+                          initialValue: track.Menufacturer,
                           maxLength: 30,
                           validator: RequiredValidator(
                               errorText: "กรุณากรอกชื่อ บริษัท"),
                           onSaved: (value) {
-                            setState(() => track.Menufacurer = value);
+                            setState(() => track.Menufacturer = value);
                           },
                         ),
                       ),
@@ -335,6 +335,7 @@ class _CreateTrackState extends State<CreateTrack> {
                   Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
+
                         const Padding(padding: EdgeInsets.all(16.16)),
                         Expanded(
                           // optional flex property if flex is 1 because the default flex is 1
@@ -433,6 +434,9 @@ class _CreateTrackState extends State<CreateTrack> {
 
                         onPressed: () async {
 
+
+                        
+
                           if (_formKey.currentState!.validate()) {
                             _formKey.currentState!.save();
                             // ignore: non_constant_identifier_names
@@ -440,7 +444,7 @@ class _CreateTrackState extends State<CreateTrack> {
                             print(track.Track_ID);
                             print(track.Brand);
                             print(track.Generation);
-                            print(track.Menufacurer);
+                            print(track.Menufacturer);
                             print(track.Size);
                             print(track.Working_Condition);
                             print(track.Location);
@@ -460,8 +464,10 @@ class _CreateTrackState extends State<CreateTrack> {
                                   'Start_Enable_Date': track.Start_Enable_Date,
                                   'Working_Condition': track.Working_Condition,
                                   'Generation': track.Generation,
-                                  'Menufacurer': track.Menufacurer,
+
+                                  'Menufacurer': track.Menufacturer,
                                   'Age_of_use': track.Age_of_use.toString(),
+
                                   'Work_for': track.Work_for,
                                   'Note': track.Note,
                                   'Count_Improve': Count_Improve.toString()
