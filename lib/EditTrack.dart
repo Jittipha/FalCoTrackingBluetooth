@@ -2,6 +2,7 @@
 // ignore: avoid_web_libraries_in_flutter, unused_import
 import 'dart:html';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:intl/intl.dart';
 // ignore: unused_import
@@ -256,7 +257,9 @@ class _EditTrackState extends State<EditTrack> {
                             // Down Arrow Icon
                             icon: const Icon(Icons.keyboard_arrow_down),
                             hint: Text(
-                              "   " + "เลือกสถานะการทำงานของเครื่อง",
+                              "   " +
+                                  (widget.result['Status'] ??
+                                      " เลือกสถานะการทำงานของเครื่อง"),
                               style: TextStyle(color: Colors.black),
                             ),
                             // Array list of items
@@ -270,7 +273,7 @@ class _EditTrackState extends State<EditTrack> {
                             // change button value to selected value
                             onChanged: (String? newValue) {
                               setState(() {
-                                track.Status = newValue!;
+                                widget.result['Status'] = newValue!;
                               });
                             },
                           ),
@@ -324,7 +327,16 @@ class _EditTrackState extends State<EditTrack> {
                         onPressed: () async {
                           if (updateTrack.currentState!.validate()) {
                             updateTrack.currentState!.save();
-                            showAlertDialog(context);
+                            if (widget.result['Status'] != null) {
+                              showAlertDialog(context);
+                            } else {
+                              Fluttertoast.showToast(
+                                  timeInSecForIosWeb: 4,
+                                  msg: "กรุณาใส่สถานะการทำงาน !",
+                                  textColor: Colors.white,
+                                  backgroundColor: Colors.redAccent,
+                                  gravity: ToastGravity.CENTER);
+                            }
                           }
                         },
                         child: const Text("ยืนยัน",
@@ -403,19 +415,17 @@ class _EditTrackState extends State<EditTrack> {
         onPressed: () async {
           print(widget.result['Count_Improve']);
           int Count_Improve = widget.result['Count_Improve'];
-
           Count_Improve = Count_Improve + 1;
           print(Count_Improve);
-
           var res = await http
               .put(Uri.parse('http://192.168.1.192:3000/track'), body: {
             'Track_ID': widget.result['Track_ID'],
             'Location': widget.result['Location'],
             'Working_Condition': widget.result['Working_Condition'],
-            'Last_Improve_Date': widget.result['Last_Improve_Date'],
+            'Last_Improve_Date': widget.result['Last_Improve_Date'] ?? '',
             'Count_Improve': Count_Improve.toString(),
-            'End_Date': widget.result['End_Date'],
-            'Note': widget.result['Note'],
+            'End_Date': widget.result['End_Date'] ?? '',
+            'Note': widget.result['Note'] ?? '',
             'Status': widget.result['Status'],
           });
           if (res.statusCode == 200) {

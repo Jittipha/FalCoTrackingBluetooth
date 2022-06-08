@@ -523,7 +523,7 @@ class _CreateTrackState extends State<CreateTrack> {
                                   'Menufacturer': track.Menufacturer,
                                   'Age_of_use': track.Age_of_use.toString(),
                                   'Work_for': track.Work_for,
-                                  'Note': track.Note,
+                                  'Note': track.Note ?? '',
                                   'Count_Improve': Count_Improve.toString(),
                                   'Status': track.Status,
                                 });
