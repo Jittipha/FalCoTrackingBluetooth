@@ -177,12 +177,12 @@ class _CreateTrackState extends State<CreateTrack> {
                               fillColor: Colors.white,
                               border: OutlineInputBorder(),
                               hintText: 'บริษัทผู้ผลิต'),
-                          initialValue: track.Menufacurer,
+                          initialValue: track.Menufacturer,
                           maxLength: 30,
                           validator: RequiredValidator(
                               errorText: "กรุณากรอกชื่อ บริษัท"),
                           onSaved: (value) {
-                            setState(() => track.Menufacurer = value);
+                            setState(() => track.Menufacturer = value);
                           },
                         ),
                       ),
@@ -346,7 +346,8 @@ class _CreateTrackState extends State<CreateTrack> {
                               ),
                             ),
                             style: ElevatedButton.styleFrom(
-                                primary: const Color.fromARGB(255, 250, 248, 248),
+                                primary:
+                                    const Color.fromARGB(255, 250, 248, 248),
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(15))),
                             icon: const Icon(
@@ -371,10 +372,8 @@ class _CreateTrackState extends State<CreateTrack> {
                             maxLength: 500,
                             maxLines: 5,
                             initialValue: track.Note,
-
-                            validator:
-                                RequiredValidator(errorText: "กรุณาระบุหมายเหตุ"),
-
+                            validator: RequiredValidator(
+                                errorText: "กรุณาระบุหมายเหตุ"),
                             onSaved: (value) {
                               setState(() => track.Note = value);
                             },
@@ -388,20 +387,19 @@ class _CreateTrackState extends State<CreateTrack> {
                         style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all<Color>(
                                 const Color.fromARGB(255, 4, 211, 225)),
-                            shape:
-                                MaterialStateProperty.all<RoundedRectangleBorder>(
-                                    RoundedRectangleBorder(
+                            shape: MaterialStateProperty.all<
+                                RoundedRectangleBorder>(RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15),
                               side: const BorderSide(width: 2),
                             ))),
-                        onPressed: ()async {
+                        onPressed: () async {
                           if (_formKey.currentState!.validate()) {
                             _formKey.currentState!.save();
                             int Count_Improve = 0;
                             print(track.Track_ID);
                             print(track.Brand);
                             print(track.Generation);
-                            print(track.Menufacurer);
+                            print(track.Menufacturer);
                             print(track.Size);
                             print(track.Working_Condition);
                             print(track.Location);
@@ -420,7 +418,7 @@ class _CreateTrackState extends State<CreateTrack> {
                                   'Start_Enable_Date': track.Start_Enable_Date,
                                   'Working_Condition': track.Working_Condition,
                                   'Generation': track.Generation,
-                                  'Menufacurer': track.Menufacurer,
+                                  'Menufacurer': track.Menufacturer,
                                   'Age_of_use': '3',
                                   'Work_for': track.Work_for,
                                   'Note': track.Note,
@@ -429,11 +427,11 @@ class _CreateTrackState extends State<CreateTrack> {
                             var data = res.body;
                             if (res.statusCode == 200) {
                               print("true");
-                                Fluttertoast.showToast(
-              msg: "เพิ่มอุปกรณ์แล้ว!", gravity: ToastGravity.CENTER);
+                              Fluttertoast.showToast(
+                                  msg: "เพิ่มอุปกรณ์แล้ว!",
+                                  gravity: ToastGravity.CENTER);
                               Navigator.pop(context);
                             }
-
                           }
                         },
                         child: const Text("ยืนยัน",

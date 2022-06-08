@@ -55,7 +55,7 @@ class _DetailState extends State<Detail> {
                 ),
                 Text(
                   // ignore: prefer_interpolation_to_compose_strings
-                  'ผู้ผลิต : ' + widget.result['Menufacurer'],
+                  'ผู้ผลิต : ' + widget.result['Menufacturer'],
                   style: const TextStyle(color: Colors.black, fontSize: 18),
                 ),
                 const SizedBox(
