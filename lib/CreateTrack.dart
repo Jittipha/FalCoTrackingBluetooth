@@ -451,6 +451,10 @@ class _CreateTrackState extends State<CreateTrack> {
                                   value: track.Status,
                                   // Down Arrow Icon
                                   icon: const Icon(Icons.keyboard_arrow_down),
+                                  hint: Text(
+                                    "เลือกสถานะการทำงานของเครื่อง",
+                                    style: TextStyle(color: Colors.black),
+                                  ),
                                   // Array list of items
                                   items: status.map((String status) {
                                     return DropdownMenuItem(
