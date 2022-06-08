@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:intl/intl.dart';
 import 'package:trackingbluetooth/Background/Bg-detail.dart';
+import 'package:http/http.dart ' as http;
 
 import 'model/track.dart';
 
@@ -345,7 +346,8 @@ class _CreateTrackState extends State<CreateTrack> {
                               ),
                             ),
                             style: ElevatedButton.styleFrom(
-                                primary: const Color.fromARGB(255, 250, 248, 248),
+                                primary:
+                                    const Color.fromARGB(255, 250, 248, 248),
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(15))),
                             icon: const Icon(
@@ -370,8 +372,8 @@ class _CreateTrackState extends State<CreateTrack> {
                             maxLength: 500,
                             maxLines: 5,
                             initialValue: track.Note,
-                            validator:
-                                RequiredValidator(errorText: "กรุณาระบุหมายเหตุ"),
+                            validator: RequiredValidator(
+                                errorText: "กรุณาระบุหมายเหตุ"),
                             onSaved: (value) {
                               setState(() => track.Note = value);
                             },
@@ -385,13 +387,12 @@ class _CreateTrackState extends State<CreateTrack> {
                         style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all<Color>(
                                 const Color.fromARGB(255, 4, 211, 225)),
-                            shape:
-                                MaterialStateProperty.all<RoundedRectangleBorder>(
-                                    RoundedRectangleBorder(
+                            shape: MaterialStateProperty.all<
+                                RoundedRectangleBorder>(RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15),
                               side: const BorderSide(width: 2),
                             ))),
-                        onPressed: () {
+                        onPressed: () async {
                           if (_formKey.currentState!.validate()) {
                             _formKey.currentState!.save();
                             print(track.Track_ID);
@@ -404,6 +405,24 @@ class _CreateTrackState extends State<CreateTrack> {
                             print(track.Work_for);
                             print(track.Start_Enable_Date);
                             print(track.Note);
+                            var res = await http.put(
+                                Uri.parse('http://localhost:3000/track'),
+                                body: {
+                                  'Track_ID': track.Track_ID,
+                                  'Brand': track.Brand,
+                                  'Generation': track.Generation,
+                                  'Menufacurer': track.Menufacurer,
+                                  'Size': track.Size,
+                                  'Working_Condition': track.Working_Condition,
+                                  'Location': track.Location,
+                                  'Work_for': track.Work_for,
+                                  'Start_Enable_Date': track.Start_Enable_Date,
+                                  'Note': track.Note,
+                                  'Count_Improver': '0'
+                                });
+                            if (res.statusCode == 200) {
+                              print("true");
+                            }
                           }
                         },
                         child: const Text("ยืนยัน",
