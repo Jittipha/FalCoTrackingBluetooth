@@ -343,31 +343,33 @@ class _EditTrackState extends State<EditTrack> {
         child: const Text("OK"),
         onPressed: () async {
           print(widget.result['Count_Improve']);
-          // int Count_Improve = widget.result['Count_Improve'];
-          // Count_Improve = Count_Improve + 1;
-          print("asdasdasdas");
-          print(widget.result['Track_ID'] +
-              widget.result['Location'] +
-              widget.result['Working_Condition'] +
-              widget.result['Last_Improve_Date'] +
-              widget.result['Count_Improve'] +
-              widget.result['End_Date'] +
-              widget.result['Note']);
-          // var res =
-          //     await http.put(Uri.parse('http://localhost:3000/track'), body: {
-          //   'Track_ID': widget.result['Track_ID'],
-          //   'Location': widget.result['Location'],
-          //   'Working_Condition': widget.result['Working_Condition'],
-          //   'Last_Improve_Date': widget.result['Last_Improve_Date'],
-          //   'Count_Improver': '1',
-          //   'End_Date': widget.result['End_Date'],
-          //   'Note': widget.result['Note'],
-          // });
-          // if (res.statusCode == 200) {
-          //   print("true");
-          // }
-          // Navigator.pop(context);
-          // Navigator.pop(context);
+          int Count_Improve = widget.result['Count_Improve'];
+          
+          Count_Improve = Count_Improve + 1;
+          print(Count_Improve);
+          // print(widget.result['Track_ID'] +
+          //     widget.result['Location'] +
+          //     widget.result['Working_Condition'] +
+          //     widget.result['Last_Improve_Date'] +
+          //     widget.result['Count_Improve'] +
+          //     widget.result['End_Date'] +
+          //     widget.result['Note']);
+          var res =
+              await http.put(Uri.parse('http://localhost:3000/track'), body: {
+            'Track_ID': widget.result['Track_ID'],
+            'Location': widget.result['Location'],
+            'Working_Condition': widget.result['Working_Condition'],
+            'Last_Improve_Date': widget.result['Last_Improve_Date'],
+            'Count_Improve': '1',
+            'End_Date': widget.result['End_Date'],
+            'Note': widget.result['Note'],
+          });
+          if (res.statusCode == 200) {
+            print("true");
+             Navigator.pop(context);
+          Navigator.pop(context);
+          }
+         
         });
 
     Widget cancleButton = FlatButton(
@@ -379,8 +381,8 @@ class _EditTrackState extends State<EditTrack> {
 
     // set up the AlertDialog
     AlertDialog alert = AlertDialog(
-      title: const Text("Delete This Track !"),
-      content: const Text("Are you sure?"),
+      title: const Text("Do you want to change?"),
+      content: const Text("sure?"),
       actions: [cancleButton, okButton],
     );
 
