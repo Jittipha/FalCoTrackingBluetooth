@@ -6,6 +6,7 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:trackingbluetooth/Detail.dart';
 import 'package:trackingbluetooth/EditTrack.dart';
 import 'package:trackingbluetooth/model/track.dart';
 import 'package:http/http.dart ' as http;
@@ -189,7 +190,15 @@ class _ListdataState extends State<Listdata> {
                                     ))
                               ],
                             ),
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => Detail(
+                                                    result: _resultList[index],
+                                                  )),
+                                        );
+                            },
                           ),
                         );
                       })),
