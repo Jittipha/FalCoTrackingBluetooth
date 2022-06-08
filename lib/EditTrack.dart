@@ -334,7 +334,7 @@ class _EditTrackState extends State<EditTrack> {
                             } else {
                               Fluttertoast.showToast(
                                   timeInSecForIosWeb: 4,
-                                  msg: "กรุณาใส่สถานะการทำงาน!",
+                                  msg: "กรุณาใส่สถานะการทำงาน !",
                                   textColor: Colors.white,
                                   backgroundColor: Colors.redAccent,
                                   gravity: ToastGravity.CENTER);
