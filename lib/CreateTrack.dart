@@ -1,6 +1,7 @@
 // ignore_for_file: file_names, prefer_const_constructors, avoid_print
 
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:intl/intl.dart';
 import 'package:trackingbluetooth/Background/Bg-detail.dart';
@@ -34,7 +35,7 @@ class _CreateTrackState extends State<CreateTrack> {
     final newDate = await showDatePicker(
       context: context,
       initialDate: dateTime ?? initialDate,
-      firstDate: DateTime.now().subtract(const Duration(days: 0)),
+      firstDate: DateTime(2000),
       // firstDate: DateTime.utc(yyyy, mm, dd),
       lastDate: DateTime(DateTime.now().year + 5),
     );
@@ -424,6 +425,9 @@ class _CreateTrackState extends State<CreateTrack> {
                             var data = res.body;
                             if (res.statusCode == 200) {
                               print("true");
+                                Fluttertoast.showToast(
+              msg: "เพิ่มอุปกรณ์แล้ว!", gravity: ToastGravity.CENTER);
+                              Navigator.pop(context);
                             }
                           }
                         },
