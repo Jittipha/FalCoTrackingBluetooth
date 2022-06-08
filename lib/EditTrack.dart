@@ -76,8 +76,6 @@ class _EditTrackState extends State<EditTrack> {
   }
 
   String dropdownvalue = 'กำลังใช้งาน';
-
-  // List of items in our dropdown menu
   var status = [
     'กำลังใช้งาน',
     'กำลังซ่อม',
