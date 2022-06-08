@@ -320,7 +320,7 @@ class _CreateTrackState extends State<CreateTrack> {
                         const Padding(padding: EdgeInsets.all(16.16)),
                         const Expanded(
                           child: Text(
-                            "วันเปิดใช้งาน",
+                            "อายุการใช้งาน",
                             style: TextStyle(fontSize: 15),
                           ),
                         ),
@@ -334,32 +334,26 @@ class _CreateTrackState extends State<CreateTrack> {
                   Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Padding(padding: EdgeInsets.all(16.16)),
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.2,
-                          height: MediaQuery.of(context).size.height * 0.07,
-                          child: ElevatedButton.icon(
-                            onPressed: () => pickDate(context),
-                            label: Text(
-                              getTextDate(),
-                              style: const TextStyle(
-                                fontSize: 18,
-                                color: Colors.black,
-                              ),
-                            ),
-                            style: ElevatedButton.styleFrom(
-                                primary: const Color.fromARGB(255, 250, 248, 248),
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(15))),
-                            icon: const Icon(
-                              Icons.calendar_month_rounded,
-                              color: Colors.black,
-                              size: 30,
-                            ),
+                        const Padding(padding: EdgeInsets.all(16.16)),
+                        Expanded(
+                          // optional flex property if flex is 1 because the default flex is 1
+                          flex: 1,
+                          child: TextFormField(
+                            decoration: const InputDecoration(
+                                filled: true,
+                                fillColor: Colors.white,
+                                border: OutlineInputBorder(),
+                                hintText: 'อายุการใช้งานของเครื่อง'),
+                            maxLength: 100,
+                            validator: RequiredValidator(
+                                errorText: "กรุณาระบุอายุการใช้งานของเครื่อง"),
+                            onSaved: (value) {
+                              setState(() => track.Age_of_use);
+                            },
                           ),
                         ),
                         SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.26,
+                          width: MediaQuery.of(context).size.width * 0.2,
                         ),
                         Expanded(
                           // optional flex property if flex is 1 because the default flex is 1
@@ -371,18 +365,55 @@ class _CreateTrackState extends State<CreateTrack> {
                                 border: OutlineInputBorder(),
                                 hintText: 'หมายเหตุ'),
                             maxLength: 500,
-                            maxLines: 5,
                             initialValue: track.Note,
-
-                            validator:
-                                RequiredValidator(errorText: "กรุณาระบุหมายเหตุ"),
-
+                            validator: RequiredValidator(
+                                errorText: "กรุณาระบุหมายเหตุ"),
                             onSaved: (value) {
                               setState(() => track.Note = value);
                             },
                           ),
                         ),
                       ]),
+                  Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      // ignore: prefer_const_literals_to_create_immutables
+                      children: [
+                        const Padding(padding: EdgeInsets.all(16.16)),
+                        const Expanded(
+                          child: Text(
+                            "อายุการใช้งาน",
+                            style: TextStyle(fontSize: 15),
+                          ),
+                        ),
+                      ]),
+                  Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+                    const Padding(padding: EdgeInsets.all(16.16)),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.2,
+                      height: MediaQuery.of(context).size.height * 0.07,
+                      child: ElevatedButton.icon(
+                        onPressed: () => pickDate(context),
+                        label: Text(
+                          getTextDate(),
+                          style: const TextStyle(
+                            fontSize: 18,
+                            color: Colors.black,
+                          ),
+                        ),
+                        style: ElevatedButton.styleFrom(
+                            primary: const Color.fromARGB(255, 250, 248, 248),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15))),
+                        icon: const Icon(
+                          Icons.calendar_month_rounded,
+                          color: Colors.black,
+                          size: 30,
+                        ),
+                      ),
+                    ),
+                  ]),
+                  SizedBox(
+                    height: 20,
+                  ),
                   SizedBox(
                       height: MediaQuery.of(context).size.height * 0.05,
                       width: MediaQuery.of(context).size.width * 0.2,
@@ -390,13 +421,14 @@ class _CreateTrackState extends State<CreateTrack> {
                         style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all<Color>(
                                 const Color.fromARGB(255, 4, 211, 225)),
-                            shape:
-                                MaterialStateProperty.all<RoundedRectangleBorder>(
-                                    RoundedRectangleBorder(
+                            shape: MaterialStateProperty.all<
+                                RoundedRectangleBorder>(RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15),
                               side: const BorderSide(width: 2),
                             ))),
-                        onPressed: ()async* {
+
+                        onPressed: () async {
+
                           if (_formKey.currentState!.validate()) {
                             _formKey.currentState!.save();
                             int Count_Improve = 0;
@@ -423,7 +455,7 @@ class _CreateTrackState extends State<CreateTrack> {
                                   'Working_Condition': track.Working_Condition,
                                   'Generation': track.Generation,
                                   'Menufacurer': track.Menufacurer,
-                                  'Age_of_use': '3',
+                                  'Age_of_use': track.Age_of_use.toString(),
                                   'Work_for': track.Work_for,
                                   'Note': track.Note,
                                   'Count_Improve': Count_Improve.toString()
@@ -431,17 +463,20 @@ class _CreateTrackState extends State<CreateTrack> {
                             var data = res.body;
                             if (res.statusCode == 200) {
                               print("true");
-                                Fluttertoast.showToast(
-              msg: "เพิ่มอุปกรณ์แล้ว!", gravity: ToastGravity.CENTER);
+                              Fluttertoast.showToast(
+                                  msg: "เพิ่มอุปกรณ์แล้ว!",
+                                  gravity: ToastGravity.CENTER);
                               Navigator.pop(context);
                             }
-
                           }
                         },
                         child: const Text("ยืนยัน",
                             style: TextStyle(fontSize: 20, color: Colors.black),
                             textAlign: TextAlign.center),
                       )),
+                  SizedBox(
+                    height: 50,
+                  )
                 ],
               ),
             )),
