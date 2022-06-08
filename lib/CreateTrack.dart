@@ -454,11 +454,15 @@ class _CreateTrackState extends State<CreateTrack> {
                                   value: track.Status,
                                   // Down Arrow Icon
                                   icon: const Icon(Icons.keyboard_arrow_down),
+                                  hint: Text(
+                                    "   " + "เลือกสถานะการทำงานของเครื่อง",
+                                    style: TextStyle(color: Colors.black),
+                                  ),
                                   // Array list of items
                                   items: status.map((String status) {
                                     return DropdownMenuItem(
                                       value: status,
-                                      child: Text(' ' + status),
+                                      child: Text('   ' + status),
                                     );
                                   }).toList(),
                                   // After selecting the desired option,it will
@@ -516,8 +520,6 @@ class _CreateTrackState extends State<CreateTrack> {
                                   'Start_Enable_Date': track.Start_Enable_Date,
                                   'Working_Condition': track.Working_Condition,
                                   'Generation': track.Generation,
-
-
                                   'Menufacturer': track.Menufacturer,
                                   'Age_of_use': track.Age_of_use.toString(),
                                   'Work_for': track.Work_for,

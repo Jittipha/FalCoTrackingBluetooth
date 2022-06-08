@@ -277,6 +277,50 @@ class _EditTrackState extends State<EditTrack> {
                       ),
                     ],
                   ),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.020,
+                  ),
+                  Column(
+                    children: [
+                      const Text('สถานะการทำงาน',
+                          style: TextStyle(fontSize: 20)),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8.0),
+                            border: Border.all(),
+                            color: Color.fromARGB(255, 255, 255, 255)),
+                        child: DropdownButtonHideUnderline(
+                          child: DropdownButton(
+                            // Initial Value
+                            value: track.Status,
+                            // Down Arrow Icon
+                            icon: const Icon(Icons.keyboard_arrow_down),
+                            hint: Text(
+                              "   " + "เลือกสถานะการทำงานของเครื่อง",
+                              style: TextStyle(color: Colors.black),
+                            ),
+                            // Array list of items
+                            items: status.map((String status) {
+                              return DropdownMenuItem(
+                                value: status,
+                                child: Text('   ' + status),
+                              );
+                            }).toList(),
+                            // After selecting the desired option,it will
+                            // change button value to selected value
+                            onChanged: (String? newValue) {
+                              setState(() {
+                                track.Status = newValue!;
+                              });
+                            },
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
                 ],
               ),
               const SizedBox(
