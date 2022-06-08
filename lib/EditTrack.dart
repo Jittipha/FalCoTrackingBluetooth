@@ -415,10 +415,12 @@ class _EditTrackState extends State<EditTrack> {
     Widget okButton = FlatButton(
         child: const Text("OK"),
         onPressed: () async {
-          print(widget.result['Count_Improve']);
           int Count_Improve = widget.result['Count_Improve'];
-          Count_Improve = Count_Improve + 1;
-          print(Count_Improve);
+          if (widget.result["Status"] == "กำลังซ่อม") {
+            print('Curent_Count>>> ${widget.result['Count_Improve']}');
+            Count_Improve = Count_Improve + 1;
+          }
+          print('Result_Count>>> $Count_Improve');
           var res = await http
               .put(Uri.parse('http://192.168.1.192:3000/track'), body: {
             'Track_ID': widget.result['Track_ID'],

@@ -128,7 +128,7 @@ class _ListdataState extends State<Listdata> {
                       hintText: 'ค้นหาด้วยรหัสอุปกรณ์..... '),
                 ),
                 const SizedBox(
-                  height: 50,
+                  height: 30,
                 ),
                 Expanded(
                   child: ListView.builder(

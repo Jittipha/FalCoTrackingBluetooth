@@ -42,6 +42,14 @@ class _DetailState extends State<Detail> {
                 ),
                 Text(
                   // ignore: prefer_interpolation_to_compose_strings
+                  'สถานะการใช้งาน : ' + widget.result['Status'],
+                  style: const TextStyle(color: Colors.black, fontSize: 18),
+                ),
+                const SizedBox(
+                  height: 5,
+                ),
+                Text(
+                  // ignore: prefer_interpolation_to_compose_strings
                   'ยี่ห้อ : ' + widget.result['Brand'],
                   style: const TextStyle(color: Colors.black, fontSize: 18),
                 ),
