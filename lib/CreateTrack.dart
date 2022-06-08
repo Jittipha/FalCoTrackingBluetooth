@@ -1,6 +1,7 @@
 // ignore_for_file: file_names, prefer_const_constructors, avoid_print
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:intl/intl.dart';
@@ -110,6 +111,8 @@ class _CreateTrackState extends State<CreateTrack> {
                               hintText: 'กรอกรหัสเครื่อง'),
                           initialValue: track.Track_ID,
                           maxLength: 50,
+                          // inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                          // keyboardType: TextInputType.number,
                           validator: RequiredValidator(
                               errorText: "กรุณากรอกรหัสเครื่อง"),
                           onSaved: (value) {
@@ -517,6 +520,8 @@ class _CreateTrackState extends State<CreateTrack> {
                                   'Start_Enable_Date': track.Start_Enable_Date,
                                   'Working_Condition': track.Working_Condition,
                                   'Generation': track.Generation,
+
+
                                   'Menufacturer': track.Menufacturer,
                                   'Age_of_use': track.Age_of_use.toString(),
                                   'Work_for': track.Work_for,
