@@ -49,13 +49,15 @@ class _CreateTrackState extends State<CreateTrack> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.lightBlue[100],
-      appBar: AppBar(
-          title: const Text(
-            "สร้างอุปกรณ์",
-            style: TextStyle(fontSize: 25),
-          ),
-          titleSpacing: 300),
+     backgroundColor: Colors.lightBlue[100],
+        appBar: AppBar(
+            title: const Center(
+              child: Text(
+                "สร้างอุปกรณ์",
+                style: TextStyle(fontSize: 30),
+              ),
+            ),
+            titleSpacing: 300),
       body: Background(
         child: SingleChildScrollView(
             padding: const EdgeInsets.only(left: 200, right: 200, top: 30),
@@ -394,7 +396,7 @@ class _CreateTrackState extends State<CreateTrack> {
                               borderRadius: BorderRadius.circular(15),
                               side: const BorderSide(width: 2),
                             ))),
-                        onPressed: ()async {
+                        onPressed: ()async* {
                           if (_formKey.currentState!.validate()) {
                             _formKey.currentState!.save();
                             int Count_Improve = 0;
@@ -411,7 +413,7 @@ class _CreateTrackState extends State<CreateTrack> {
 
                             print(Count_Improve);
                             var res = await http.post(
-                                Uri.parse('http://192.168.1.192:3000/track'),
+                                Uri.parse('http://localhost:3000/track'),
                                 body: {
                                   'Track_ID': track.Track_ID,
                                   'Brand': track.Brand,

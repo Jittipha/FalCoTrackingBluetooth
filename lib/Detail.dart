@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class Detail extends StatefulWidget {
   Detail({Key? key, required this.result}) : super(key: key);
   Map<String, dynamic> result;
@@ -14,11 +15,13 @@ class _DetailState extends State<Detail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.lightBlue[100],
+       backgroundColor: Colors.lightBlue[100],
         appBar: AppBar(
-            title: const Text(
-              "รายละเอียดอุปกรณ์",
-              style: TextStyle(fontSize: 25),
+            title: const Center(
+              child: Text(
+                "รายละเอียดอุปกรณ์",
+                style: TextStyle(fontSize: 30),
+              ),
             ),
             titleSpacing: 300),
         body: Center(

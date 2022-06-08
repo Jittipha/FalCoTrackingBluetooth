@@ -98,115 +98,123 @@ class _ListdataState extends State<Listdata> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.lightBlue[100],
-        body: Center(
-          child: SingleChildScrollView(
-            child: Container(
-              width: 800,
-              height: 500,
-              color: const Color(0x003A94FB),
-              padding: const EdgeInsets.fromLTRB(10, 20, 10, 10),
-              child: Column(children: <Widget>[
-                const Text(
-                  "อุปกรณ์ทั้งหมด",
-                  style: TextStyle(color: Colors.black, fontSize: 25),
-                ),
-                const SizedBox(
-                  height: 30,
-                ),
-                TextFormField(
-                  autofocus: false,
-                  controller: _searchController,
-                  decoration: const InputDecoration(
-                      filled: true,
-                      fillColor: Colors.white,
-                      border: OutlineInputBorder(),
-                      prefixIcon: Icon(Icons.search),
-                      hintText: 'ค้นหาด้วยรหัสอุปกรณ์..... '),
-                ),
-                const SizedBox(
-                  height: 25,
-                ),
-                Expanded(
-                  child: ListView.builder(
-                      itemCount: _resultList.length,
-                      itemBuilder: ((BuildContext context, int index) {
-                        return Container(
-                          padding: const EdgeInsets.fromLTRB(0, 0, 0, 5),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: Colors.white,
-                            boxShadow: const [
-                              BoxShadow(
-                                color: Colors.grey,
-                                blurRadius: 100,
-                                offset: Offset(20, 10),
-                                 // Shadow position
-                              ),
-                            ],
-                          ),
-                          child: ListTile(
-                            contentPadding:
-                                const EdgeInsets.symmetric(horizontal: 20.0),
-                            title: Text(
-                              // ignore: prefer_interpolation_to_compose_strings
-                              'รหัสเครื่อง : ' + _resultList[index]['Track_ID'],
-                              style: const TextStyle(
-                                  color: Colors.black, fontSize: 18),
-                            ),
-                            subtitle: Text(
-                              // ignore: prefer_interpolation_to_compose_strings
-                              'ตำเเหน่งที่ตั้ง : ' +
-                                  _resultList[index]['Location'],
-                              style: const TextStyle(
-                                  color: Colors.black, fontSize: 18),
-                            ),
-                            trailing: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: <Widget>[
-                                Align(
-                                  alignment: Alignment.center,
-                                  child: GestureDetector(
-                                      onTap: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) => EditTrack(
-                                                    result: _resultList[index],
-                                                  )),
-                                        );
-                                      },
-                                      child: const Icon(Icons.edit)),
+        appBar: AppBar(
+            title: const Center(
+              child: Text(
+                "อุปกรณ์ทั้งหมด",
+                style: TextStyle(fontSize: 30),
+              ),
+            ),
+            titleSpacing: 300),
+        body: Align(
+          alignment: Alignment.topCenter,
+          child: Container(
+           padding: const EdgeInsets.only(left: 400, right: 400, top: 70),
+            child: SingleChildScrollView(
+              child: Container(
+                width: 1000,
+                height: 800,
+                color: const Color(0x003A94FB),
+                padding: const EdgeInsets.fromLTRB(10, 20, 10, 10),
+                child: Column(children: <Widget>[
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  TextFormField(
+                    autofocus: false,
+                    controller: _searchController,
+                    decoration: const InputDecoration(
+                        filled: true,
+                        fillColor: Colors.white,
+                        border: OutlineInputBorder(),
+                        prefixIcon: Icon(Icons.search),
+                        hintText: 'ค้นหาด้วยรหัสอุปกรณ์..... '),
+                  ),
+                  const SizedBox(
+                    height: 50,
+                  ),
+                  Expanded(
+                    child: ListView.builder(
+                        itemCount: _resultList.length,
+                        itemBuilder: ((BuildContext context, int index) {
+                          return Container(
+                            padding: const EdgeInsets.fromLTRB(0, 0, 0, 5),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: Colors.white,
+                              boxShadow: const [
+                                BoxShadow(
+                                  color: Colors.grey,
+                                  blurRadius: 100,
+                                  offset: Offset(20, 10),
+                                   // Shadow position
                                 ),
-                                const SizedBox(
-                                  width: 20,
-                                  // height: 10,
-                                ),
-                                GestureDetector(
-                                    onTap: () {
-                                      showAlertDialog(
-                                          context,
-                                          _resultList[index]['Track_ID'],
-                                          index);
-                                    },
-                                    child: const Icon(
-                                      Icons.delete,
-                                    ))
                               ],
                             ),
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Detail(
-                                          result: _resultList[index],
-                                        )),
-                              );
-                            },
-                          ),
-                        );
-                      })),
-                )
-              ]),
+                            child: ListTile(
+                              contentPadding:
+                                  const EdgeInsets.symmetric(horizontal: 20.0),
+                              title: Text(
+                                // ignore: prefer_interpolation_to_compose_strings
+                                'รหัสเครื่อง : ' + _resultList[index]['Track_ID'],
+                                style: const TextStyle(
+                                    color: Colors.black, fontSize: 18),
+                              ),
+                              subtitle: Text(
+                                // ignore: prefer_interpolation_to_compose_strings
+                                'ตำเเหน่งที่ตั้ง : ' +
+                                    _resultList[index]['Location'],
+                                style: const TextStyle(
+                                    color: Colors.black, fontSize: 18),
+                              ),
+                              trailing: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: <Widget>[
+                                  Align(
+                                    alignment: Alignment.center,
+                                    child: GestureDetector(
+                                        onTap: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) => EditTrack(
+                                                      result: _resultList[index],
+                                                    )),
+                                          );
+                                        },
+                                        child: const Icon(Icons.edit)),
+                                  ),
+                                  const SizedBox(
+                                    width: 20,
+                                    // height: 10,
+                                  ),
+                                  GestureDetector(
+                                      onTap: () {
+                                        showAlertDialog(
+                                            context,
+                                            _resultList[index]['Track_ID'],
+                                            index);
+                                      },
+                                      child: const Icon(
+                                        Icons.delete,
+                                      ))
+                                ],
+                              ),
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Detail(
+                                            result: _resultList[index],
+                                          )),
+                                );
+                              },
+                            ),
+                          );
+                        })),
+                  )
+                ]),
+              ),
             ),
           ),
         ));

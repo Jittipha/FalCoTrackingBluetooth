@@ -46,7 +46,7 @@ class _EditTrackState extends State<EditTrack> {
     final newDate = await showDatePicker(
       context: context,
       initialDate: dateTime ?? initialDate,
-      firstDate: DateTime.now().subtract(Duration(days: 0)),
+      firstDate: DateTime.now().subtract(const Duration(days: 0)),
       // firstDate: DateTime.utc(yyyy, mm, dd),
       lastDate: DateTime(DateTime.now().year + 5),
     );
@@ -63,7 +63,7 @@ class _EditTrackState extends State<EditTrack> {
     final newDate = await showDatePicker(
       context: context,
       initialDate: dateTime ?? initialDate,
-      firstDate: DateTime.now().subtract(Duration(days: 0)),
+      firstDate: DateTime.now().subtract(const Duration(days: 0)),
       // firstDate: DateTime.utc(yyyy, mm, dd),
       lastDate: DateTime(DateTime.now().year + 5),
     );
@@ -83,7 +83,7 @@ class _EditTrackState extends State<EditTrack> {
             title: const Center(
               child: Text(
                 "เเก้ไขข้อมูลอุปกรณ์",
-                style: TextStyle(fontSize: 25),
+                style: TextStyle(fontSize: 30),
               ),
             ),
             titleSpacing: 300),
@@ -102,7 +102,7 @@ class _EditTrackState extends State<EditTrack> {
               ),
               const Text(
                 'สภาพการใช้งาน',
-                style: TextStyle(fontSize: 20),
+                style: TextStyle(fontSize: 18),
               ),
               const SizedBox(
                 height: 10,
@@ -127,7 +127,7 @@ class _EditTrackState extends State<EditTrack> {
               ),
               const Text(
                 'ตำเเหน่งที่ตั้ง',
-                style: TextStyle(fontSize: 20),
+                style: TextStyle(fontSize: 18),
               ),
               const SizedBox(
                 height: 10,
@@ -157,7 +157,7 @@ class _EditTrackState extends State<EditTrack> {
                   Column(
                     children: [
                       const Text('วันที่ปรับปรุงล่าสุด',
-                          style: TextStyle(fontSize: 20)),
+                          style: TextStyle(fontSize: 18)),
                       const SizedBox(
                         height: 10,
                       ),
