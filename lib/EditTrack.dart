@@ -418,6 +418,7 @@ class _EditTrackState extends State<EditTrack> {
             'Count_Improve': Count_Improve.toString(),
             'End_Date': widget.result['End_Date'],
             'Note': widget.result['Note'],
+            'Status': widget.result['Status'],
           });
           if (res.statusCode == 200) {
             print("true");
