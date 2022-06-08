@@ -54,7 +54,7 @@ class _ListdataState extends State<Listdata> {
 
 //ดึงข้อมูลทั้งหมดมาเก็บใน allresult
   Getdata() async {
-    var res = await http.get(Uri.parse('http://localhost:3000/tracks'));
+    var res = await http.get(Uri.parse('http://192.168.1.192:3000/tracks'));
     if (res.statusCode == 200) {
       var jsonData = jsonDecode(res.body);
 
@@ -217,7 +217,7 @@ class _ListdataState extends State<Listdata> {
         child: const Text("OK"),
         onPressed: () async {
           var response = await http.delete(
-              Uri.parse('http://localhost:3000/track'),
+              Uri.parse('http://192.168.1.192:3000/track'),
               body: {'Track_ID': Track_id});
           if (response.statusCode == 200) {
             _resultList.remove(_resultList[index]);

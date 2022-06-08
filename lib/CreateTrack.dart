@@ -407,7 +407,7 @@ class _CreateTrackState extends State<CreateTrack> {
                             print(track.Note);
                             print(Count_Improve);
                             var res = await http.post(
-                                Uri.parse('http://localhost:3000/track'),
+                                Uri.parse('http://192.168.1.192:3000/track'),
                                 body: {
                                   'Track_ID': track.Track_ID,
                                   'Brand': track.Brand,

@@ -355,7 +355,7 @@ class _EditTrackState extends State<EditTrack> {
           //     widget.result['End_Date'] +
           //     widget.result['Note']);
           var res =
-              await http.put(Uri.parse('http://localhost:3000/track'), body: {
+              await http.put(Uri.parse('http://192.168.1.192:3000/track'), body: {
             'Track_ID': widget.result['Track_ID'],
             'Location': widget.result['Location'],
             'Working_Condition': widget.result['Working_Condition'],
