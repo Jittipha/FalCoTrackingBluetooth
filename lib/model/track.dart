@@ -4,7 +4,7 @@ class Track {
   String? Track_ID;
   String? Brand;
   String? Generation;
-  String? Menufacurer;
+  String? Menufacturer;
   String? Size;
   int? Age_of_use;
   String? Location;
@@ -20,7 +20,7 @@ class Track {
     this.Track_ID,
     this.Brand,
     this.Generation,
-    this.Menufacurer,
+    this.Menufacturer,
     this.Size,
     this.Age_of_use,
     this.Location,
