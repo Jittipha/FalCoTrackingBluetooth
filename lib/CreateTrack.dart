@@ -99,6 +99,7 @@ class _CreateTrackState extends State<CreateTrack> {
                           initialValue: track.Track_ID,
                           maxLength: 50,
                           validator: RequiredValidator(
+                            
                               errorText: "กรุณากรอกรหัสเครื่อง"),
                           onSaved: (value) {
                             setState(() => track.Track_ID = value);
@@ -345,10 +346,12 @@ class _CreateTrackState extends State<CreateTrack> {
                                 border: OutlineInputBorder(),
                                 hintText: 'อายุการใช้งานของเครื่อง'),
                             maxLength: 100,
+                          
                             validator: RequiredValidator(
                                 errorText: "กรุณาระบุอายุการใช้งานของเครื่อง"),
                             onSaved: (value) {
-                              setState(() => track.Age_of_use);
+                              int Age = int.parse(value!);
+                              setState(() => track.Age_of_use = Age);
                             },
                           ),
                         ),
@@ -364,6 +367,7 @@ class _CreateTrackState extends State<CreateTrack> {
                                 fillColor: Colors.white,
                                 border: OutlineInputBorder(),
                                 hintText: 'หมายเหตุ'),
+                                maxLines: 3,
                             maxLength: 500,
                             initialValue: track.Note,
                             validator: RequiredValidator(
@@ -380,7 +384,7 @@ class _CreateTrackState extends State<CreateTrack> {
                         const Padding(padding: EdgeInsets.all(16.16)),
                         const Expanded(
                           child: Text(
-                            "อายุการใช้งาน",
+                            "วันที่เปิดใช้งาน",
                             style: TextStyle(fontSize: 15),
                           ),
                         ),
@@ -388,8 +392,8 @@ class _CreateTrackState extends State<CreateTrack> {
                   Row(mainAxisAlignment: MainAxisAlignment.start, children: [
                     const Padding(padding: EdgeInsets.all(16.16)),
                     SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.2,
-                      height: MediaQuery.of(context).size.height * 0.07,
+                      width: MediaQuery.of(context).size.width * 0.1,
+                      height: MediaQuery.of(context).size.height * 0.05,
                       child: ElevatedButton.icon(
                         onPressed: () => pickDate(context),
                         label: Text(
@@ -424,13 +428,14 @@ class _CreateTrackState extends State<CreateTrack> {
                             shape: MaterialStateProperty.all<
                                 RoundedRectangleBorder>(RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15),
-                              side: const BorderSide(width: 2),
+                              side: const BorderSide(width: 0.1),
                             ))),
 
                         onPressed: () async {
 
                           if (_formKey.currentState!.validate()) {
                             _formKey.currentState!.save();
+                            // ignore: non_constant_identifier_names
                             int Count_Improve = 0;
                             print(track.Track_ID);
                             print(track.Brand);
@@ -439,13 +444,14 @@ class _CreateTrackState extends State<CreateTrack> {
                             print(track.Size);
                             print(track.Working_Condition);
                             print(track.Location);
+                            print(track.Age_of_use);
                             print(track.Work_for);
                             print(track.Start_Enable_Date);
                             print(track.Note);
-
+                           
                             print(Count_Improve);
                             var res = await http.post(
-                                Uri.parse('http://localhost:3000/track'),
+                                Uri.parse('http://192.168.1.192:3000/track'),
                                 body: {
                                   'Track_ID': track.Track_ID,
                                   'Brand': track.Brand,
@@ -460,12 +466,14 @@ class _CreateTrackState extends State<CreateTrack> {
                                   'Note': track.Note,
                                   'Count_Improve': Count_Improve.toString()
                                 });
+                            // ignore: unused_local_variable
                             var data = res.body;
                             if (res.statusCode == 200) {
                               print("true");
                               Fluttertoast.showToast(
                                   msg: "เพิ่มอุปกรณ์แล้ว!",
                                   gravity: ToastGravity.CENTER);
+                              // ignore: use_build_context_synchronously
                               Navigator.pop(context);
                             }
                           }

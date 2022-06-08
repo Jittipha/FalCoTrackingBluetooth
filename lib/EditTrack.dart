@@ -287,6 +287,7 @@ class _EditTrackState extends State<EditTrack> {
                             shape: MaterialStateProperty.all<
                                 RoundedRectangleBorder>(RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15),
+                              side: const BorderSide(width: 0.1),
                               //side: const BorderSide(width: 2),
                             ))),
                         onPressed: () {
@@ -294,6 +295,7 @@ class _EditTrackState extends State<EditTrack> {
                         },
                         child: const Text("ยกเลิก",
                             style: TextStyle(fontSize: 20, color: Colors.black),
+                            
                             textAlign: TextAlign.center),
                       )),
                 ],
