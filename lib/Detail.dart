@@ -26,7 +26,7 @@ class _DetailState extends State<Detail> {
             child: Container(
               width: 800,
               height: 500,
-              color: const Color(0x003A94FB),
+              color: const Color.fromARGB(250, 255, 255, 255),
               padding: const EdgeInsets.fromLTRB(10, 20, 10, 10),
               child: ListView(children: <Widget>[
                 Text(
@@ -119,6 +119,7 @@ class _DetailState extends State<Detail> {
                   'วันที่สิ้นสุดงาน : ' +
                       (widget.result['End_Date'] ?? '- - -'),
                   style: TextStyle(color: Colors.black, fontSize: 18),
+
                 ),
                 const SizedBox(
                   height: 5,

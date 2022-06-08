@@ -71,7 +71,7 @@ class _CreateTrackState extends State<CreateTrack> {
                         const Expanded(
                           child: Text(
                             "รหัสเครื่อง",
-                            style: TextStyle(fontSize: 15),
+                            style: TextStyle(fontSize: 20),
                           ),
                         ),
                         SizedBox(
