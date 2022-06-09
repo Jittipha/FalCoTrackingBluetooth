@@ -17,6 +17,7 @@ class CreateTrack extends StatefulWidget {
 }
 
 class _CreateTrackState extends State<CreateTrack> {
+  late FToast fToast;
   Track track = Track();
   DateTime date = DateTime(2022, 01, 01);
   DateTime? dateTime;
@@ -58,6 +59,12 @@ class _CreateTrackState extends State<CreateTrack> {
     'เครื่องปิด',
     'เครื่องเสีย'
   ];
+  @override
+  void initState() {
+    super.initState();
+    fToast = FToast();
+    fToast.init(context);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -335,7 +342,7 @@ class _CreateTrackState extends State<CreateTrack> {
                         const Padding(padding: EdgeInsets.all(16.16)),
                         const Expanded(
                           child: Text(
-                            "อายุการใช้งาน",
+                            "อายุการใช้งาน (ปี)",
                             style: TextStyle(fontSize: 15),
                           ),
                         ),
@@ -354,12 +361,16 @@ class _CreateTrackState extends State<CreateTrack> {
                           // optional flex property if flex is 1 because the default flex is 1
                           flex: 1,
                           child: TextFormField(
+                            keyboardType: TextInputType.number,
+                            inputFormatters: <TextInputFormatter>[
+                              FilteringTextInputFormatter.digitsOnly
+                            ],
                             decoration: const InputDecoration(
                                 filled: true,
                                 fillColor: Colors.white,
                                 border: OutlineInputBorder(),
                                 hintText: 'อายุการใช้งานของเครื่อง'),
-                            maxLength: 100,
+                            maxLength: 5,
                             validator: RequiredValidator(
                                 errorText: "กรุณาระบุอายุการใช้งานของเครื่อง"),
                             onSaved: (value) {
@@ -495,47 +506,55 @@ class _CreateTrackState extends State<CreateTrack> {
                           if (_formKey.currentState!.validate()) {
                             _formKey.currentState!.save();
                             // ignore: non_constant_identifier_names
-                            int Count_Improve = 0;
-                            print(track.Track_ID);
-                            print(track.Brand);
-                            print(track.Generation);
-                            print(track.Menufacturer);
-                            print(track.Size);
-                            print(track.Working_Condition);
-                            print(track.Location);
-                            print(track.Age_of_use);
-                            print(track.Work_for);
-                            print(track.Start_Enable_Date);
-                            print(track.Note);
-                            print(track.Status);
+                            if (track.Status != null) {
+                              int Count_Improve = 0;
+                              print(track.Track_ID);
+                              print(track.Brand);
+                              print(track.Generation);
+                              print(track.Menufacturer);
+                              print(track.Size);
+                              print(track.Working_Condition);
+                              print(track.Location);
+                              print(track.Age_of_use);
+                              print(track.Work_for);
+                              print(track.Start_Enable_Date);
+                              print(track.Note);
+                              print(track.Status);
 
-                            print(Count_Improve);
-                            var res = await http.post(
-                                Uri.parse('http://192.168.1.192:3000/track'),
-                                body: {
-                                  'Track_ID': track.Track_ID,
-                                  'Brand': track.Brand,
-                                  'Size': track.Size,
-                                  'Location': track.Location,
-                                  'Start_Enable_Date': track.Start_Enable_Date,
-                                  'Working_Condition': track.Working_Condition,
-                                  'Generation': track.Generation,
-                                  'Menufacturer': track.Menufacturer,
-                                  'Age_of_use': track.Age_of_use.toString(),
-                                  'Work_for': track.Work_for,
-                                  'Note': track.Note ?? '',
-                                  'Count_Improve': Count_Improve.toString(),
-                                  'Status': track.Status,
-                                });
-                            // ignore: unused_local_variable
-                            var data = res.body;
-                            if (res.statusCode == 200) {
-                              print("true");
-                              Fluttertoast.showToast(
-                                  msg: "เพิ่มอุปกรณ์แล้ว!",
-                                  gravity: ToastGravity.CENTER);
-                              // ignore: use_build_context_synchronously
-                              Navigator.pop(context);
+                              print(Count_Improve);
+                              var res = await http.post(
+                                  Uri.parse('http://192.168.1.192:3000/track'),
+                                  body: {
+                                    'Track_ID': track.Track_ID,
+                                    'Brand': track.Brand,
+                                    'Size': track.Size,
+                                    'Location': track.Location,
+                                    'Start_Enable_Date':
+                                        track.Start_Enable_Date,
+                                    'Working_Condition':
+                                        track.Working_Condition,
+                                    'Generation': track.Generation,
+                                    'Menufacturer': track.Menufacturer,
+                                    'Age_of_use': track.Age_of_use.toString(),
+                                    'Work_for': track.Work_for,
+                                    'Note': track.Note ?? '',
+                                    'Count_Improve': Count_Improve.toString(),
+                                    'Status': track.Status,
+                                  });
+                              // ignore: unused_local_variable
+                              var data = res.body;
+                              if (res.statusCode == 200) {
+                                print("true");
+                                Fluttertoast.showToast(
+                                    msg: "เพิ่มอุปกรณ์แล้ว!",
+                                    gravity: ToastGravity.CENTER);
+                                // ignore: use_build_context_synchronously
+                                Navigator.pop(context);
+                              }
+                            } else {
+                              fToast.showToast(
+                                  child: toast,
+                                  gravity: ToastGravity.TOP_RIGHT);
                             }
                           }
                         },
@@ -552,4 +571,29 @@ class _CreateTrackState extends State<CreateTrack> {
       ),
     );
   }
+
+  Widget toast = Container(
+    padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(25.0),
+      color: Colors.redAccent,
+    ),
+    child: Row(
+      mainAxisSize: MainAxisSize.min,
+      children: const [
+        Icon(
+          Icons.cancel_outlined,
+          color: Colors.white,
+          size: 25,
+        ),
+        SizedBox(
+          width: 12.0,
+        ),
+        Text(
+          "กรุณาใส่สถานะการทำงาน !",
+          style: TextStyle(color: Colors.white),
+        ),
+      ],
+    ),
+  );
 }
