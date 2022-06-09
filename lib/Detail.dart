@@ -15,7 +15,7 @@ class _DetailState extends State<Detail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       backgroundColor: Colors.lightBlue[100],
+        backgroundColor: Colors.lightBlue[100],
         appBar: AppBar(
             title: const Center(
               child: Text(
@@ -138,6 +138,13 @@ class _DetailState extends State<Detail> {
                 ),
                 const SizedBox(
                   height: 5,
+                ),
+                Text(
+                  'สถานะของเครื่อง : ' + (widget.result['Status'] ?? '- - -'),
+                  style: const TextStyle(color: Colors.black, fontSize: 18),
+                ),
+                const SizedBox(
+                  height: 5 ,
                 ),
                 Text(
                   // ignore: prefer_interpolation_to_compose_strings
