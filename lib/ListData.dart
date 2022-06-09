@@ -1,11 +1,10 @@
 // ignore_for_file: file_names
 
 import 'dart:convert';
-import 'dart:html';
-import 'dart:io';
-
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+import 'package:trackingbluetooth/Background/Bg-detail.dart';
 import 'package:trackingbluetooth/Detail.dart';
 import 'package:trackingbluetooth/EditTrack.dart';
 import 'package:trackingbluetooth/model/track.dart';
@@ -99,122 +98,134 @@ class _ListdataState extends State<Listdata> {
     return Scaffold(
         backgroundColor: Colors.lightBlue[100],
         appBar: AppBar(
-            title: const Center(
-              child: Text(
+          backgroundColor: const Color.fromARGB(255, 18, 95, 116),
+            title:  const Center(
+              child:Text(
                 "อุปกรณ์ทั้งหมด",
                 style: TextStyle(fontSize: 30),
               ),
             ),
             titleSpacing: 300),
-        body: Align(
-          alignment: Alignment.topCenter,
-          child: Container(
-           padding: const EdgeInsets.only(left: 400, right: 400, top: 70,),
+        body: Background(
+          child: Align(
+            alignment: Alignment.topCenter,
             child: Container(
-              width: 1000,
-              padding: const EdgeInsets.fromLTRB(10, 20, 10, 10),
-              child: Column(children: <Widget>[
-                const SizedBox(
-                  height: 30,
-                ),
-                TextFormField(
-                  autofocus: false,
-                  controller: _searchController,
-                  decoration: const InputDecoration(
-                      filled: true,
-                      fillColor: Colors.white,
-                      border: OutlineInputBorder(),
-                      prefixIcon: Icon(Icons.search),
-                      hintText: 'ค้นหาด้วยรหัสอุปกรณ์..... '),
-                ),
-                const SizedBox(
-                  height: 50,
-                ),
-                Expanded(
-                  child: ListView.builder(
-                      itemCount: _resultList.length,
-                      itemBuilder: ((BuildContext context, int index) {
-                        return Padding(
-                          padding: const EdgeInsets.all(3.0),
-                          child: Container(
-                            padding: const EdgeInsets.fromLTRB(0, 0, 0, 5),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: Colors.white,
-                              // boxShadow: const [
-                              //   BoxShadow(
-                              //     color: Colors.grey,
-                              //     blurRadius: 100,
-                              //     offset: Offset(20, 10),
-                              //      // Shadow position
-                              //   ),
-                              // ],
-                            ),
-                            child: ListTile(
-                              contentPadding:
-                                  const EdgeInsets.symmetric(horizontal: 20.0),
-                                  // const EdgeInsets.only(bottom: 20.0),
-                              title: Text(
-                                // ignore: prefer_interpolation_to_compose_strings
-                                'รหัสเครื่อง : ' + _resultList[index]['Track_ID'],
-                                style: const TextStyle(
-                                    color: Colors.black, fontSize: 18),
+              height: double.infinity,
+          width: double.infinity,
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+                image: NetworkImage(
+                    "https://images.unsplash.com/photo-1651147538420-06f5e0d3f1d9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"),
+                fit: BoxFit.cover),
+          ),
+             padding: const EdgeInsets.only(left: 400, right: 400, top: 70,),
+              child: Container(
+                width: 1000,
+                padding: const EdgeInsets.fromLTRB(10, 20, 10, 10),
+                child: Column(children: <Widget>[
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  TextFormField(
+                    autofocus: false,
+                    controller: _searchController,
+                    decoration: const InputDecoration(
+                        filled: true,
+                        fillColor: Colors.white,
+                        border: OutlineInputBorder(),
+                        prefixIcon: Icon(Icons.search),
+                        hintText: 'ค้นหาด้วยรหัสอุปกรณ์..... '),
+                  ),
+                  const SizedBox(
+                    height: 50,
+                  ),
+                  Expanded(
+                    child: ListView.builder(
+                        itemCount: _resultList.length,
+                        itemBuilder: ((BuildContext context, int index) {
+                          return Padding(
+                            padding: const EdgeInsets.all(3.0),
+                            child: Container(
+                              padding: const EdgeInsets.fromLTRB(0, 0, 0, 5),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: Colors.white,
+                                // boxShadow: const [
+                                //   BoxShadow(
+                                //     color: Colors.grey,
+                                //     blurRadius: 100,
+                                //     offset: Offset(20, 10),
+                                //      // Shadow position
+                                //   ),
+                                // ],
                               ),
-                              subtitle: Text(
-                                // ignore: prefer_interpolation_to_compose_strings
-                                'ตำเเหน่งที่ตั้ง : ' +
-                                    _resultList[index]['Location'],
-                                style: const TextStyle(
-                                    color: Colors.black, fontSize: 18),
-                              ),
-                              trailing: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: <Widget>[
-                                  Align(
-                                    alignment: Alignment.center,
-                                    child: GestureDetector(
+                              child: ListTile(
+                                contentPadding:
+                                    const EdgeInsets.symmetric(horizontal: 20.0),
+                                    // const EdgeInsets.only(bottom: 20.0),
+                                title: Text(
+                                  // ignore: prefer_interpolation_to_compose_strings
+                                  'รหัสเครื่อง : ' + _resultList[index]['Track_ID'],
+                                  style: const TextStyle(
+                                      color: Colors.black, fontSize: 18),
+                                ),
+                                subtitle: Text(
+                                  // ignore: prefer_interpolation_to_compose_strings
+                                  'ตำเเหน่งที่ตั้ง : ' +
+                                      _resultList[index]['Location'],
+                                  style: const TextStyle(
+                                      color: Colors.black, fontSize: 18),
+                                ),
+                                trailing: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: <Widget>[
+                                    Align(
+                                      alignment: Alignment.center,
+                                      child: GestureDetector(
+                                          onTap: () {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) => EditTrack(
+                                                        result: _resultList[index],
+                                                      )),
+                                            );
+                                          },
+                                          child: const Icon(Icons.edit,color: Colors.black,)),
+                                    ),
+                                    const SizedBox(
+                                      width: 20,
+                                      // height: 10,
+                                    ),
+                                    GestureDetector(
                                         onTap: () {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) => EditTrack(
-                                                      result: _resultList[index],
-                                                    )),
-                                          );
+                                          showAlertDialog(
+                                              context,
+                                              _resultList[index]['Track_ID'],
+                                              index);
                                         },
-                                        child: const Icon(Icons.edit)),
-                                  ),
-                                  const SizedBox(
-                                    width: 20,
-                                    // height: 10,
-                                  ),
-                                  GestureDetector(
-                                      onTap: () {
-                                        showAlertDialog(
-                                            context,
-                                            _resultList[index]['Track_ID'],
-                                            index);
-                                      },
-                                      child: const Icon(
-                                        Icons.delete,
-                                      ))
-                                ],
+                                        child: const Icon(
+                                          Icons.delete,
+                                          color: Colors.red,
+                                        ))
+                                  ],
+                                ),
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => Detail(
+                                              result: _resultList[index],
+                                            )),
+                                  );
+                                },
                               ),
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => Detail(
-                                            result: _resultList[index],
-                                          )),
-                                );
-                              },
                             ),
-                          ),
-                        );
-                      })),
-                )
-              ]),
+                          );
+                        })),
+                  )
+                ]),
+              ),
             ),
           ),
         ));

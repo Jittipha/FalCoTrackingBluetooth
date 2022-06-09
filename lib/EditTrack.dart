@@ -7,6 +7,7 @@ import 'package:intl/intl.dart';
 // ignore: unused_import
 import 'package:http/http.dart ' as http;
 import 'package:trackingbluetooth/ListData.dart';
+import 'Background/Bg-Edit.dart';
 import 'model/track.dart';
 
 // ignore: must_be_immutable
@@ -80,6 +81,7 @@ class _EditTrackState extends State<EditTrack> {
     return Scaffold(
         backgroundColor: Colors.lightBlue[100],
         appBar: AppBar(
+          backgroundColor: const Color.fromARGB(255, 18, 95, 116),
             title: const Center(
               child: Text(
                 "เเก้ไขข้อมูลอุปกรณ์",
@@ -87,251 +89,263 @@ class _EditTrackState extends State<EditTrack> {
               ),
             ),
             titleSpacing: 300),
-        body: SingleChildScrollView(
-          padding: const EdgeInsets.only(left: 300, right: 300, top: 30),
-          child: Form(
-            key: updateTrack,
-            child:
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              // const Text(
-              //   'เเก้ไขข้อมูลอุปกFรณ์',
-              //   style: TextStyle(fontSize: 25),
-              // ),
-              const SizedBox(
-                height: 50,
-              ),
-              const Text(
-                'สภาพการใช้งาน',
-                style: TextStyle(fontSize: 18),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              TextFormField(
-                decoration: const InputDecoration(
-                  filled: true,
-                  fillColor: Colors.white,
-                  focusedBorder: OutlineInputBorder(),
-                ),
-                initialValue: widget.result['Working_Condition'],
-                validator:
-                    RequiredValidator(errorText: "กรุณาใส่สภาพการใช้งาน!"),
-                onSaved: (value) {
-                  setState(() => widget.result['Working_Condition'] = value);
-                },
-                maxLength: 50,
-                maxLines: 2,
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              const Text(
-                'ตำเเหน่งที่ตั้ง',
-                style: TextStyle(fontSize: 18),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              TextFormField(
-                decoration: const InputDecoration(
-                  filled: true,
-                  fillColor: Colors.white,
-                  focusedBorder: OutlineInputBorder(),
-                ),
-                initialValue: widget.result['Location'],
-                validator:
-                    RequiredValidator(errorText: "กรุณาใส่ตำเเหน่งที่ตั้ง!"),
-                onSaved: (value) {
-                  setState(() => widget.result['Location'] = value);
-                },
-                maxLength: 100,
-                maxLines: 2,
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Column(
-                    children: [
-                      const Text('วันที่ปรับปรุงล่าสุด',
-                          style: TextStyle(fontSize: 18)),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      SizedBox(
-                        height: 45,
-                        width: MediaQuery.of(context).size.width * 0.168,
-                        child: ElevatedButton.icon(
-                          onPressed: () => pickDateStart(context),
-                          label: Text(
-                            getTextDateStart(),
-                            style: const TextStyle(
-                              fontSize: 18,
-                              color: Colors.black,
-                            ),
-                          ),
-                          style: ElevatedButton.styleFrom(
-                              primary: Colors.white,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(15))),
-                          icon: const Icon(
-                            Icons.calendar_month_rounded,
-                            color: Colors.black,
-                            size: 30,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.020,
-                  ),
-                  Column(
-                    children: [
-                      const Text('วันที่สิ้นสุด',
-                          style: TextStyle(fontSize: 20)),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      SizedBox(
-                        height: 45,
-                        width: MediaQuery.of(context).size.width * 0.168,
-                        child: ElevatedButton.icon(
-                          onPressed: () => pickDateLast(context),
-                          label: Text(
-                            getTextDateLast(),
-                            style: const TextStyle(
-                              fontSize: 18,
-                              color: Colors.black,
-                            ),
-                          ),
-                          style: ElevatedButton.styleFrom(
-                              primary: Colors.white,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(15))),
-                          icon: const Icon(
-                            Icons.calendar_month_rounded,
-                            color: Colors.black,
-                            size: 30,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              const Text(
-                'หมายเหตุ',
-                style: TextStyle(fontSize: 20),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              TextFormField(
-                decoration: const InputDecoration(
-                  filled: true,
-                  fillColor: Colors.white,
-                  focusedBorder: OutlineInputBorder(),
-                ),
-                initialValue: widget.result['Note'],
-                onSaved: (value) {
-                  setState(() => widget.result['Note'] = value);
-                },
-                maxLength: 500,
-                maxLines: 5,
-              ),
-              const SizedBox(
-                height: 50,
-              ),
-
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(
-                      height: 40,
-                      width: 130,
-                      child: ElevatedButton(
-                        style: ButtonStyle(
-                            backgroundColor:
-                                MaterialStateProperty.all<Color>(Colors.blue),
-                            shape: MaterialStateProperty.all<
-                                RoundedRectangleBorder>(RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(15),
-                            ))),
-                        onPressed: () async {
-                          if (updateTrack.currentState!.validate()) {
-                            updateTrack.currentState!.save();
-                            showAlertDialog(context);
-                          }
-                        },
-                        child: const Text("ยืนยัน",
-                            style: TextStyle(fontSize: 20, color: Colors.black),
-                            textAlign: TextAlign.center),
-                      )),
+        body: Background(               
+          child: Container(
+            height: double.infinity,
+          width: double.infinity,
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+                image: NetworkImage(
+                    "https://images.unsplash.com/photo-1508614999368-9260051292e5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"),
+                fit: BoxFit.cover),
+          ),
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.only(left: 300, right: 300, top: 30,bottom: 80),
+              child: Form(
+                key: updateTrack,
+                child:
+                    Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                  // const Text(
+                  //   'เเก้ไขข้อมูลอุปกFรณ์',
+                  //   style: TextStyle(fontSize: 25),
+                  // ),
                   const SizedBox(
-                    width: 30,
+                    height: 50,
                   ),
-                  SizedBox(
-                      height: 40,
-                      width: 130,
-                      child: ElevatedButton(
-                        style: ButtonStyle(
-                            backgroundColor:
-                                MaterialStateProperty.all<Color>(Colors.blue),
-                            shape: MaterialStateProperty.all<
-                                RoundedRectangleBorder>(RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(15),
-                              side: const BorderSide(width: 0.1),
-                              //side: const BorderSide(width: 2),
-                            ))),
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        child: const Text("ยกเลิก",
-                            style: TextStyle(fontSize: 20, color: Colors.black),
-                            
-                            textAlign: TextAlign.center),
-                      )),
-                ],
+                  const Text(
+                    'สภาพการใช้งาน',
+                    style: TextStyle(fontSize: 18),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  TextFormField(
+                    decoration: const InputDecoration(
+                      filled: true,
+                      fillColor: Colors.white,
+                      focusedBorder: OutlineInputBorder(),
+                    ),
+                    initialValue: widget.result['Working_Condition'],
+                    validator:
+                        RequiredValidator(errorText: "กรุณาใส่สภาพการใช้งาน!"),
+                    onSaved: (value) {
+                      setState(() => widget.result['Working_Condition'] = value);
+                    },
+                    maxLength: 50,
+                    maxLines: 2,
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  const Text(
+                    'ตำเเหน่งที่ตั้ง',
+                    style: TextStyle(fontSize: 18),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  TextFormField(
+                    decoration: const InputDecoration(
+                      filled: true,
+                      fillColor: Colors.white,
+                      focusedBorder: OutlineInputBorder(),
+                    ),
+                    initialValue: widget.result['Location'],
+                    validator:
+                        RequiredValidator(errorText: "กรุณาใส่ตำเเหน่งที่ตั้ง!"),
+                    onSaved: (value) {
+                      setState(() => widget.result['Location'] = value);
+                    },
+                    maxLength: 100,
+                    maxLines: 2,
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+        
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Column(
+                        children: [
+                          const Text('วันที่ปรับปรุงล่าสุด',
+                              style: TextStyle(fontSize: 18)),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          SizedBox(
+                            height: 45,
+                            width: MediaQuery.of(context).size.width * 0.168,
+                            child: ElevatedButton.icon(
+                              onPressed: () => pickDateStart(context),
+                              label: Text(
+                                getTextDateStart(),
+                                style: const TextStyle(
+                                  fontSize: 18,
+                                  color: Colors.black,
+                                ),
+                              ),
+                              style: ElevatedButton.styleFrom(
+                                  primary: Colors.white,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(15))),
+                              icon: const Icon(
+                                Icons.calendar_month_rounded,
+                                color: Colors.black,
+                                size: 30,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.020,
+                      ),
+                      Column(
+                        children: [
+                          const Text('วันที่สิ้นสุด',
+                              style: TextStyle(fontSize: 20)),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          SizedBox(
+                            height: 45,
+                            width: MediaQuery.of(context).size.width * 0.168,
+                            child: ElevatedButton.icon(
+                              onPressed: () => pickDateLast(context),
+                              label: Text(
+                                getTextDateLast(),
+                                style: const TextStyle(
+                                  fontSize: 18,
+                                  color: Colors.black,
+                                ),
+                              ),
+                              style: ElevatedButton.styleFrom(
+                                  primary: Colors.white,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(15))),
+                              icon: const Icon(
+                                Icons.calendar_month_rounded,
+                                color: Colors.black,
+                                size: 30,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  const Text(
+                    'หมายเหตุ',
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  TextFormField(
+                    decoration: const InputDecoration(
+                      filled: true,
+                      fillColor: Colors.white,
+                      focusedBorder: OutlineInputBorder(),
+                    ),
+                    initialValue: widget.result['Note'],
+                    onSaved: (value) {
+                      setState(() => widget.result['Note'] = value);
+                    },
+                    maxLength: 500,
+                    maxLines: 5,
+                  ),
+                  const SizedBox(
+                    height: 50,
+                  ),
+        
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                          height: 40,
+                          width: 130,
+                          child: ElevatedButton(
+                            style: ButtonStyle(
+                                backgroundColor:
+                                    MaterialStateProperty.all<Color>(Color.fromARGB(255, 252, 4, 4)),
+                                shape: MaterialStateProperty.all<
+                                    RoundedRectangleBorder>(RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15),
+                                ))),
+                            onPressed: () async {
+                              if (updateTrack.currentState!.validate()) {
+                                updateTrack.currentState!.save();
+                                showAlertDialog(context);
+                              }
+                            },
+                            child: const Text("ยืนยัน",
+                                style: TextStyle(fontSize: 20, color: Color.fromARGB(255, 251, 249, 249)),
+                                textAlign: TextAlign.center),
+                          )),
+                      const SizedBox(
+                        width: 30,
+                      ),
+                      SizedBox(
+                          height: 40,
+                          width: 130,
+                          child: ElevatedButton(
+                            style: ButtonStyle(
+                                backgroundColor:
+                                    MaterialStateProperty.all<Color>(Color.fromARGB(255, 0, 7, 13)),
+                                shape: MaterialStateProperty.all<
+                                    RoundedRectangleBorder>(RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15),
+                                  side: const BorderSide(width: 0.1),
+                                  //side: const BorderSide(width: 2),
+                                ))),
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: const Text("ยกเลิก",
+                                style: TextStyle(fontSize: 20, color: Color.fromARGB(255, 247, 244, 244)),
+                                
+                                textAlign: TextAlign.center),
+                          )),
+                    ],
+                  ),
+                  //      Container(
+                  //        child: Row(
+                  //         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  //         children: <Widget>[
+                  //           Padding(padding: EdgeInsets.all(16.16)),
+                  //           SizedBox(
+                  //             height: 45,
+                  //             width: 300,
+                  //             child: ElevatedButton.icon(
+                  //               onPressed: () => pickDate(context),
+                  //               label: Text(
+                  //                 getTextDate(),
+                  //                 style: const TextStyle(
+                  //                   fontSize: 18,
+                  //                   color: Colors.black,
+                  //                 ),
+                  //               ),
+                  //               style: ElevatedButton.styleFrom(
+                  //                   primary: Color.fromARGB(255, 250, 248, 248),
+                  //                   shape: RoundedRectangleBorder(
+                  //                       borderRadius: BorderRadius.circular(15))),
+                  //               icon: Icon(
+                  //                 Icons.calendar_month_rounded,
+                  //                 color: Colors.black,
+                  //                 size: 30,
+                  //               ),
+                  //             ),
+        
+                  //        )],
+                  // ),
+                  //      ),
+                ]),
               ),
-              //      Container(
-              //        child: Row(
-              //         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              //         children: <Widget>[
-              //           Padding(padding: EdgeInsets.all(16.16)),
-              //           SizedBox(
-              //             height: 45,
-              //             width: 300,
-              //             child: ElevatedButton.icon(
-              //               onPressed: () => pickDate(context),
-              //               label: Text(
-              //                 getTextDate(),
-              //                 style: const TextStyle(
-              //                   fontSize: 18,
-              //                   color: Colors.black,
-              //                 ),
-              //               ),
-              //               style: ElevatedButton.styleFrom(
-              //                   primary: Color.fromARGB(255, 250, 248, 248),
-              //                   shape: RoundedRectangleBorder(
-              //                       borderRadius: BorderRadius.circular(15))),
-              //               icon: Icon(
-              //                 Icons.calendar_month_rounded,
-              //                 color: Colors.black,
-              //                 size: 30,
-              //               ),
-              //             ),
-
-              //        )],
-              // ),
-              //      ),
-            ]),
+            ),
           ),
         ) //        )],
         // ),

@@ -61,8 +61,9 @@ class _CreateTrackState extends State<CreateTrack> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.lightBlue[100],
+      backgroundColor: Color.fromARGB(255, 250, 251, 251),
       appBar: AppBar(
+         backgroundColor: Color.fromARGB(255, 18, 95, 116),
           title: const Center(
             child: Text(
               "สร้างอุปกรณ์",
@@ -71,283 +72,43 @@ class _CreateTrackState extends State<CreateTrack> {
           ),
           titleSpacing: 300),
       body: Background(
-        child: SingleChildScrollView(
-            padding: const EdgeInsets.only(left: 200, right: 200, top: 30),
-            child: Form(
-              key: _formKey,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Row(
+        child: Container(
+          height: double.infinity,
+          width: double.infinity,
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+                image: NetworkImage(
+                    "https://images.pexels.com/photos/7135058/pexels-photo-7135058.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"),
+                fit: BoxFit.cover),
+          ),
+          child: SingleChildScrollView(
+              padding: const EdgeInsets.only(left: 200, right: 200, top: 30),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                          const Padding(padding: EdgeInsets.all(16.16)),
+                          const Expanded(
+                            child: Text(
+                              "รหัสเครื่อง",
+                              style: TextStyle(fontSize: 15,color: Colors.black),
+                              
+                            ),
+                          ),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.2,
+                          ),
+                          const Expanded(
+                            child: Text("ยี่ห้อ"),
+                          ),
+                        ]),
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
-                        const Padding(padding: EdgeInsets.all(16.16)),
-                        const Expanded(
-                          child: Text(
-                            "รหัสเครื่อง",
-                            style: TextStyle(fontSize: 15),
-                          ),
-                        ),
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.2,
-                        ),
-                        const Expanded(
-                          child: Text("ยี่ห้อ"),
-                        ),
-                      ]),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: <Widget>[
-                      const Padding(padding: EdgeInsets.all(16.16)),
-                      Expanded(
-                        // optional flex property if flex is 1 because the default flex is 1
-                        flex: 1,
-                        child: TextFormField(
-                          decoration: const InputDecoration(
-                              filled: true,
-                              fillColor: Colors.white,
-                              border: OutlineInputBorder(),
-                              hintText: 'กรอกรหัสเครื่อง'),
-                          initialValue: track.Track_ID,
-                          maxLength: 50,
-                          validator: RequiredValidator(
-                            
-                              errorText: "กรุณากรอกรหัสเครื่อง"),
-                          onSaved: (value) {
-                            setState(() => track.Track_ID = value);
-                          },
-                        ),
-                      ),
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.2,
-                      ),
-                      Expanded(
-                        // optional flex property if flex is 1 because the default flex is 1
-                        flex: 1,
-                        child: TextFormField(
-                          decoration: const InputDecoration(
-                              filled: true,
-                              fillColor: Colors.white,
-                              border: OutlineInputBorder(),
-                              hintText: 'ระบุยี่ห้อ'),
-                          initialValue: track.Brand,
-                          maxLength: 50,
-                          validator:
-                              RequiredValidator(errorText: "กรุณาระบุยี่ห้อ"),
-                          onSaved: (value) {
-                            setState(() => track.Brand = value);
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-                  Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: <Widget>[
-                        const Padding(padding: EdgeInsets.all(16.16)),
-                        const Expanded(
-                          child: Text(
-                            "รุ่น",
-                            style: TextStyle(fontSize: 15),
-                          ),
-                        ),
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.2,
-                        ),
-                        const Expanded(
-                          child: Text("ผู้ผลิต"),
-                        ),
-                      ]),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: <Widget>[
-                      const Padding(padding: EdgeInsets.all(16.16)),
-                      Expanded(
-                        // optional flex property if flex is 1 because the default flex is 1
-                        flex: 1,
-                        child: TextFormField(
-                          decoration: const InputDecoration(
-                              filled: true,
-                              fillColor: Colors.white,
-                              border: OutlineInputBorder(),
-                              hintText: 'รุ่นของเครื่อง'),
-                          initialValue: track.Generation,
-                          maxLength: 20,
-                          validator: RequiredValidator(
-                              errorText: "กรุณากรอกรุ่นของเครื่อง"),
-                          onSaved: (value) {
-                            setState(() => track.Generation = value);
-                          },
-                        ),
-                      ),
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.2,
-                      ),
-                      Expanded(
-                        // optional flex property if flex is 1 because the default flex is 1
-                        flex: 1,
-                        child: TextFormField(
-                          decoration: const InputDecoration(
-                              filled: true,
-                              fillColor: Colors.white,
-                              border: OutlineInputBorder(),
-                              hintText: 'บริษัทผู้ผลิต'),
-                          initialValue: track.Menufacturer,
-                          maxLength: 30,
-                          validator: RequiredValidator(
-                              errorText: "กรุณากรอกชื่อ บริษัท"),
-                          onSaved: (value) {
-                            setState(() => track.Menufacturer = value);
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-                  Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: <Widget>[
-                        const Padding(padding: EdgeInsets.all(16.16)),
-                        const Expanded(
-                          child: Text(
-                            "ขนาดเครื่อง ( หน่วยเป็น cm เช่น 70*50 )",
-                            style: TextStyle(fontSize: 15),
-                          ),
-                        ),
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.2,
-                        ),
-                        const Expanded(
-                          child: Text("สภาพการใช้งาน"),
-                        ),
-                      ]),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: <Widget>[
-                      const Padding(padding: EdgeInsets.all(16.16)),
-                      Expanded(
-                        // optional flex property if flex is 1 because the default flex is 1
-                        flex: 1,
-                        child: TextFormField(
-                          decoration: const InputDecoration(
-                              filled: true,
-                              fillColor: Colors.white,
-                              border: OutlineInputBorder(),
-                              hintText: 'ขนาดของเครื่อง'),
-                          initialValue: track.Size,
-                          maxLength: 50,
-                          validator: RequiredValidator(
-                              errorText: "กรุณากรอกขนาดของเครื่อง"),
-                          onSaved: (value) {
-                            setState(() => track.Size = value);
-                          },
-                        ),
-                      ),
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.2,
-                      ),
-                      Expanded(
-                        // optional flex property if flex is 1 because the default flex is 1
-                        flex: 1,
-                        child: TextFormField(
-                          decoration: const InputDecoration(
-                              filled: true,
-                              fillColor: Colors.white,
-                              border: OutlineInputBorder(),
-                              hintText: 'สภาพการใช้งานของเครื่อง'),
-                          initialValue: track.Working_Condition,
-                          maxLength: 50,
-                          validator: RequiredValidator(
-                              errorText: "กรุณากรอกสภาพการใช้งาน"),
-                          onSaved: (value) {
-                            setState(() => track.Working_Condition = value);
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-                  Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: <Widget>[
-                        const Padding(padding: EdgeInsets.all(16.16)),
-                        const Expanded(
-                          child: Text(
-                            "ตำแหน่งที่ตั้ง",
-                            style: TextStyle(fontSize: 15),
-                          ),
-                        ),
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.2,
-                        ),
-                        const Expanded(
-                          child: Text("ใช้ในการ"),
-                        ),
-                      ]),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: <Widget>[
-                      const Padding(padding: EdgeInsets.all(16.16)),
-                      Expanded(
-                        // optional flex property if flex is 1 because the default flex is 1
-                        flex: 1,
-                        child: TextFormField(
-                          decoration: const InputDecoration(
-                              filled: true,
-                              fillColor: Colors.white,
-                              border: OutlineInputBorder(),
-                              hintText: 'ตำแหน่งของเครื่อง'),
-                          initialValue: track.Location,
-                          maxLength: 100,
-                          validator: RequiredValidator(
-                              errorText: "กรุณาระบุตำแหน่งของเครื่อง"),
-                          onSaved: (value) {
-                            setState(() => track.Location = value);
-                          },
-                        ),
-                      ),
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.2,
-                      ),
-                      Expanded(
-                        // optional flex property if flex is 1 because the default flex is 1
-                        flex: 1,
-                        child: TextFormField(
-                          decoration: const InputDecoration(
-                              filled: true,
-                              fillColor: Colors.white,
-                              border: OutlineInputBorder(),
-                              hintText: 'ใช้ในการ'),
-                          initialValue: track.Work_for,
-                          maxLength: 100,
-                          validator: RequiredValidator(
-                              errorText: "กรุณาระบุว่าเครื่องใช้ทำอะไร"),
-                          onSaved: (value) {
-                            setState(() => track.Work_for = value);
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-                  Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: <Widget>[
-                        const Padding(padding: EdgeInsets.all(16.16)),
-                        const Expanded(
-                          child: Text(
-                            "อายุการใช้งาน",
-                            style: TextStyle(fontSize: 15),
-                          ),
-                        ),
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.2,
-                        ),
-                        const Expanded(
-                          child: Text("หมายเหตุ"),
-                        ),
-                      ]),
-                  Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-
                         const Padding(padding: EdgeInsets.all(16.16)),
                         Expanded(
                           // optional flex property if flex is 1 because the default flex is 1
@@ -357,14 +118,200 @@ class _CreateTrackState extends State<CreateTrack> {
                                 filled: true,
                                 fillColor: Colors.white,
                                 border: OutlineInputBorder(),
-                                hintText: 'อายุการใช้งานของเครื่อง'),
+                                hintText: 'กรอกรหัสเครื่อง'),
+                            initialValue: track.Track_ID,
+                            maxLength: 50,
+                            validator: RequiredValidator(
+                              
+                                errorText: "กรุณากรอกรหัสเครื่อง"),
+                            onSaved: (value) {
+                              setState(() => track.Track_ID = value);
+                            },
+                          ),
+                        ),
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.2,
+                        ),
+                        Expanded(
+                          // optional flex property if flex is 1 because the default flex is 1
+                          flex: 1,
+                          child: TextFormField(
+                            decoration: const InputDecoration(
+                                filled: true,
+                                fillColor: Colors.white,
+                                border: OutlineInputBorder(),
+                                hintText: 'ระบุยี่ห้อ'),
+                            initialValue: track.Brand,
+                            maxLength: 50,
+                            validator:
+                                RequiredValidator(errorText: "กรุณาระบุยี่ห้อ"),
+                            onSaved: (value) {
+                              setState(() => track.Brand = value);
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                          const Padding(padding: EdgeInsets.all(16.16)),
+                          const Expanded(
+                            child: Text(
+                              "รุ่น",
+                              style: TextStyle(fontSize: 15),
+                            ),
+                          ),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.2,
+                          ),
+                          const Expanded(
+                            child: Text("ผู้ผลิต"),
+                          ),
+                        ]),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        const Padding(padding: EdgeInsets.all(16.16)),
+                        Expanded(
+                          // optional flex property if flex is 1 because the default flex is 1
+                          flex: 1,
+                          child: TextFormField(
+                            decoration: const InputDecoration(
+                                filled: true,
+                                fillColor: Colors.white,
+                                border: OutlineInputBorder(),
+                                hintText: 'รุ่นของเครื่อง'),
+                            initialValue: track.Generation,
+                            maxLength: 20,
+                            validator: RequiredValidator(
+                                errorText: "กรุณากรอกรุ่นของเครื่อง"),
+                            onSaved: (value) {
+                              setState(() => track.Generation = value);
+                            },
+                          ),
+                        ),
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.2,
+                        ),
+                        Expanded(
+                          // optional flex property if flex is 1 because the default flex is 1
+                          flex: 1,
+                          child: TextFormField(
+                            decoration: const InputDecoration(
+                                filled: true,
+                                fillColor: Colors.white,
+                                border: OutlineInputBorder(),
+                                hintText: 'บริษัทผู้ผลิต'),
+                            initialValue: track.Menufacturer,
+                            maxLength: 30,
+                            validator: RequiredValidator(
+                                errorText: "กรุณากรอกชื่อ บริษัท"),
+                            onSaved: (value) {
+                              setState(() => track.Menufacturer = value);
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                          const Padding(padding: EdgeInsets.all(16.16)),
+                          const Expanded(
+                            child: Text(
+                              "ขนาดเครื่อง ( หน่วยเป็น cm เช่น 70*50 )",
+                              style: TextStyle(fontSize: 15),
+                            ),
+                          ),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.2,
+                          ),
+                          const Expanded(
+                            child: Text("สภาพการใช้งาน"),
+                          ),
+                        ]),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        const Padding(padding: EdgeInsets.all(16.16)),
+                        Expanded(
+                          // optional flex property if flex is 1 because the default flex is 1
+                          flex: 1,
+                          child: TextFormField(
+                            decoration: const InputDecoration(
+                                filled: true,
+                                fillColor: Colors.white,
+                                border: OutlineInputBorder(),
+                                hintText: 'ขนาดของเครื่อง'),
+                            initialValue: track.Size,
+                            maxLength: 50,
+                            validator: RequiredValidator(
+                                errorText: "กรุณากรอกขนาดของเครื่อง"),
+                            onSaved: (value) {
+                              setState(() => track.Size = value);
+                            },
+                          ),
+                        ),
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.2,
+                        ),
+                        Expanded(
+                          // optional flex property if flex is 1 because the default flex is 1
+                          flex: 1,
+                          child: TextFormField(
+                            decoration: const InputDecoration(
+                                filled: true,
+                                fillColor: Colors.white,
+                                border: OutlineInputBorder(),
+                                hintText: 'สภาพการใช้งานของเครื่อง'),
+                            initialValue: track.Working_Condition,
+                            maxLength: 50,
+                            validator: RequiredValidator(
+                                errorText: "กรุณากรอกสภาพการใช้งาน"),
+                            onSaved: (value) {
+                              setState(() => track.Working_Condition = value);
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                          const Padding(padding: EdgeInsets.all(16.16)),
+                          const Expanded(
+                            child: Text(
+                              "ตำแหน่งที่ตั้ง",
+                              style: TextStyle(fontSize: 15),
+                            ),
+                          ),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.2,
+                          ),
+                          const Expanded(
+                            child: Text("ใช้ในการ"),
+                          ),
+                        ]),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        const Padding(padding: EdgeInsets.all(16.16)),
+                        Expanded(
+                          // optional flex property if flex is 1 because the default flex is 1
+                          flex: 1,
+                          child: TextFormField(
+                            decoration: const InputDecoration(
+                                filled: true,
+                                fillColor: Colors.white,
+                                border: OutlineInputBorder(),
+                                hintText: 'ตำแหน่งของเครื่อง'),
+                            initialValue: track.Location,
                             maxLength: 100,
-                          
                             validator: RequiredValidator(
-                                errorText: "กรุณาระบุอายุการใช้งานของเครื่อง"),
+                                errorText: "กรุณาระบุตำแหน่งของเครื่อง"),
                             onSaved: (value) {
-                              int Age = int.parse(value!);
-                              setState(() => track.Age_of_use = Age);
+                              setState(() => track.Location = value);
                             },
                           ),
                         ),
@@ -379,178 +326,243 @@ class _CreateTrackState extends State<CreateTrack> {
                                 filled: true,
                                 fillColor: Colors.white,
                                 border: OutlineInputBorder(),
-                                hintText: 'หมายเหตุ'),
-                                maxLines: 3,
-                            maxLength: 500,
-                            initialValue: track.Note,
+                                hintText: 'ใช้ในการ'),
+                            initialValue: track.Work_for,
+                            maxLength: 100,
                             validator: RequiredValidator(
-                                errorText: "กรุณาระบุหมายเหตุ"),
+                                errorText: "กรุณาระบุว่าเครื่องใช้ทำอะไร"),
                             onSaved: (value) {
-                              setState(() => track.Note = value);
+                              setState(() => track.Work_for = value);
                             },
                           ),
                         ),
-                      ]),
-                  Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      // ignore: prefer_const_literals_to_create_immutables
-                      children: [
-                        const Padding(padding: EdgeInsets.all(16.16)),
-                        const Expanded(
-                          child: Text(
-                            "วันที่เปิดใช้งาน",
-
-                            style: TextStyle(fontSize: 15),
-                          ),
-                        ),
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.2,
-                        ),
-                        Expanded(
-                          child: Text(
-                            "สถานะการทำงาน",
-
-
-                            style: TextStyle(fontSize: 15),
-                          ),
-                        ),
-                      ]),
-
-                  Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: <Widget>[
-                        const Padding(padding: EdgeInsets.all(16.16)),
-                        Expanded(
-                          flex: 1,
-                          child: ElevatedButton.icon(
-                            onPressed: () => pickDate(context),
-                            label: Text(
-                              getTextDate(),
-                              style: const TextStyle(
-                                fontSize: 18,
-                                color: Colors.black,
-                              ),
+                      ],
+                    ),
+                    Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                          const Padding(padding: EdgeInsets.all(16.16)),
+                          const Expanded(
+                            child: Text(
+                              "อายุการใช้งาน",
+                              style: TextStyle(fontSize: 15),
                             ),
-                            style: ElevatedButton.styleFrom(
-                                padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
-                                primary:
-                                    const Color.fromARGB(255, 250, 248, 248),
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(15))),
-                            icon: const Icon(
-                              Icons.calendar_month_rounded,
-                              color: Colors.black,
-                              size: 30,
-                            ),
-
                           ),
-                        ),
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.2,
-                        ),
-                        Expanded(
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.2,
+                          ),
+                          const Expanded(
+                            child: Text("หมายเหตุ"),
+                          ),
+                        ]),
+                    Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+
+                          const Padding(padding: EdgeInsets.all(16.16)),
+                          Expanded(
+                            // optional flex property if flex is 1 because the default flex is 1
                             flex: 1,
-                            child: Container(
-                              decoration: BoxDecoration(
-                                  border: Border.all(),
-                                  color: Color.fromARGB(255, 241, 244, 244)),
-                              child: DropdownButtonHideUnderline(
-                                child: DropdownButton(
-                                  // Initial Value
-                                  value: dropdownvalue,
-                                  // Down Arrow Icon
-                                  icon: const Icon(Icons.keyboard_arrow_down),
-                                  // Array list of items
-                                  items: status.map((String status) {
-                                    return DropdownMenuItem(
-                                      value: status,
-                                      child: Text(' ' + status),
-                                    );
-                                  }).toList(),
-                                  // After selecting the desired option,it will
-                                  // change button value to selected value
-                                  onChanged: (String? newValue) {
-                                    setState(() {
-                                      dropdownvalue = newValue!;
-                                    });
-                                  },
+                            child: TextFormField(
+                              decoration: const InputDecoration(
+                                  filled: true,
+                                  fillColor: Colors.white,
+                                  border: OutlineInputBorder(),
+                                  hintText: 'อายุการใช้งานของเครื่อง'),
+                              maxLength: 100,
+                            
+                              validator: RequiredValidator(
+                                  errorText: "กรุณาระบุอายุการใช้งานของเครื่อง"),
+                              onSaved: (value) {
+                                int Age = int.parse(value!);
+                                setState(() => track.Age_of_use = Age);
+                              },
+                            ),
+                          ),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.2,
+                          ),
+                          Expanded(
+                            // optional flex property if flex is 1 because the default flex is 1
+                            flex: 1,
+                            child: TextFormField(
+                              decoration: const InputDecoration(
+                                  filled: true,
+                                  fillColor: Colors.white,
+                                  border: OutlineInputBorder(),
+                                  hintText: 'หมายเหตุ'),
+                                  maxLines: 3,
+                              maxLength: 500,
+                              initialValue: track.Note,
+                              validator: RequiredValidator(
+                                  errorText: "กรุณาระบุหมายเหตุ"),
+                              onSaved: (value) {
+                                setState(() => track.Note = value);
+                              },
+                            ),
+                          ),
+                        ]),
+                    Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        // ignore: prefer_const_literals_to_create_immutables
+                        children: [
+                          const Padding(padding: EdgeInsets.all(16.16)),
+                          const Expanded(
+                            child: Text(
+                              "วันที่เปิดใช้งาน",
+
+                              style: TextStyle(fontSize: 15),
+                            ),
+                          ),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.2,
+                          ),
+                          Expanded(
+                            child: Text(
+                              "สถานะการทำงาน",
+
+
+                              style: TextStyle(fontSize: 15),
+                            ),
+                          ),
+                        ]),
+
+                    Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                          const Padding(padding: EdgeInsets.all(16.16)),
+                          Expanded(
+                            flex: 1,
+                            child: ElevatedButton.icon(
+                              onPressed: () => pickDate(context),
+                              label: Text(
+                                getTextDate(),
+                                style: const TextStyle(
+                                  fontSize: 18,
+                                  color: Colors.black,
                                 ),
                               ),
-                            ))
-                      ]),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.05,
-                      width: MediaQuery.of(context).size.width * 0.2,
-                      child: ElevatedButton(
-                        style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all<Color>(
-                                const Color.fromARGB(255, 4, 211, 225)),
-                            shape: MaterialStateProperty.all<
-                                RoundedRectangleBorder>(RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(15),
-                              side: const BorderSide(width: 0.1),
-                            ))),
-                        onPressed: () async {
+                              style: ElevatedButton.styleFrom(
+                                  padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
+                                  primary:
+                                      Color.fromARGB(255, 255, 255, 255),
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(15))),
+                              icon: const Icon(
+                                Icons.calendar_month_rounded,
+                                color: Colors.black,
+                                size: 30,
+                              ),
 
-                          if (_formKey.currentState!.validate()) {
-                            _formKey.currentState!.save();
-                            // ignore: non_constant_identifier_names
-                            int Count_Improve = 0;
-                            print(track.Track_ID);
-                            print(track.Brand);
-                            print(track.Generation);
-                            print(track.Menufacturer);
-                            print(track.Size);
-                            print(track.Working_Condition);
-                            print(track.Location);
-                            print(track.Age_of_use);
-                            print(track.Work_for);
-                            print(track.Start_Enable_Date);
-                            print(track.Note);
-                           
-                            print(Count_Improve);
-                            var res = await http.post(
-                                Uri.parse('http://192.168.1.192:3000/track'),
-                                body: {
-                                  'Track_ID': track.Track_ID,
-                                  'Brand': track.Brand,
-                                  'Size': track.Size,
-                                  'Location': track.Location,
-                                  'Start_Enable_Date': track.Start_Enable_Date,
-                                  'Working_Condition': track.Working_Condition,
-                                  'Generation': track.Generation,
+                            ),
+                          ),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.2,
+                          ),
+                          Expanded(
+                              flex: 1,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                    border: Border.all(),
+                                    color: Color.fromARGB(255, 255, 255, 255),),
+                                child: DropdownButtonHideUnderline(
+                                  child: DropdownButton(
+                                    // Initial Value
+                                    value: dropdownvalue,
+                                    // Down Arrow Icon
+                                    icon: const Icon(Icons.keyboard_arrow_down),
+                                    // Array list of items
+                                    items: status.map((String status) {
+                                      return DropdownMenuItem(
+                                        value: status,
+                                        child: Text(' ' + status),
+                                      );
+                                    }).toList(),
+                                    // After selecting the desired option,it will
+                                    // change button value to selected value
+                                    onChanged: (String? newValue) {
+                                      setState(() {
+                                        dropdownvalue = newValue!;
+                                      });
+                                    },
+                                  ),
+                                ),
+                              ))
+                        ]),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.05,
+                        width: MediaQuery.of(context).size.width * 0.15,
+                        child: ElevatedButton(
+                          style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all<Color>(
+                                  Color.fromARGB(255, 187, 62, 24)),
+                              shape: MaterialStateProperty.all<
+                                  RoundedRectangleBorder>(RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15),
+                                side: const BorderSide(width: 0.1),
+                              ))),
+                          onPressed: () async {
 
-                                  'Menufacurer': track.Menufacturer,
-                                  'Age_of_use': track.Age_of_use.toString(),
+                            if (_formKey.currentState!.validate()) {
+                              _formKey.currentState!.save();
+                              // ignore: non_constant_identifier_names
+                              int Count_Improve = 0;
+                              print(track.Track_ID);
+                              print(track.Brand);
+                              print(track.Generation);
+                              print(track.Menufacturer);
+                              print(track.Size);
+                              print(track.Working_Condition);
+                              print(track.Location);
+                              print(track.Age_of_use);
+                              print(track.Work_for);
+                              print(track.Start_Enable_Date);
+                              print(track.Note);
+                             
+                              print(Count_Improve);
+                              var res = await http.post(
+                                  Uri.parse('http://192.168.1.192:3000/track'),
+                                  body: {
+                                    'Track_ID': track.Track_ID,
+                                    'Brand': track.Brand,
+                                    'Size': track.Size,
+                                    'Location': track.Location,
+                                    'Start_Enable_Date': track.Start_Enable_Date,
+                                    'Working_Condition': track.Working_Condition,
+                                    'Generation': track.Generation,
 
-                                  'Work_for': track.Work_for,
-                                  'Note': track.Note,
-                                  'Count_Improve': Count_Improve.toString()
-                                });
-                            // ignore: unused_local_variable
-                            var data = res.body;
-                            if (res.statusCode == 200) {
-                              print("true");
-                              Fluttertoast.showToast(
-                                  msg: "เพิ่มอุปกรณ์แล้ว!",
-                                  gravity: ToastGravity.CENTER);
-                              // ignore: use_build_context_synchronously
-                              Navigator.pop(context);
+                                    'Menufacurer': track.Menufacturer,
+                                    'Age_of_use': track.Age_of_use.toString(),
+
+                                    'Work_for': track.Work_for,
+                                    'Note': track.Note,
+                                    'Count_Improve': Count_Improve.toString()
+                                  });
+                              // ignore: unused_local_variable
+                              var data = res.body;
+                              if (res.statusCode == 200) {
+                                print("true");
+                                Fluttertoast.showToast(
+                                    msg: "เพิ่มอุปกรณ์แล้ว!",
+                                    gravity: ToastGravity.CENTER);
+                                // ignore: use_build_context_synchronously
+                                Navigator.pop(context);
+                              }
                             }
-                          }
-                        },
-                        child: const Text("ยืนยัน",
-                            style: TextStyle(fontSize: 20, color: Colors.black),
-                            textAlign: TextAlign.center),
-                      )),
-                  SizedBox(
-                    height: 50,
-                  )
-                ],
-              ),
-            )),
+                          },
+                          child: const Text("ยืนยัน",
+                              style: TextStyle(fontSize: 20, color: Color.fromARGB(255, 246, 244, 244)),
+                              textAlign: TextAlign.center),
+                        )),
+                    SizedBox(
+                      height: 50,
+                    )
+                  ],
+                ),
+              )),
+        ),
       ),
     );
   }
