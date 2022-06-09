@@ -1,10 +1,6 @@
-// ignore_for_file: file_names
-
-import 'dart:html';
+// ignore_for_file: file_names, unused_local_variable
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-
 class Backgrounde extends StatelessWidget {
   final Widget child;
   const Backgrounde({Key? key, required this.child,}) : super(key: key);

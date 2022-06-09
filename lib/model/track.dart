@@ -1,4 +1,6 @@
-import 'package:flutter/material.dart';
+
+
+// ignore_for_file: non_constant_identifier_names
 
 class Track {
   String? Track_ID;
@@ -15,24 +17,24 @@ class Track {
   String? End_Date;
   String? Note;
   String? Working_Condition;
+  String? Status;
 
-  Track({
-    this.Track_ID,
-    this.Brand,
-    this.Generation,
-    this.Menufacturer,
-    this.Size,
-    this.Age_of_use,
-    this.Location,
-    this.Work_for,
-    this.Start_Enable_Date,
-    this.Last_Improve_Date,
-    this.Count_Improve,
-    this.End_Date,
-    this.Note,
-    this.Working_Condition
-    
-  });
+  Track(
+      {this.Track_ID,
+      this.Brand,
+      this.Generation,
+      this.Menufacturer,
+      this.Size,
+      this.Age_of_use,
+      this.Location,
+      this.Work_for,
+      this.Start_Enable_Date,
+      this.Last_Improve_Date,
+      this.Count_Improve,
+      this.End_Date,
+      this.Note,
+      this.Working_Condition,
+      this.Status});
   Track.fromSnapshot(result) {
     Track_ID = result['Track_ID'];
   }

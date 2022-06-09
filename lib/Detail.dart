@@ -1,9 +1,7 @@
-// ignore_for_file: file_names
+// ignore_for_file: file_names, avoid_unnecessary_containers
 
 import 'package:flutter/material.dart';
-
 import 'Background/Bg-detail copy.dart';
-import 'Background/Bg-img.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 // ignore: must_be_immutable
@@ -21,7 +19,7 @@ class _DetailState extends State<Detail> {
     return Scaffold(
         backgroundColor: Colors.lightBlue[100],
         appBar: AppBar(
-          backgroundColor: Color.fromARGB(255, 18, 95, 116),
+          backgroundColor: const Color.fromARGB(255, 18, 95, 116),
             title: const Center(
               child: Text(
                 "รายละเอียดอุปกรณ์",
@@ -29,6 +27,7 @@ class _DetailState extends State<Detail> {
               ),
             ),
             titleSpacing: 300),
+
         body: Background(
           child: Container(
             // height: double.infinity,
@@ -224,6 +223,7 @@ class _DetailState extends State<Detail> {
                       height: 30,
                     ),
                   ]),
+
                 ),
               ),
             ),

@@ -1,9 +1,7 @@
-// ignore_for_file: file_names
+// ignore_for_file: file_names, prefer_final_fields, non_constant_identifier_names, use_build_context_synchronously, avoid_print
 
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-
 import 'package:trackingbluetooth/Background/Bg-detail.dart';
 import 'package:trackingbluetooth/Detail.dart';
 import 'package:trackingbluetooth/EditTrack.dart';
@@ -110,6 +108,7 @@ class _ListdataState extends State<Listdata> {
           child: Align(
             alignment: Alignment.topCenter,
             child: Container(
+
               height: double.infinity,
           width: double.infinity,
           decoration: const BoxDecoration(
@@ -158,6 +157,7 @@ class _ListdataState extends State<Listdata> {
                                 //      // Shadow position
                                 //   ),
                                 // ],
+
                               ),
                               child: ListTile(
                                 contentPadding:
@@ -233,6 +233,7 @@ class _ListdataState extends State<Listdata> {
 
   showAlertDialog(BuildContext context, String Track_id, index) {
     // set up the button
+    // ignore: deprecated_member_use
     Widget okButton = FlatButton(
         child: const Text("OK"),
         onPressed: () async {
@@ -250,6 +251,7 @@ class _ListdataState extends State<Listdata> {
           setState(() {});
         });
 
+    // ignore: deprecated_member_use
     Widget cancleButton = FlatButton(
       child: const Text("CANCLE"),
       onPressed: () {
