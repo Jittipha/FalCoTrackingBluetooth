@@ -148,13 +148,6 @@ class _DetailState extends State<Detail> {
                   height: 5,
                 ),
                 Text(
-                  'สถานะของเครื่อง : ' + (widget.result['Status'] ?? '- - -'),
-                  style: const TextStyle(color: Colors.black, fontSize: 18),
-                ),
-                const SizedBox(
-                  height: 5 ,
-                ),
-                Text(
                   // ignore: prefer_interpolation_to_compose_strings
                   'หมายเหตุ : ' + (widget.result['Note'] ?? '- - -'),
                   style: const TextStyle(color: Colors.black, fontSize: 18),
