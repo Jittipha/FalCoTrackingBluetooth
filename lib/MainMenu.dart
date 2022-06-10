@@ -106,6 +106,9 @@ class _mainmenuState extends State<mainmenu> {
                         )),
                   ),
                 ),
+                 const SizedBox(
+                  height: 30,
+                ),
                 GestureDetector(
                   onTap: () {
                     Navigator.push(
