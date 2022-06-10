@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:trackingbluetooth/Detail.dart';
+import 'package:trackingbluetooth/DetailRepair.dart';
 
 import 'package:trackingbluetooth/ListData.dart';
 
@@ -32,7 +33,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const mainmenu(),
+      home:  mainmenu(),
     );
   }
 }
@@ -117,7 +118,9 @@ class _MyHomePageState extends State<MyHomePage> {
         onPressed: _incrementCounter,
         tooltip: 'Increment',
         child: const Icon(Icons.add),
+        
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
+
