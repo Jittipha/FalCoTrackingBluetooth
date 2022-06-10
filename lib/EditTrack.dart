@@ -1,4 +1,4 @@
-// ignore_for_file: file_names
+// ignore_for_file: file_names, prefer_interpolation_to_compose_strings, non_constant_identifier_names, avoid_print, use_build_context_synchronously, duplicate_ignore
 // ignore: avoid_web_libraries_in_flutter, unused_import
 import 'dart:html';
 import 'package:flutter/material.dart';
@@ -8,6 +8,7 @@ import 'package:intl/intl.dart';
 // ignore: unused_import
 import 'package:http/http.dart ' as http;
 import 'package:trackingbluetooth/ListData.dart';
+import 'Background/Bg-Edit.dart';
 import 'model/track.dart';
 
 // ignore: must_be_immutable
@@ -91,6 +92,7 @@ class _EditTrackState extends State<EditTrack> {
     return Scaffold(
         backgroundColor: Colors.lightBlue[100],
         appBar: AppBar(
+          backgroundColor: const Color.fromARGB(255, 18, 95, 116),
             title: const Center(
               child: Text(
                 "เเก้ไขข้อมูลอุปกรณ์",
@@ -98,8 +100,19 @@ class _EditTrackState extends State<EditTrack> {
               ),
             ),
             titleSpacing: 300),
-        body: SingleChildScrollView(
-          padding: const EdgeInsets.only(left: 300, right: 300, top: 30),
+
+        body: Background(               
+          child: Container(
+            height: double.infinity,
+          width: double.infinity,
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+                image: NetworkImage(
+                    "https://images.unsplash.com/photo-1508614999368-9260051292e5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"),
+                fit: BoxFit.cover),
+          ),
+            child: SingleChildScrollView(
+          padding: const EdgeInsets.only(left: 300, right: 300, top: 30,bottom: 50),
           child: Form(
             key: updateTrack,
             child:
@@ -320,7 +333,7 @@ class _EditTrackState extends State<EditTrack> {
                       child: ElevatedButton(
                         style: ButtonStyle(
                             backgroundColor:
-                                MaterialStateProperty.all<Color>(Colors.blue),
+                                MaterialStateProperty.all<Color>(const Color.fromARGB(255, 243, 33, 33)),
                             shape: MaterialStateProperty.all<
                                 RoundedRectangleBorder>(RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15),
@@ -341,7 +354,7 @@ class _EditTrackState extends State<EditTrack> {
                           }
                         },
                         child: const Text("ยืนยัน",
-                            style: TextStyle(fontSize: 20, color: Colors.black),
+                            style: TextStyle(fontSize: 20, color: Color.fromARGB(255, 254, 253, 253)),
                             textAlign: TextAlign.center),
                       )),
                   const SizedBox(
@@ -353,7 +366,7 @@ class _EditTrackState extends State<EditTrack> {
                       child: ElevatedButton(
                         style: ButtonStyle(
                             backgroundColor:
-                                MaterialStateProperty.all<Color>(Colors.blue),
+                                MaterialStateProperty.all<Color>(const Color.fromARGB(255, 66, 66, 67)),
                             shape: MaterialStateProperty.all<
                                 RoundedRectangleBorder>(RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15),
@@ -364,7 +377,7 @@ class _EditTrackState extends State<EditTrack> {
                           Navigator.pop(context);
                         },
                         child: const Text("ยกเลิก",
-                            style: TextStyle(fontSize: 20, color: Colors.black),
+                            style: TextStyle(fontSize: 20, color: Color.fromARGB(255, 254, 253, 253)),
                             textAlign: TextAlign.center),
                       )),
                 ],
@@ -402,6 +415,8 @@ class _EditTrackState extends State<EditTrack> {
               //      ),
             ]),
           ),
+        )
+          ),
         ) //        )],
         // ),
         //      ),
@@ -411,6 +426,7 @@ class _EditTrackState extends State<EditTrack> {
 
   showAlertDialog(BuildContext context) {
     // set up the button
+    // ignore: deprecated_member_use
     Widget okButton = FlatButton(
         child: const Text("OK"),
         onPressed: () async {
@@ -442,6 +458,7 @@ class _EditTrackState extends State<EditTrack> {
           }
         });
 
+    // ignore: deprecated_member_use
     Widget cancleButton = FlatButton(
       child: const Text("CANCLE"),
       onPressed: () {

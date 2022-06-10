@@ -1,4 +1,4 @@
-// ignore_for_file: file_names, prefer_const_constructors, avoid_print
+// ignore_for_file: file_names, prefer_const_constructors, avoid_print, non_constant_identifier_names, prefer_adjacent_string_concatenation, prefer_interpolation_to_compose_strings, duplicate_ignore
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -69,8 +69,9 @@ class _CreateTrackState extends State<CreateTrack> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.lightBlue[100],
+      backgroundColor: Color.fromARGB(255, 250, 251, 251),
       appBar: AppBar(
+         backgroundColor: Color.fromARGB(255, 18, 95, 116),
           title: const Center(
             child: Text(
               "สร้างอุปกรณ์",
@@ -79,7 +80,16 @@ class _CreateTrackState extends State<CreateTrack> {
           ),
           titleSpacing: 300),
       body: Background(
-        child: SingleChildScrollView(
+        child: Container(
+          height: double.infinity,
+          width: double.infinity,
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+                image: NetworkImage(
+                    "https://images.pexels.com/photos/7135058/pexels-photo-7135058.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"),
+                fit: BoxFit.cover),
+          ),
+          child: SingleChildScrollView(
             padding: const EdgeInsets.only(left: 200, right: 200, top: 30),
             child: Form(
               key: _formKey,
@@ -458,7 +468,7 @@ class _CreateTrackState extends State<CreateTrack> {
                             child: Container(
                               decoration: BoxDecoration(
                                   border: Border.all(),
-                                  color: Color.fromARGB(255, 241, 244, 244)),
+                                  color: Color.fromARGB(255, 255, 255, 255)),
                               child: DropdownButtonHideUnderline(
                                 child: DropdownButton(
                                   // Initial Value
@@ -492,11 +502,11 @@ class _CreateTrackState extends State<CreateTrack> {
                   ),
                   SizedBox(
                       height: MediaQuery.of(context).size.height * 0.05,
-                      width: MediaQuery.of(context).size.width * 0.2,
+                      width: MediaQuery.of(context).size.width * 0.15,
                       child: ElevatedButton(
                         style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all<Color>(
-                                const Color.fromARGB(255, 4, 211, 225)),
+                                Color.fromARGB(255, 9, 58, 126)),
                             shape: MaterialStateProperty.all<
                                 RoundedRectangleBorder>(RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15),
@@ -559,7 +569,7 @@ class _CreateTrackState extends State<CreateTrack> {
                           }
                         },
                         child: const Text("ยืนยัน",
-                            style: TextStyle(fontSize: 20, color: Colors.black),
+                            style: TextStyle(fontSize: 20, color: Color.fromARGB(255, 248, 245, 245)),
                             textAlign: TextAlign.center),
                       )),
                   SizedBox(
@@ -568,8 +578,8 @@ class _CreateTrackState extends State<CreateTrack> {
                 ],
               ),
             )),
-      ),
-    );
+              )),
+      );
   }
 
   Widget toast = Container(
