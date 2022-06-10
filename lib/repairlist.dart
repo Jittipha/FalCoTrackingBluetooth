@@ -1,17 +1,25 @@
 import 'package:flutter/material.dart';
 
-class repairlist extends StatefulWidget {
-  const repairlist({Key? key}) : super(key: key);
+class RepairList extends StatefulWidget {
+  const RepairList({Key? key}) : super(key: key);
 
   @override
-  State<repairlist> createState() => _repairlistState();
+  State<RepairList> createState() => _RepairListState();
 }
 
-class _repairlistState extends State<repairlist> {
+class _RepairListState extends State<RepairList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 179, 229, 252),
-    );
+       backgroundColor: Colors.lightBlue[100],
+        appBar: AppBar(
+          backgroundColor: const Color.fromARGB(255, 18, 95, 116),
+            title:  const Center(
+              child:Text(
+                "ประวัติการซ่อม",
+                style: TextStyle(fontSize: 30),
+              ),
+            ),
+    ));
   }
 }
