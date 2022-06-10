@@ -249,7 +249,7 @@ class _EditTrackState extends State<EditTrack> {
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8.0),
                             border: Border.all(),
-                            color: Color.fromARGB(255, 255, 255, 255)),
+                            color: const Color.fromARGB(255, 255, 255, 255)),
                         child: DropdownButtonHideUnderline(
                           child: DropdownButton(
                             // Initial Value
@@ -257,10 +257,11 @@ class _EditTrackState extends State<EditTrack> {
                             // Down Arrow Icon
                             icon: const Icon(Icons.keyboard_arrow_down),
                             hint: Text(
+                              // ignore: prefer_interpolation_to_compose_strings
                               "   " +
                                   (widget.result['Status'] ??
                                       " เลือกสถานะการทำงานของเครื่อง"),
-                              style: TextStyle(color: Colors.black),
+                              style: const TextStyle(color: Colors.black),
                             ),
                             // Array list of items
                             items: status.map((String status) {
