@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:trackingbluetooth/Background/Bg.dart';
 import 'package:trackingbluetooth/CreateTrack.dart';
 import 'package:trackingbluetooth/ListData.dart';
-
+import 'package:trackingbluetooth/RepairList.dart';
 
 class mainmenu extends StatefulWidget {
   const mainmenu({Key? key}) : super(key: key);
@@ -98,6 +98,43 @@ class _mainmenuState extends State<mainmenu> {
                         alignment: Alignment.center,
                         child: AutoSizeText(
                           'จัดการอุปกรณ์',
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 24,
+                              fontWeight: FontWeight.w500),
+                        )),
+                  ),
+                ),
+                const SizedBox(
+                  height: 30,
+                ),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const RepairList()));
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                    height: MediaQuery.of(context).size.height * 0.1,
+                    width: MediaQuery.of(context).size.width * 0.25,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.white,
+                      boxShadow: [
+                        const BoxShadow(
+                          color: Colors.grey,
+                          blurRadius: 4,
+                          offset: const Offset(4, 8), // Shadow position
+                        ),
+                      ],
+                    ),
+                    child: const Align(
+                        alignment: Alignment.center,
+                        child: AutoSizeText(
+                          'แจ้งซ่อม',
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
                               color: Colors.black,

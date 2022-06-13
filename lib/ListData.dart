@@ -7,6 +7,7 @@ import 'package:trackingbluetooth/Detail.dart';
 import 'package:trackingbluetooth/EditTrack.dart';
 import 'package:trackingbluetooth/model/track.dart';
 import 'package:http/http.dart ' as http;
+import 'package:trackingbluetooth/repairlist.dart';
 
 class Listdata extends StatefulWidget {
   const Listdata({Key? key}) : super(key: key);
@@ -190,14 +191,17 @@ class _ListdataState extends State<Listdata> {
                                               context,
                                               MaterialPageRoute(
                                                   builder: (context) =>
-                                                      EditTrack(
-                                                        result:
-                                                            _resultList[index],
+
+                                                      RepairList(
+                                                        // result:
+                                                        //     _resultList[index],
                                                       )),
                                             );
                                           },
+                                          
                                           child: const Icon(
-                                            Icons.edit,
+                                            Icons.settings,
+
                                             color: Colors.black,
                                           )),
                                     ),
@@ -206,6 +210,26 @@ class _ListdataState extends State<Listdata> {
                                       // height: 10,
                                     ),
                                     GestureDetector(
+                                         onTap: () {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                        EditTrack(
+                                                        result:
+                                                            _resultList[index],
+                                                      )),
+                                            );
+                                          },
+                                        child: const Icon(
+                                          Icons.edit,
+                                          color: Colors.black,
+                                        )),
+                                        const SizedBox(
+                                      width: 20,
+                                      // height: 10,
+                                    ),
+                                        GestureDetector(
                                         onTap: () {
                                           showAlertDialog(
                                               context,
@@ -216,6 +240,7 @@ class _ListdataState extends State<Listdata> {
                                           Icons.delete,
                                           color: Colors.red,
                                         ))
+                                        
                                   ],
                                 ),
                                 onTap: () {
