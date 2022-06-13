@@ -106,7 +106,7 @@ class _mainmenuState extends State<mainmenu> {
                         )),
                   ),
                 ),
-                 const SizedBox(
+                const SizedBox(
                   height: 30,
                 ),
                 GestureDetector(
