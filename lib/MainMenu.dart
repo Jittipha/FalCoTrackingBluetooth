@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:trackingbluetooth/Background/Bg.dart';
 import 'package:trackingbluetooth/CreateTrack.dart';
 import 'package:trackingbluetooth/ListData.dart';
-import 'package:trackingbluetooth/repairlist.dart';
+import 'package:trackingbluetooth/formrepair.dart';
+import 'package:trackingbluetooth/testsearch.dart';
 
 class mainmenu extends StatefulWidget {
   const mainmenu({Key? key}) : super(key: key);
@@ -106,12 +107,13 @@ class _mainmenuState extends State<mainmenu> {
                         )),
                   ),
                 ),
+                const SizedBox(
+                  height: 30,
+                ),
                 GestureDetector(
                   onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const repairlist()));
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => MyApp()));
                   },
                   child: Container(
                     padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
@@ -131,7 +133,7 @@ class _mainmenuState extends State<mainmenu> {
                     child: const Align(
                         alignment: Alignment.center,
                         child: AutoSizeText(
-                          'ประวัติการซ่อม',
+                          'แจ้งซ่อม',
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
                               color: Colors.black,
