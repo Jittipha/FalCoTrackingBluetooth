@@ -5,8 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:trackingbluetooth/Background/Bg.dart';
 import 'package:trackingbluetooth/CreateTrack.dart';
 import 'package:trackingbluetooth/ListData.dart';
-import 'package:trackingbluetooth/formrepair.dart';
-import 'package:trackingbluetooth/testsearch.dart';
+import 'package:trackingbluetooth/RepairList.dart';
 
 class mainmenu extends StatefulWidget {
   const mainmenu({Key? key}) : super(key: key);
@@ -107,13 +106,15 @@ class _mainmenuState extends State<mainmenu> {
                         )),
                   ),
                 ),
-                const SizedBox(
+                 const SizedBox(
                   height: 30,
                 ),
                 GestureDetector(
                   onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => MyApp()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const RepairList()));
                   },
                   child: Container(
                     padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
