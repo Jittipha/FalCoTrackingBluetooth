@@ -96,9 +96,9 @@ class _ListdataState extends State<Listdata> {
     return Scaffold(
         backgroundColor: Colors.lightBlue[100],
         appBar: AppBar(
-          backgroundColor: const Color.fromARGB(255, 18, 95, 116),
-            title:  const Center(
-              child:Text(
+            backgroundColor: const Color.fromARGB(255, 18, 95, 116),
+            title: const Center(
+              child: Text(
                 "อุปกรณ์ทั้งหมด",
                 style: TextStyle(fontSize: 30),
               ),
@@ -108,16 +108,19 @@ class _ListdataState extends State<Listdata> {
           child: Align(
             alignment: Alignment.topCenter,
             child: Container(
-
               height: double.infinity,
-          width: double.infinity,
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-                image: NetworkImage(
-                    "https://images.unsplash.com/photo-1651147538420-06f5e0d3f1d9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"),
-                fit: BoxFit.cover),
-          ),
-             padding: const EdgeInsets.only(left: 400, right: 400, top: 70,),
+              width: double.infinity,
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                    image: NetworkImage(
+                        "https://images.unsplash.com/photo-1651147538420-06f5e0d3f1d9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"),
+                    fit: BoxFit.cover),
+              ),
+              padding: const EdgeInsets.only(
+                left: 400,
+                right: 400,
+                top: 70,
+              ),
               child: Container(
                 width: 1000,
                 padding: const EdgeInsets.fromLTRB(10, 20, 10, 10),
@@ -157,15 +160,15 @@ class _ListdataState extends State<Listdata> {
                                 //      // Shadow position
                                 //   ),
                                 // ],
-
                               ),
                               child: ListTile(
-                                contentPadding:
-                                    const EdgeInsets.symmetric(horizontal: 20.0),
-                                    // const EdgeInsets.only(bottom: 20.0),
+                                contentPadding: const EdgeInsets.symmetric(
+                                    horizontal: 20.0),
+                                // const EdgeInsets.only(bottom: 20.0),
                                 title: Text(
                                   // ignore: prefer_interpolation_to_compose_strings
-                                  'รหัสเครื่อง : ' + _resultList[index]['Track_ID'],
+                                  'รหัสเครื่อง : ' +
+                                      _resultList[index]['Track_ID'],
                                   style: const TextStyle(
                                       color: Colors.black, fontSize: 18),
                                 ),
@@ -186,12 +189,17 @@ class _ListdataState extends State<Listdata> {
                                             Navigator.push(
                                               context,
                                               MaterialPageRoute(
-                                                  builder: (context) => EditTrack(
-                                                        result: _resultList[index],
+                                                  builder: (context) =>
+                                                      EditTrack(
+                                                        result:
+                                                            _resultList[index],
                                                       )),
                                             );
                                           },
-                                          child: const Icon(Icons.edit,color: Colors.black,)),
+                                          child: const Icon(
+                                            Icons.edit,
+                                            color: Colors.black,
+                                          )),
                                     ),
                                     const SizedBox(
                                       width: 20,
