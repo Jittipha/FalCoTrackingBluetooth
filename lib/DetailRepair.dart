@@ -1,6 +1,7 @@
 // ignore_for_file: file_names
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 // ignore: must_be_immutable
 class DetailRepair extends StatefulWidget {
@@ -8,11 +9,17 @@ class DetailRepair extends StatefulWidget {
   Map<String, dynamic> result;
 
 
+ 
+ 
+  
   @override
   State<DetailRepair> createState() => _DetailRepairState();
 }
 
 class _DetailRepairState extends State<DetailRepair> {
+
+  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
