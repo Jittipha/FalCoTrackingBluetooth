@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class DetailRepair extends StatefulWidget {
-  
+  DetailRepair({Key? key, required this.result}) : super(key: key);
+  Map<String, dynamic> result;
+
 
   @override
   State<DetailRepair> createState() => _DetailRepairState();
@@ -30,28 +32,28 @@ class _DetailRepairState extends State<DetailRepair> {
               height: 500,
               color: const Color.fromARGB(250, 255, 255, 255),
               padding: const EdgeInsets.fromLTRB(10, 20, 10, 10),
-              child: ListView(children: const <Widget>[
+              child: ListView(children:  <Widget>[
                  Text(
-                  'รหัสเครื่อง : ' ,
-                  style: TextStyle(color: Colors.black, fontSize: 18),
+                  'รหัสเครื่อง : ' + widget.result['Track_ID'], 
+                  style:  TextStyle(color: Colors.black, fontSize: 18),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 30,
                 ),
-                Text(
+                 Text(
                   // ignore: prefer_interpolation_to_compose_strings
-                  'สถานะการใช้งาน : ',
-                  style: TextStyle(color: Colors.black, fontSize: 18),
+                  'สถานะการใช้งาน :'+ widget.result['Status']  ,
+                  style:  TextStyle(color: Colors.black, fontSize: 18),
                 ),
-                SizedBox(
+                const SizedBox(
                   height:30,
                 ),
-                Text(
+                 Text(
                   // ignore: prefer_interpolation_to_compose_strings
-                  'บริษัท : '  ,
-                  style: TextStyle(color: Colors.black, fontSize: 18),
+                  'บริษัท : ' + widget.result['Company_Repair'] ,
+                  style:  TextStyle(color: Colors.black, fontSize: 18),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 30,
                 ),
                 Text(
@@ -59,29 +61,35 @@ class _DetailRepairState extends State<DetailRepair> {
                   'วันที่ดำเนินการ : ' ,
                   style: TextStyle(color: Colors.black, fontSize: 18),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 30,
                 ),
-                Text(
+                const Text(
                   // ignore: prefer_interpolation_to_compose_strings
                   'เวลาที่ซ่อม : ' ,
-                  style: TextStyle(color: Colors.black, fontSize: 18),
+                  style: const TextStyle(color: Colors.black, fontSize: 18),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 30,
                 ),
-                Text(
+                 Text(
                   // ignore: prefer_interpolation_to_compose_strings
-                  'รายละเอียด : ',
+                  'รายละเอียด : '+ widget.result['Repair_Description'],
                   style: TextStyle(color: Colors.black, fontSize: 18),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 30,
                 ),
               ]),
             ),
           ),
         ));
+
+  }
+
+  String textfordate(String day, month, year) {
+    String Date = "$day/$month/$year";
+    return Date;
   }
 
   //checktext(String check) {

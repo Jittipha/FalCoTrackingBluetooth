@@ -3,38 +3,38 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:trackingbluetooth/Background/Bg-detail.dart';
 import 'package:http/http.dart ' as http;
+import 'package:trackingbluetooth/Detail.dart';
 import 'package:trackingbluetooth/DetailRepair.dart';
+import 'package:trackingbluetooth/EditTrack.dart';
 
 class repairhistory extends StatefulWidget {
-  const repairhistory({Key? key}) : super(key: key);
+  repairhistory({Key? key, required this.trackid}) : super(key: key);
+  String? trackid;
 
   @override
   State<repairhistory> createState() => _repairhistoryState();
 }
 
 class _repairhistoryState extends State<repairhistory> {
-  TextEditingController _searchController = TextEditingController();
-  //ลิสทั้งหมดที่มัี
-  List _allresult = [];
   //ลิสที่ค้นหาได้
-  List _resultList = [];
-  late Future resultsLoaded;
+  List _allresult = [];
+  
+
   @override
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    //resultloaded เท่ากันค่าที่เม็ดตอธ getdata return มา
-    //ซึ่งเท่ากับ complete
-    resultsLoaded = Getdata();
+  void initState() {
+    super.initState();
+    Getdata();
   }
 
   Getdata() async {
-    var res = await http.get(Uri.parse('http://192.168.1.192:3000/tracks'));
+    var res = await http
+        .get(Uri.parse('http://192.168.1.192:3000/history/${widget.trackid}'));
     if (res.statusCode == 200) {
       var jsonData = jsonDecode(res.body);
 
       setState(() {
         _allresult = jsonData;
+        print(_allresult.length);
       });
     }
 
@@ -78,75 +78,89 @@ class _repairhistoryState extends State<repairhistory> {
                     height: 30,
                   ),
                   Expanded(
-                    child: ListView.builder(
-                        itemCount: _resultList.length,
-                        itemBuilder: ((BuildContext context, int index) {
-                          return Padding(
-                            padding: const EdgeInsets.all(3.0),
-                            child: Container(
-                              padding: const EdgeInsets.fromLTRB(0, 0, 0, 5),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: Colors.white,
-                                // boxShadow: const [
-                                //   BoxShadow(
-                                //     color: Colors.grey,
-                                //     blurRadius: 100,
-                                //     offset: Offset(20, 10),
-                                //      // Shadow position
-                                //   ),
-                                // ],
-                              ),
-                              child: ListTile(
-                                contentPadding: const EdgeInsets.symmetric(
-                                    horizontal: 20.0),
-                                // const EdgeInsets.only(bottom: 20.0),
-                                title: Text(
-                                  // ignore: prefer_interpolation_to_compose_strings
-                                  'รหัสเครื่อง : ' +
-                                      _resultList[index]['Track_ID'],
-                                  style: const TextStyle(
-                                      color: Colors.black, fontSize: 18),
-                                ),
-                                subtitle: Text(
-                                  // ignore: prefer_interpolation_to_compose_strings
-                                  'ตำเเหน่งที่ตั้ง : ' +
-                                      _resultList[index]['Location'],
-                                  style: const TextStyle(
-                                      color: Colors.black, fontSize: 18),
-                                ),
-                                trailing: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: <Widget>[
-                                    Align(
-                                      alignment: Alignment.center,
-                                      child: GestureDetector(
-                                          onTap: () {
-                                            Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      DetailRepair(
-                                                          // result:
-                                                          //     _resultList[index],
-                                                          )),
-                                            );
-                                          },
-                                          child: const Icon(
-                                            Icons.settings,
-                                            color: Colors.black,
-                                          )),
-                                    ),
-                                    const SizedBox(
-                                      width: 20,
-                                      // height: 10,
-                                    ),
-                                  ],
-                                ),
+                    child: _allresult.isEmpty
+                        ? const Center(
+                            child: Text(
+                              "ไม่มีประวัติการซ่อม",
+                              style: TextStyle(
+                                color: Color.fromARGB(255, 252, 249, 249),
+                                fontSize: 30,
+                                fontFamily: 'Raleway',
+                                fontWeight: FontWeight.w500,
                               ),
                             ),
-                          );
-                        })),
+                          )
+                        : ListView.builder(
+                            itemCount: _allresult.length,
+                            itemBuilder: ((BuildContext context, int index) {
+                              return Padding(
+                                  padding: const EdgeInsets.all(3.0),
+                                  child: Container(
+                                    padding:
+                                        const EdgeInsets.fromLTRB(0, 0, 0, 5),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: Colors.white,
+                                      // boxShadow: const [
+                                      //   BoxShadow(
+                                      //     color: Colors.grey,
+                                      //     blurRadius: 100,
+                                      //     offset: Offset(20, 10),
+                                      //      // Shadow position
+                                      //   ),
+                                      // ],
+                                    ),
+                                    child: ListTile(
+                                      contentPadding:
+                                          const EdgeInsets.symmetric(
+                                              horizontal: 20.0),
+                                      // const EdgeInsets.only(bottom: 20.0),
+                                      title: Text(
+                                        // ignore: prefer_interpolation_to_compose_strings
+                                        'วันที่ซ่อม : ' +
+                                            textfordate(
+                                                _allresult[index]["Day"],
+                                                _allresult[index]["Month"],
+                                                _allresult[index]["Year"]),
+                                        style: const TextStyle(
+                                            color: Colors.black, fontSize: 18),
+                                      ),
+                                      subtitle: Text(
+                                        // ignore: prefer_interpolation_to_compose_strings
+                                        'สถานะ : ' +
+                                            _allresult[index]['Status'],
+                                        style: const TextStyle(
+                                            color: Colors.black, fontSize: 18),
+                                      ),
+                                      trailing: Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: <Widget>[
+                                          Align(
+                                            alignment: Alignment.center,
+                                            child: GestureDetector(
+                                                onTap: () {
+                                                  Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            DetailRepair(
+                                                              result:
+                                                                  _allresult[
+                                                                      index],
+                                                            )),
+                                                  );
+                                                },
+                                                child: const Icon(
+                                                  Icons.edit,
+                                                  color: Colors.black,
+                                                )),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ));
+                              // }return Container();
+                            })),
                   )
                 ]),
               ),
@@ -155,47 +169,8 @@ class _repairhistoryState extends State<repairhistory> {
         ));
   }
 
-  showAlertDialog(BuildContext context, String Track_id, index) {
-    // set up the button
-    // ignore: deprecated_member_use
-    Widget okButton = FlatButton(
-        child: const Text("OK"),
-        onPressed: () async {
-          var response = await http.delete(
-              Uri.parse('http://192.168.1.192:3000/track'),
-              body: {'Track_ID': Track_id});
-          if (response.statusCode == 200) {
-            _resultList.remove(_resultList[index]);
-            Navigator.pop(context);
-            setState(() {});
-          } else {
-            return print("Delete Fail!");
-          }
-
-          setState(() {});
-        });
-
-    // ignore: deprecated_member_use
-    Widget cancleButton = FlatButton(
-      child: const Text("CANCLE"),
-      onPressed: () {
-        Navigator.pop(context, 'Cancel');
-      },
-    );
-
-    // set up the AlertDialog
-    AlertDialog alert = AlertDialog(
-      title: const Text("Delete This Track !"),
-      content: const Text("Are you sure?"),
-      actions: [cancleButton, okButton],
-    );
-
-    // show the dialog
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return alert;
-      },
-    );
+  String textfordate(String day, month, year) {
+    String Date = "$day/$month/$year";
+    return Date;
   }
 }
