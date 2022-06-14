@@ -191,6 +191,7 @@ class _ListdataState extends State<Listdata> {
                                               context,
                                               MaterialPageRoute(
                                                   builder: (context) =>
+
                                                       RepairList(
                                                         // result:
                                                         //     _resultList[index],
@@ -200,6 +201,7 @@ class _ListdataState extends State<Listdata> {
                                           
                                           child: const Icon(
                                             Icons.settings,
+
                                             color: Colors.black,
                                           )),
                                     ),
