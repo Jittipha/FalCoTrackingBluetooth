@@ -1,5 +1,3 @@
-
-
 // ignore_for_file: non_constant_identifier_names
 
 class Track {
@@ -19,6 +17,7 @@ class Track {
   String? Working_Condition;
   String? Status;
   String? Repairdetail;
+  String? Company_Repair;
 
   Track(
       {this.Track_ID,
@@ -36,7 +35,8 @@ class Track {
       this.Note,
       this.Working_Condition,
       this.Status,
-      this.Repairdetail});
+      this.Repairdetail,
+      this.Company_Repair});
   Track.fromSnapshot(result) {
     Track_ID = result['Track_ID'];
   }

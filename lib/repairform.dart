@@ -56,7 +56,7 @@ class _RepairListState extends State<RepairList> {
         backgroundColor: const Color.fromARGB(255, 18, 95, 116),
         title: const Center(
           child: Text(
-            "ประวัติการซ่อม",
+            "แจ้งซ่อม",
             style: TextStyle(fontSize: 30),
           ),
         ),
@@ -193,6 +193,37 @@ class _RepairListState extends State<RepairList> {
                   ),
                 ],
               ),
+              const SizedBox(
+                height: 50,
+              ),
+              Column(
+                children: [
+                  const Text('ชื่อบริษัทที่รับซ่อม',
+                      style: TextStyle(fontSize: 20)),
+                  Container(
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(30.0),
+                          child: TextFormField(
+                            decoration: const InputDecoration(
+                              filled: true,
+                              fillColor: Colors.white,
+                              focusedBorder: OutlineInputBorder(),
+                            ),
+                            initialValue: track.Company_Repair,
+                            onSaved: (value) {
+                              setState(() => track.Company_Repair = value);
+                            },
+                            maxLength: 500,
+                            maxLines: 5,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -245,7 +276,6 @@ class _RepairListState extends State<RepairList> {
           ),
         ),
       ),
-
     );
   }
 }
