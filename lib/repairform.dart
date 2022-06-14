@@ -83,22 +83,28 @@ class _RepairListState extends State<RepairList> {
                         return (MapEntry(
                             k,
                             Center(
-                                child: Card(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                side: const BorderSide(
-                                  color: Color.fromARGB(255, 26, 1, 1),
-                                  width: 1.0,
-                                ),
+                                child: Padding(
+                              padding: const EdgeInsets.only(
+                                left: 300,
+                                right: 300,
                               ),
-                              margin: const EdgeInsets.all(20),
-                              child: Padding(
-                                padding: const EdgeInsets.only(top: 20),
-                                child: Column(
-                                  children: <Widget>[
-                                    Text("$k:"),
-                                    v,
-                                  ],
+                              child: Card(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  side: const BorderSide(
+                                    color: Color.fromARGB(255, 26, 1, 1),
+                                    width: 1.0,
+                                  ),
+                                ),
+                                margin: const EdgeInsets.all(20),
+                                child: Padding(
+                                  padding: const EdgeInsets.only(top: 20),
+                                  child: Column(
+                                    children: <Widget>[
+                                      Text("$k:"),
+                                      v,
+                                    ],
+                                  ),
                                 ),
                               ),
                             ))));
@@ -108,7 +114,7 @@ class _RepairListState extends State<RepairList> {
                     .toList(),
               ),
               const SizedBox(
-                height: 50,
+                height: 10,
               ),
               Column(
                 children: [
@@ -169,7 +175,7 @@ class _RepairListState extends State<RepairList> {
                 ],
               ),
               const SizedBox(
-                height: 50,
+                height: 20,
               ),
               Column(
                 children: [
@@ -181,7 +187,10 @@ class _RepairListState extends State<RepairList> {
                       children: [
                         Padding(
                           padding: const EdgeInsets.only(
-                              left: 300, right: 300, top: 10, bottom: 50),
+                            left: 300,
+                            right: 300,
+                            top: 10,
+                          ),
                           child: TextFormField(
                             decoration: const InputDecoration(
                               filled: true,
@@ -201,29 +210,25 @@ class _RepairListState extends State<RepairList> {
                   ),
                 ],
               ),
-              const SizedBox(
-                height: 10,
-              ),
-              const Text('ชื่อบริษัทที่รับซ่อม',
-                  style: TextStyle(fontSize: 20)),
               Column(
                 children: [
+                  const Text('ชื่อบริษัทที่รับซ่อม',
+                      style: TextStyle(fontSize: 20)),
                   Padding(
                     padding: const EdgeInsets.only(
                         left: 300, right: 300, top: 10, bottom: 50),
                     child: TextFormField(
-                      decoration: const InputDecoration(
-                        filled: true,
-                        fillColor: Colors.white,
-                        focusedBorder: OutlineInputBorder(),
-                      ),
-                      initialValue: track.Company_Repair,
-                      onSaved: (value) {
-                        setState(() => track.Company_Repair = value);
-                      },
-                      maxLength: 500,
-                      maxLines: 5,
-                    ),
+                        decoration: const InputDecoration(
+                          filled: true,
+                          fillColor: Colors.white,
+                          focusedBorder: OutlineInputBorder(),
+                        ),
+                        initialValue: track.Company_Repair,
+                        onSaved: (value) {
+                          setState(() => track.Company_Repair = value);
+                        },
+                        maxLength: 500,
+                        maxLines: 3),
                   ),
                 ],
               ),
