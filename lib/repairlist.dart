@@ -43,49 +43,54 @@ class _RepairListState extends State<RepairList> {
         isExpanded: true,
       ),
     };
-    return Scaffold(
-       backgroundColor: Colors.lightBlue[100],
-        appBar: AppBar(
-          backgroundColor: const Color.fromARGB(255, 18, 95, 116),
-            title:  const Center(
-              child:Text(
-                "ประวัติการซ่อม",
-                style: TextStyle(fontSize: 30),
-              ),
-            ),
-    ),
+    return Column(
+      children: [
+        Scaffold(
+           backgroundColor: Colors.lightBlue[100],
+            appBar: AppBar(
+              backgroundColor: const Color.fromARGB(255, 18, 95, 116),
+                title:  const Center(
+                  child:Text(
+                    "ประวัติการซ่อม",
+                    style: TextStyle(fontSize: 30),
+                  ),
+                ),
+        ),
    body: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        child: Column(
-            children: widgets
-                .map((k, v) {
-                  return (MapEntry(
-                      k,
-                      Center(
-                          child: Card(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          side: BorderSide(
-                            color: Color.fromARGB(255, 26, 1, 1),
-                            width: 1.0,
-                          ),
-                        ),
-                        margin: EdgeInsets.all(20),
-                        child: Padding(
-                          padding: const EdgeInsets.only(top: 20),
-                          child: Column(
-                            children: <Widget>[
-                              Text("$k:"),
-                              v,
-                            ],
-                          ),
-                        ),
-                      ))));
-                })
-                .values
-                .toList()
-            ),
-      ),
+            scrollDirection: Axis.vertical,
+            child: Column(
+                children: widgets
+                    .map((k, v) {
+                      return (MapEntry(
+                          k,
+                          Center(
+                              child: Card(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              side: BorderSide(
+                                color: Color.fromARGB(255, 26, 1, 1),
+                                width: 1.0,
+                              ),
+                            ),
+                            margin: EdgeInsets.all(20),
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 20),
+                              child: Column(
+                                children: <Widget>[
+                                  Text("$k:"),
+                                  v,
+                                ],
+                              ),
+                              
+                            ),
+                          ))));
+                    })
+                    .values
+                    .toList()
+                ),
+          ),
+        ),
+      ],
     );
   }
 }
