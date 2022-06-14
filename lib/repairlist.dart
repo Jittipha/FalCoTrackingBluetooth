@@ -13,37 +13,12 @@ class RepairList extends StatefulWidget {
 class _RepairListState extends State<RepairList> {
   bool asTabs = false;
   Track track = Track();
-  DateTime? dateTime;
-  DateTime date = DateTime(2022, 01, 01);
   String? selectedValueSingleDialog;
   List<DropdownMenuItem<String>> test = [];
   List h = ['nanine', 'nanon', 'nagarn', 'nanick', 'nahee'];
   String dropdownValue = 'One';
-
-  String getTextDate() {
-    if (track.Start_Enable_Date == null) {
-      return "Select Date";
-    } else {
-      return track.Start_Enable_Date!;
-    }
-  }
-
-  Future pickDate(BuildContext context) async {
-    final initialDate = DateTime.now();
-    final newDate = await showDatePicker(
-      context: context,
-      initialDate: dateTime ?? initialDate,
-      firstDate: DateTime(2000),
-      // firstDate: DateTime.utc(yyyy, mm, dd),
-      lastDate: DateTime(DateTime.now().year + 5),
-    );
-    if (newDate == null) return;
-    String stDate = DateFormat('dd/MM/yyyy').format(newDate);
-
-    setState(() {
-      track.Start_Enable_Date = stDate;
-    });
-  }
+  final _formKey = GlobalKey<FormState>();
+  final updateTrack = GlobalKey<FormState>();
 
   @override
   void initState() {
@@ -87,125 +62,186 @@ class _RepairListState extends State<RepairList> {
       ),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
-        child: Column(
-          children: [
-            Column(
-              children: widgets
-                  .map(
-                    (k, v) {
-                      return (MapEntry(
-                          k,
-                          Center(
-                              child: Card(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              side: const BorderSide(
-                                color: Color.fromARGB(255, 26, 1, 1),
-                                width: 1.0,
+        child: Form(
+          key: _formKey,
+          child: Column(
+            children: [
+              const SizedBox(
+                height: 20,
+              ),
+              const Text('รหัสเครื่องที่ต้องการซ่อม',
+                  style: TextStyle(fontSize: 20)),
+              Column(
+                children: widgets
+                    .map(
+                      (k, v) {
+                        return (MapEntry(
+                            k,
+                            Center(
+                                child: Card(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                side: const BorderSide(
+                                  color: Color.fromARGB(255, 26, 1, 1),
+                                  width: 1.0,
+                                ),
                               ),
-                            ),
-                            margin: const EdgeInsets.all(20),
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 20),
-                              child: Column(
-                                children: <Widget>[
-                                  Text("$k:"),
-                                  v,
-                                ],
+                              margin: const EdgeInsets.all(20),
+                              child: Padding(
+                                padding: const EdgeInsets.only(top: 20),
+                                child: Column(
+                                  children: <Widget>[
+                                    Text("$k:"),
+                                    v,
+                                  ],
+                                ),
                               ),
-                            ),
-                          ))));
-                    },
-                  )
-                  .values
-                  .toList(),
-            ),
-            SizedBox(height: 50,),
-            Container(
-             padding: EdgeInsets.fromLTRB(600, 0, 0, 0),
-
-              child: Row(
+                            ))));
+                      },
+                    )
+                    .values
+                    .toList(),
+              ),
+              SizedBox(
+                height: 50,
+              ),
+              Column(
                 children: [
-                  Row(
-                    children: [
-                      Container(
-                        
-                        // alignment: Alignment.centerRight,
-                        width: 200,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.white,
-                        ),
-                        child: Center(
-                          
-                          child: DropdownButton<String>(
-                            
-                            value: dropdownValue,
-                            icon: const Icon(Icons.arrow_downward),
-                            elevation: 16,
-                            style: const TextStyle(
-                                color: Color.fromARGB(255, 13, 13, 13)),
-                            // underline: Container(
-                            //   height: 2,
-                            //   // width: 100,
-                            //   color: const Color.fromARGB(255, 13, 13, 13),
-                            // ),
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                dropdownValue = newValue!;
-                              });
-                            },
-                            items: <String>['One', 'Two', 'Free', 'Four']
-                                .map<DropdownMenuItem<String>>((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Text(value),
-                              );
-                            }).toList(),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                  const Text('สถานะการทำงาน', style: TextStyle(fontSize: 20)),
                   const SizedBox(
                     height: 10,
                   ),
-                  Row(mainAxisAlignment: MainAxisAlignment.center,
-                      // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: <Widget>[
-                        const Padding(padding: EdgeInsets.all(16.16)),
-                        Container(
-                          width: 200,
-                          child: Expanded(
-                            flex: 1,
-                            child: ElevatedButton.icon(
-                              onPressed: () => pickDate(context),
-                              label: Text(
-                                getTextDate(),
-                                style: const TextStyle(
-                                  fontSize: 18,
-                                  color: Colors.black,
+                  Container(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Row(
+                          children: [
+                            Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: Colors.white,
+                              ),
+                              child: Center(
+                                child: DropdownButton<String>(
+                                  value: track.Status,
+                                  icon: const Icon(Icons.arrow_downward),
+                                  elevation: 16,
+                                  style: const TextStyle(
+                                      color: Color.fromARGB(255, 13, 13, 13)),
+                                  hint: Text(
+                                    "   " + "เลือกสถานะการทำงานของเครื่อง",
+                                    style: TextStyle(color: Colors.black),
+                                  ),
+                                  onChanged: (String? newValue) {
+                                    setState(() {
+                                      track.Status = newValue!;
+                                    });
+                                  },
+                                  items: <String>[
+                                    'กำลังใช้งาน',
+                                    'กำลังซ่อม',
+                                    'อยู่ระหว่างการดูแลรักษา',
+                                    'กำลังเปลี่ยนชิ้นส่วน',
+                                    'เครื่องปิด',
+                                    'เครื่องเสีย'
+                                  ].map<DropdownMenuItem<String>>(
+                                      (String status) {
+                                    return DropdownMenuItem<String>(
+                                      value: status,
+                                      child: Text('   ' + status),
+                                    );
+                                  }).toList(),
                                 ),
                               ),
-                              style: ElevatedButton.styleFrom(
-                                  padding: const EdgeInsets.fromLTRB(0, 20, 0, 20),
-                                  primary: const Color.fromARGB(255, 250, 248, 248),
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(15))),
-                              icon: const Icon(
-                                Icons.calendar_month_rounded,
-                                color: Colors.black,
-                                size: 30,
-                              ),
                             ),
-                          ),
+                          ],
                         ),
-                       
-                      ]),
+                      ],
+                    ),
+                  ),
                 ],
               ),
-            ),
-          ],
+              const SizedBox(
+                height: 50,
+              ),
+              Column(
+                children: [
+                  const Text('สถานะการทำงาน', style: TextStyle(fontSize: 20)),
+                  Container(
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(30.0),
+                          child: TextFormField(
+                            decoration: const InputDecoration(
+                              filled: true,
+                              fillColor: Colors.white,
+                              focusedBorder: OutlineInputBorder(),
+                            ),
+                            initialValue: track.Repairdetail,
+                            onSaved: (value) {
+                              setState(() => track.Repairdetail = value);
+                            },
+                            maxLength: 500,
+                            maxLines: 5,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(
+                      height: 40,
+                      width: 130,
+                      child: ElevatedButton(
+                        style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all<Color>(
+                                const Color.fromARGB(255, 243, 33, 33)),
+                            shape: MaterialStateProperty.all<
+                                RoundedRectangleBorder>(RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15),
+                            ))),
+                        onPressed: () async {},
+                        child: const Text("ยืนยัน",
+                            style: TextStyle(
+                                fontSize: 20,
+                                color: Color.fromARGB(255, 254, 253, 253)),
+                            textAlign: TextAlign.center),
+                      )),
+                  const SizedBox(
+                    width: 30,
+                  ),
+                  SizedBox(
+                      height: 40,
+                      width: 130,
+                      child: ElevatedButton(
+                        style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all<Color>(
+                                const Color.fromARGB(255, 66, 66, 67)),
+                            shape: MaterialStateProperty.all<
+                                RoundedRectangleBorder>(RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15),
+                              side: const BorderSide(width: 0.1),
+                              //side: const BorderSide(width: 2),
+                            ))),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: const Text("ยกเลิก",
+                            style: TextStyle(
+                                fontSize: 20,
+                                color: Color.fromARGB(255, 254, 253, 253)),
+                            textAlign: TextAlign.center),
+                      )),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

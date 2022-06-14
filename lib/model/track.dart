@@ -18,6 +18,7 @@ class Track {
   String? Note;
   String? Working_Condition;
   String? Status;
+  String? Repairdetail;
 
   Track(
       {this.Track_ID,
@@ -34,7 +35,8 @@ class Track {
       this.End_Date,
       this.Note,
       this.Working_Condition,
-      this.Status});
+      this.Status,
+      this.Repairdetail});
   Track.fromSnapshot(result) {
     Track_ID = result['Track_ID'];
   }

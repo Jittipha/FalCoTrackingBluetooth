@@ -71,7 +71,7 @@ class _CreateTrackState extends State<CreateTrack> {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 250, 251, 251),
       appBar: AppBar(
-         backgroundColor: Color.fromARGB(255, 18, 95, 116),
+          backgroundColor: Color.fromARGB(255, 18, 95, 116),
           title: const Center(
             child: Text(
               "สร้างอุปกรณ์",
@@ -80,16 +80,16 @@ class _CreateTrackState extends State<CreateTrack> {
           ),
           titleSpacing: 300),
       body: Background(
-        child: Container(
-          height: double.infinity,
-          width: double.infinity,
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-                image: NetworkImage(
-                    "https://images.pexels.com/photos/7135058/pexels-photo-7135058.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"),
-                fit: BoxFit.cover),
-          ),
-          child: SingleChildScrollView(
+          child: Container(
+        height: double.infinity,
+        width: double.infinity,
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+              image: NetworkImage(
+                  "https://images.pexels.com/photos/7135058/pexels-photo-7135058.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"),
+              fit: BoxFit.cover),
+        ),
+        child: SingleChildScrollView(
             padding: const EdgeInsets.only(left: 200, right: 200, top: 30),
             child: Form(
               key: _formKey,
@@ -569,7 +569,9 @@ class _CreateTrackState extends State<CreateTrack> {
                           }
                         },
                         child: const Text("ยืนยัน",
-                            style: TextStyle(fontSize: 20, color: Color.fromARGB(255, 248, 245, 245)),
+                            style: TextStyle(
+                                fontSize: 20,
+                                color: Color.fromARGB(255, 248, 245, 245)),
                             textAlign: TextAlign.center),
                       )),
                   SizedBox(
@@ -578,8 +580,8 @@ class _CreateTrackState extends State<CreateTrack> {
                 ],
               ),
             )),
-              )),
-      );
+      )),
+    );
   }
 
   Widget toast = Container(
