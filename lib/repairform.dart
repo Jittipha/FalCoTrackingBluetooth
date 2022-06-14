@@ -177,13 +177,15 @@ class _RepairListState extends State<RepairList> {
               ),
               Column(
                 children: [
-                  const Text('สถานะการทำงาน', style: TextStyle(fontSize: 20)),
+                  const Text('รายระเอียดการซ่อม',
+                      style: TextStyle(fontSize: 20)),
                   // ignore: avoid_unnecessary_containers
                   Container(
                     child: Column(
                       children: [
                         Padding(
-                          padding: const EdgeInsets.all(30.0),
+                          padding: const EdgeInsets.only(
+                              left: 300, right: 300, top: 10, bottom: 50),
                           child: TextFormField(
                             decoration: const InputDecoration(
                               filled: true,
@@ -204,33 +206,29 @@ class _RepairListState extends State<RepairList> {
                 ],
               ),
               const SizedBox(
-                height: 50,
+                height: 10,
               ),
+              const Text('ชื่อบริษัทที่รับซ่อม',
+                  style: TextStyle(fontSize: 20)),
               Column(
                 children: [
-                  const Text('ชื่อบริษัทที่รับซ่อม',
-                      style: TextStyle(fontSize: 20)),
-                 
-                  Container(
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(30.0),
-                          child: TextFormField(
-                            decoration: const InputDecoration(
-                              filled: true,
-                              fillColor: Colors.white,
-                              focusedBorder: OutlineInputBorder(),
-                            ),
-                            initialValue: track.Company_Repair,
-                            onSaved: (value) {
-                              setState(() => track.Company_Repair = value);
-                            },
-                            maxLength: 500,
-                            maxLines: 5,
-                          ),
-                        ),
-                      ],
+
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        left: 300, right: 300, top: 10, bottom: 50),
+                    child: TextFormField(
+                      decoration: const InputDecoration(
+                        filled: true,
+                        fillColor: Colors.white,
+                        focusedBorder: OutlineInputBorder(),
+                      ),
+                      initialValue: track.Company_Repair,
+                      onSaved: (value) {
+                        setState(() => track.Company_Repair = value);
+                      },
+                      maxLength: 500,
+                      maxLines: 5,
+
                     ),
                   ),
                 ],
