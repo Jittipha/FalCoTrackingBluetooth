@@ -5,13 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:trackingbluetooth/Background/Bg.dart';
 import 'package:trackingbluetooth/CreateTrack.dart';
 import 'package:trackingbluetooth/ListData.dart';
-
-import 'package:trackingbluetooth/repairhistory.dart';
-
-
 import 'package:trackingbluetooth/repairform.dart';
-
-
 class mainmenu extends StatefulWidget {
   const mainmenu({Key? key}) : super(key: key);
 
@@ -119,7 +113,9 @@ class _mainmenuState extends State<mainmenu> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const repairhistory()));
+
+                            builder: (context) => RepairList()));
+
                   },
                   child: Container(
                     padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
