@@ -22,9 +22,12 @@ class _RepairListState extends State<RepairList> {
 
   @override
   void initState() {
+    // ignore: unused_local_variable
     String wordPair = "";
+    // ignore: avoid_function_literals_in_foreach_calls
     h.forEach((element) {
       test.add(DropdownMenuItem(
+        // ignore: sort_child_properties_last
         child: Text(element),
         value: element,
       ));
@@ -33,6 +36,7 @@ class _RepairListState extends State<RepairList> {
     super.initState();
   }
 
+  @override
   Widget build(BuildContext context) {
     Map<String, Widget> widgets;
     widgets = {
@@ -103,7 +107,7 @@ class _RepairListState extends State<RepairList> {
                     .values
                     .toList(),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 50,
               ),
               Column(
