@@ -20,6 +20,13 @@ class _RepairListState extends State<RepairList> {
   final _formKey = GlobalKey<FormState>();
   final updateTrack = GlobalKey<FormState>();
 
+  String day = DateFormat("dd").format(DateTime.now());
+  String month = DateFormat("MM").format(DateTime.now());
+  String year = DateFormat("yyyy").format(DateTime.now());
+  // ignore: non_constant_identifier_names
+  String Timerepair = DateFormat("HH:mm").format(DateTime.now());
+  
+
   @override
   void initState() {
     // ignore: unused_local_variable
@@ -146,10 +153,7 @@ class _RepairListState extends State<RepairList> {
                                   items: <String>[
                                     'กำลังใช้งาน',
                                     'กำลังซ่อม',
-                                    'อยู่ระหว่างการดูแลรักษา',
-                                    'กำลังเปลี่ยนชิ้นส่วน',
-                                    'เครื่องปิด',
-                                    'เครื่องเสีย'
+                                    
                                   ].map<DropdownMenuItem<String>>(
                                       (String status) {
                                     return DropdownMenuItem<String>(
@@ -206,6 +210,7 @@ class _RepairListState extends State<RepairList> {
                 children: [
                   const Text('ชื่อบริษัทที่รับซ่อม',
                       style: TextStyle(fontSize: 20)),
+                 
                   Container(
                     child: Column(
                       children: [
