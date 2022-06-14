@@ -49,6 +49,7 @@ class _RepairListState extends State<RepairList> {
         isExpanded: true,
       ),
     };
+
     return Scaffold(
       backgroundColor: Colors.lightBlue[100],
       appBar: AppBar(
@@ -129,7 +130,7 @@ class _RepairListState extends State<RepairList> {
                                   elevation: 16,
                                   style: const TextStyle(
                                       color: Color.fromARGB(255, 13, 13, 13)),
-                                  hint: Text(
+                                  hint: const Text(
                                     "   " + "เลือกสถานะการทำงานของเครื่อง",
                                     style: TextStyle(color: Colors.black),
                                   ),
@@ -149,6 +150,7 @@ class _RepairListState extends State<RepairList> {
                                       (String status) {
                                     return DropdownMenuItem<String>(
                                       value: status,
+                                      // ignore: prefer_interpolation_to_compose_strings
                                       child: Text('   ' + status),
                                     );
                                   }).toList(),
@@ -168,6 +170,7 @@ class _RepairListState extends State<RepairList> {
               Column(
                 children: [
                   const Text('สถานะการทำงาน', style: TextStyle(fontSize: 20)),
+                  // ignore: avoid_unnecessary_containers
                   Container(
                     child: Column(
                       children: [
