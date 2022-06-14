@@ -1,48 +1,25 @@
-// ignore_for_file: file_names, prefer_final_fields, non_constant_identifier_names, use_build_context_synchronously, avoid_print
-
 import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:trackingbluetooth/Background/Bg-detail.dart';
-import 'package:trackingbluetooth/Detail.dart';
-import 'package:trackingbluetooth/EditTrack.dart';
-import 'package:trackingbluetooth/model/track.dart';
 import 'package:http/http.dart ' as http;
-import 'package:trackingbluetooth/repairhistory.dart';
-import 'package:trackingbluetooth/repairform.dart';
+import 'package:trackingbluetooth/DetailRepair.dart';
 
-class Listdata extends StatefulWidget {
-  const Listdata({Key? key}) : super(key: key);
+class repairhistory extends StatefulWidget {
+  const repairhistory({Key? key}) : super(key: key);
 
   @override
-  State<Listdata> createState() => _ListdataState();
+  State<repairhistory> createState() => _repairhistoryState();
 }
 
-class _ListdataState extends State<Listdata> {
+class _repairhistoryState extends State<repairhistory> {
   TextEditingController _searchController = TextEditingController();
   //ลิสทั้งหมดที่มัี
   List _allresult = [];
   //ลิสที่ค้นหาได้
   List _resultList = [];
   late Future resultsLoaded;
-  //เม็ดตอธทำงานก่อน widget build
   @override
-  void initState() {
-    super.initState();
-    setState(() {});
-    // Getdata();
-    // getheightforlength();
-    _searchController.addListener((_onSearchChanged));
-  }
-
-//เม็ดตอธทำงานก่อน widget build
-  @override
-  void dispose() {
-    _searchController.removeListener(_onSearchChanged);
-    _searchController.dispose();
-    super.dispose();
-  }
-
-//เม็ดตอธทำงานก่อน widget build
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -51,7 +28,6 @@ class _ListdataState extends State<Listdata> {
     resultsLoaded = Getdata();
   }
 
-//ดึงข้อมูลทั้งหมดมาเก็บใน allresult
   Getdata() async {
     var res = await http.get(Uri.parse('http://192.168.1.192:3000/tracks'));
     if (res.statusCode == 200) {
@@ -61,39 +37,10 @@ class _ListdataState extends State<Listdata> {
         _allresult = jsonData;
       });
     }
-    searchResultList();
 
     return 'Complete';
   }
 
-  _onSearchChanged() {
-    searchResultList();
-  }
-
-  searchResultList() {
-    var showResult = [];
-    //ในกล่อง Search มีค่า?
-    if (_searchController.text != "") {
-      for (var Snapshot in _allresult) {
-        var Track_id = Track.fromSnapshot(Snapshot).Track_ID!.toLowerCase();
-        //เช็คตัวแปร Name ของ event ทั้งหมดว่ามีส่วนประกอยของข้อความที่ใส่ไปรึป่าว
-        //เช่น ในtext คือ p แล้วเอา p ไปเช็คกับชื่อ event ทั้งหมด
-        if (Track_id.contains(_searchController.text.toLowerCase())) {
-          showResult.add(Snapshot);
-        }
-      }
-      //ในกล่อง Search ไม่ได้ใส่อะไร
-    } else {
-      //ให้ showresult เท่ากับ allresult คือ ถ้าไม่มีค่าในกล่อง search ให้โชว์event ทั้งหมด
-      showResult = List.from(_allresult);
-    }
-    setState(() {
-      //เอาค่าที่ได้มาใส่ใน resultlist
-      _resultList = showResult;
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.lightBlue[100],
@@ -101,7 +48,7 @@ class _ListdataState extends State<Listdata> {
             backgroundColor: const Color.fromARGB(255, 18, 95, 116),
             title: const Center(
               child: Text(
-                "อุปกรณ์ทั้งหมด",
+                "ประวัติการซ่อม",
                 style: TextStyle(fontSize: 30),
               ),
             ),
@@ -129,19 +76,6 @@ class _ListdataState extends State<Listdata> {
                 child: Column(children: <Widget>[
                   const SizedBox(
                     height: 30,
-                  ),
-                  TextFormField(
-                    autofocus: false,
-                    controller: _searchController,
-                    decoration: const InputDecoration(
-                        filled: true,
-                        fillColor: Colors.white,
-                        border: OutlineInputBorder(),
-                        prefixIcon: Icon(Icons.search),
-                        hintText: 'ค้นหาด้วยรหัสอุปกรณ์..... '),
-                  ),
-                  const SizedBox(
-                    height: 50,
                   ),
                   Expanded(
                     child: ListView.builder(
@@ -192,7 +126,7 @@ class _ListdataState extends State<Listdata> {
                                               context,
                                               MaterialPageRoute(
                                                   builder: (context) =>
-                                                      repairhistory(
+                                                      DetailRepair(
                                                           // result:
                                                           //     _resultList[index],
                                                           )),
@@ -207,47 +141,8 @@ class _ListdataState extends State<Listdata> {
                                       width: 20,
                                       // height: 10,
                                     ),
-                                    GestureDetector(
-                                        onTap: () {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) => EditTrack(
-                                                      result:
-                                                          _resultList[index],
-                                                    )),
-                                          );
-                                        },
-                                        child: const Icon(
-                                          Icons.edit,
-                                          color: Colors.black,
-                                        )),
-                                    const SizedBox(
-                                      width: 20,
-                                      // height: 10,
-                                    ),
-                                    GestureDetector(
-                                        onTap: () {
-                                          showAlertDialog(
-                                              context,
-                                              _resultList[index]['Track_ID'],
-                                              index);
-                                        },
-                                        child: const Icon(
-                                          Icons.delete,
-                                          color: Colors.red,
-                                        ))
                                   ],
                                 ),
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => Detail(
-                                              result: _resultList[index],
-                                            )),
-                                  );
-                                },
                               ),
                             ),
                           );
