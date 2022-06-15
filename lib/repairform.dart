@@ -1,5 +1,9 @@
+import 'dart:convert';
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:http/http.dart';
 import 'package:intl/intl.dart';
 import 'package:search_choices/search_choices.dart';
 import 'package:trackingbluetooth/model/track.dart';
@@ -13,15 +17,17 @@ class RepairList extends StatefulWidget {
 }
 
 class _RepairListState extends State<RepairList> {
+
   late FToast fToast;
   bool asTabs = false;
   Track track = Track();
   String? selectedValueSingleDialog;
   List<DropdownMenuItem<String>> test = [];
-  List h = ['nanine', 'nanon', 'nagarn', 'nanick', 'nahee'];
+  List h = [];
   String dropdownValue = 'One';
   final _formKey = GlobalKey<FormState>();
   final updateTrack = GlobalKey<FormState>();
+  List _allresult = [];
 
   String day = DateFormat("dd").format(DateTime.now());
   String month = DateFormat("MM").format(DateTime.now());
@@ -31,18 +37,31 @@ class _RepairListState extends State<RepairList> {
 
   @override
   void initState() {
-    // ignore: unused_local_variable
-    String wordPair = "";
-    // ignore: avoid_function_literals_in_foreach_calls
-    h.forEach((element) {
-      test.add(DropdownMenuItem(
-        // ignore: sort_child_properties_last
-        child: Text(element),
-        value: element,
-      ));
-    });
-
     super.initState();
+    getdata();
+    print(test);
+  }
+
+  getdata() async {
+    var res =
+        await http.get(Uri.parse('http://192.168.1.192:3000/tracks/trackid'));
+    if (res.statusCode == 200) {
+      var jsonData = jsonDecode(res.body);
+      _allresult = jsonData;
+      _allresult.forEach((element) => {h.add(element['Track_ID'])});
+
+      h.forEach((element) {
+        test.add(DropdownMenuItem(
+          // ignore: sort_child_properties_last
+          child: Text(element),
+          value: element,
+        ));
+      });
+      setState(() {});
+    }
+    ;
+
+    return 'Complete';
   }
 
   @override
@@ -134,6 +153,7 @@ class _RepairListState extends State<RepairList> {
                   const SizedBox(
                     height: 10,
                   ),
+
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -153,6 +173,8 @@ class _RepairListState extends State<RepairList> {
                             hint: const Text(
                               "   " + "เลือกสถานะการทำงานของเครื่อง",
                               style: TextStyle(color: Colors.black),
+
+                 
                             ),
                             onChanged: (String? newValue) {
                               setState(() {
@@ -224,8 +246,10 @@ class _RepairListState extends State<RepairList> {
                             onSaved: (value) {
                               setState(() => track.Company_Repair = value);
                             },
+
                             maxLength: 500,
                             maxLines: 2),
+
                       ],
                     ),
                   ),
@@ -233,6 +257,7 @@ class _RepairListState extends State<RepairList> {
               ),
               SizedBox(
                 height: 50,
+
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -256,6 +281,8 @@ class _RepairListState extends State<RepairList> {
                          
                               print(selectedValueSingleDialog);
                               print(track.Status);
+                              print(track.Repairdetail);
+                              print(track.Company_Repair);
 
                               var res = await http.post(
                                   Uri.parse(
@@ -268,7 +295,7 @@ class _RepairListState extends State<RepairList> {
                                     'Time':Timerepair,
                                     'Repair_Description': track.Repairdetail,
                                     'Status': track.Status,
-                                    'Comepany_Repair': track.Company_Repair,
+                                    'Company_Repair': track.Company_Repair,
                                   });
                               var data = res.body;
                               if (res.statusCode == 200) {
