@@ -18,7 +18,6 @@ class repairhistory extends StatefulWidget {
 class _repairhistoryState extends State<repairhistory> {
   //ลิสที่ค้นหาได้
   List _allresult = [];
-  
 
   @override
   void initState() {
@@ -117,7 +116,7 @@ class _repairhistoryState extends State<repairhistory> {
                                       // const EdgeInsets.only(bottom: 20.0),
                                       title: Text(
                                         // ignore: prefer_interpolation_to_compose_strings
-                                        'วันที่ซ่อม : ' +
+                                        'วันที่ดำเนินการ : ' +
                                             textfordate(
                                                 _allresult[index]["Day"],
                                                 _allresult[index]["Month"],
@@ -132,31 +131,17 @@ class _repairhistoryState extends State<repairhistory> {
                                         style: const TextStyle(
                                             color: Colors.black, fontSize: 18),
                                       ),
-                                      trailing: Row(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: <Widget>[
-                                          Align(
-                                            alignment: Alignment.center,
-                                            child: GestureDetector(
-                                                onTap: () {
-                                                  Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            DetailRepair(
-                                                              result:
-                                                                  _allresult[
-                                                                      index],
-                                                            )),
-                                                  );
-                                                },
-                                                child: const Icon(
-                                                  Icons.edit,
-                                                  color: Colors.black,
-                                                )),
-                                          ),
-                                        ],
-                                      ),
+                                      //
+                                      onTap: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  DetailRepair(
+                                                    result: _allresult[index],
+                                                  )),
+                                        );
+                                      },
                                     ),
                                   ));
                               // }return Container();
