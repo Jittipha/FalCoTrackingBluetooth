@@ -1,7 +1,12 @@
+import 'dart:convert';
+import 'dart:html';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import 'package:intl/intl.dart';
 import 'package:search_choices/search_choices.dart';
 import 'package:trackingbluetooth/model/track.dart';
+import 'package:http/http.dart ' as http;
 
 class RepairList extends StatefulWidget {
   const RepairList({Key? key}) : super(key: key);
@@ -11,29 +16,42 @@ class RepairList extends StatefulWidget {
 }
 
 class _RepairListState extends State<RepairList> {
-  bool asTabs = false;
   Track track = Track();
   String? selectedValueSingleDialog;
   List<DropdownMenuItem<String>> test = [];
-  List h = ['nanine', 'nanon', 'nagarn', 'nanick', 'nahee'];
+  List h = [];
   String dropdownValue = 'One';
   final _formKey = GlobalKey<FormState>();
   final updateTrack = GlobalKey<FormState>();
+  List _allresult = [];
 
   @override
   void initState() {
-    // ignore: unused_local_variable
-    String wordPair = "";
-    // ignore: avoid_function_literals_in_foreach_calls
-    h.forEach((element) {
-      test.add(DropdownMenuItem(
-        // ignore: sort_child_properties_last
-        child: Text(element),
-        value: element,
-      ));
-    });
-
     super.initState();
+    getdata();
+    print(test);
+  }
+
+  getdata() async {
+    var res =
+        await http.get(Uri.parse('http://192.168.1.192:3000/tracks/trackid'));
+    if (res.statusCode == 200) {
+      var jsonData = jsonDecode(res.body);
+      _allresult = jsonData;
+      _allresult.forEach((element) => {h.add(element['Track_ID'])});
+
+      h.forEach((element) {
+        test.add(DropdownMenuItem(
+          // ignore: sort_child_properties_last
+          child: Text(element),
+          value: element,
+        ));
+      });
+      setState(() {});
+    }
+    ;
+
+    return 'Complete';
   }
 
   @override
@@ -129,6 +147,11 @@ class _RepairListState extends State<RepairList> {
                         Row(
                           children: [
                             Container(
+                              padding: const EdgeInsets.only(
+                                left: 300,
+                                right: 300,
+                                top: 10,
+                              ),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
                                 color: Colors.white,
@@ -179,7 +202,7 @@ class _RepairListState extends State<RepairList> {
               ),
               Column(
                 children: [
-                  const Text('รายระเอียดการซ่อม',
+                  const Text('ชื่อบริษัทที่รับซ่อม',
                       style: TextStyle(fontSize: 20)),
                   // ignore: avoid_unnecessary_containers
                   Container(
@@ -201,8 +224,8 @@ class _RepairListState extends State<RepairList> {
                             onSaved: (value) {
                               setState(() => track.Repairdetail = value);
                             },
-                            maxLength: 500,
-                            maxLines: 5,
+                            maxLength: 100,
+                            maxLines: 3,
                           ),
                         ),
                       ],
@@ -212,7 +235,7 @@ class _RepairListState extends State<RepairList> {
               ),
               Column(
                 children: [
-                  const Text('ชื่อบริษัทที่รับซ่อม',
+                  const Text('รายระเอียดการซ่อม',
                       style: TextStyle(fontSize: 20)),
                   Padding(
                     padding: const EdgeInsets.only(
@@ -228,7 +251,7 @@ class _RepairListState extends State<RepairList> {
                           setState(() => track.Company_Repair = value);
                         },
                         maxLength: 500,
-                        maxLines: 3),
+                        maxLines: 5),
                   ),
                 ],
               ),
