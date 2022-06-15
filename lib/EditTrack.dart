@@ -92,7 +92,7 @@ class _EditTrackState extends State<EditTrack> {
     return Scaffold(
         backgroundColor: Colors.lightBlue[100],
         appBar: AppBar(
-          backgroundColor: const Color.fromARGB(255, 18, 95, 116),
+            backgroundColor: const Color.fromARGB(255, 18, 95, 116),
             title: const Center(
               child: Text(
                 "เเก้ไขข้อมูลอุปกรณ์",
@@ -100,324 +100,343 @@ class _EditTrackState extends State<EditTrack> {
               ),
             ),
             titleSpacing: 300),
-
-        body: Background(               
+        body: Background(
           child: Container(
-            height: double.infinity,
-          width: double.infinity,
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-                image: NetworkImage(
-                    "https://images.unsplash.com/photo-1508614999368-9260051292e5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"),
-                fit: BoxFit.cover),
-          ),
-            child: SingleChildScrollView(
-          padding: const EdgeInsets.only(left: 300, right: 300, top: 30,bottom: 50),
-          child: Form(
-            key: updateTrack,
-            child:
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              // const Text(
-              //   'เเก้ไขข้อมูลอุปกFรณ์',
-              //   style: TextStyle(fontSize: 25),
-              // ),
-              const SizedBox(
-                height: 50,
+              height: double.infinity,
+              width: double.infinity,
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                    image: NetworkImage(
+                        "https://images.unsplash.com/photo-1508614999368-9260051292e5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"),
+                    fit: BoxFit.cover),
               ),
-              const Text(
-                'สภาพการใช้งาน',
-                style: TextStyle(fontSize: 18),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              TextFormField(
-                decoration: const InputDecoration(
-                  filled: true,
-                  fillColor: Colors.white,
-                  focusedBorder: OutlineInputBorder(),
-                ),
-                initialValue: widget.result['Working_Condition'],
-                validator:
-                    RequiredValidator(errorText: "กรุณาใส่สภาพการใช้งาน!"),
-                onSaved: (value) {
-                  setState(() => widget.result['Working_Condition'] = value);
-                },
-                maxLength: 50,
-                maxLines: 2,
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              const Text(
-                'ตำเเหน่งที่ตั้ง',
-                style: TextStyle(fontSize: 18),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              TextFormField(
-                decoration: const InputDecoration(
-                  filled: true,
-                  fillColor: Colors.white,
-                  focusedBorder: OutlineInputBorder(),
-                ),
-                initialValue: widget.result['Location'],
-                validator:
-                    RequiredValidator(errorText: "กรุณาใส่ตำเเหน่งที่ตั้ง!"),
-                onSaved: (value) {
-                  setState(() => widget.result['Location'] = value);
-                },
-                maxLength: 100,
-                maxLines: 2,
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.020,
-                  ),
-                  Column(
-                    children: [
-                      const Text('วันที่ปรับปรุงล่าสุด',
-                          style: TextStyle(fontSize: 18)),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      SizedBox(
-                        height: 45,
-                        width: MediaQuery.of(context).size.width * 0.168,
-                        child: ElevatedButton.icon(
-                          onPressed: () => pickDateStart(context),
-                          label: Text(
-                            getTextDateStart(),
-                            style: const TextStyle(
-                              fontSize: 18,
-                              color: Colors.black,
-                            ),
-                          ),
-                          style: ElevatedButton.styleFrom(
-                              primary: Colors.white,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20))),
-                          icon: const Icon(
-                            Icons.calendar_month_rounded,
-                            color: Colors.black,
-                            size: 30,
-                          ),
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.only(
+                    left: 300, right: 300, top: 30, bottom: 50),
+                child: Form(
+                  key: updateTrack,
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        // const Text(
+                        //   'เเก้ไขข้อมูลอุปกFรณ์',
+                        //   style: TextStyle(fontSize: 25),
+                        // ),
+                        const SizedBox(
+                          height: 50,
                         ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.020,
-                  ),
-                  Column(
-                    children: [
-                      const Text('วันที่สิ้นสุด',
-                          style: TextStyle(fontSize: 20)),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      SizedBox(
-                        height: 45,
-                        width: MediaQuery.of(context).size.width * 0.168,
-                        child: ElevatedButton.icon(
-                          onPressed: () => pickDateLast(context),
-                          label: Text(
-                            getTextDateLast(),
-                            style: const TextStyle(
-                              fontSize: 18,
-                              color: Colors.black,
-                            ),
-                          ),
-                          style: ElevatedButton.styleFrom(
-                              primary: Colors.white,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(15))),
-                          icon: const Icon(
-                            Icons.calendar_month_rounded,
-                            color: Colors.black,
-                            size: 30,
-                          ),
+                        const Text(
+                          'สภาพการใช้งาน',
+                          style: TextStyle(fontSize: 18),
                         ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.020,
-                  ),
-                  Column(
-                    children: [
-                      const Text('สถานะการทำงาน',
-                          style: TextStyle(fontSize: 20)),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8.0),
-                            border: Border.all(),
-                            color: const Color.fromARGB(255, 255, 255, 255)),
-                        child: DropdownButtonHideUnderline(
-                          child: DropdownButton(
-                            // Initial Value
-                            value: track.Status,
-                            // Down Arrow Icon
-                            icon: const Icon(Icons.keyboard_arrow_down),
-                            hint: Text(
-                              // ignore: prefer_interpolation_to_compose_strings
-                              "   " +
-                                  (widget.result['Status'] ??
-                                      " เลือกสถานะการทำงานของเครื่อง"),
-                              style: const TextStyle(color: Colors.black),
-                            ),
-                            // Array list of items
-                            items: status.map((String status) {
-                              return DropdownMenuItem(
-                                value: status,
-                                child: Text('   ' + status),
-                              );
-                            }).toList(),
-                            // After selecting the desired option,it will
-                            // change button value to selected value
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                widget.result['Status'] = newValue!;
-                              });
-                            },
-                          ),
+                        const SizedBox(
+                          height: 10,
                         ),
-                      )
-                    ],
-                  ),
-                  
-                ],
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              const Text(
-                'หมายเหตุ',
-                style: TextStyle(fontSize: 20),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              TextFormField(
-                decoration: const InputDecoration(
-                  filled: true,
-                  fillColor: Colors.white,
-                  focusedBorder: OutlineInputBorder(),
+                        TextFormField(
+                          decoration: const InputDecoration(
+                            filled: true,
+                            fillColor: Colors.white,
+                            focusedBorder: OutlineInputBorder(),
+                          ),
+                          initialValue: widget.result['Working_Condition'],
+                          validator: RequiredValidator(
+                              errorText: "กรุณาใส่สภาพการใช้งาน!"),
+                          onSaved: (value) {
+                            setState(() =>
+                                widget.result['Working_Condition'] = value);
+                          },
+                          maxLength: 50,
+                          maxLines: 2,
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        const Text(
+                          'ตำเเหน่งที่ตั้ง',
+                          style: TextStyle(fontSize: 18),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        TextFormField(
+                          decoration: const InputDecoration(
+                            filled: true,
+                            fillColor: Colors.white,
+                            focusedBorder: OutlineInputBorder(),
+                          ),
+                          initialValue: widget.result['Location'],
+                          validator: RequiredValidator(
+                              errorText: "กรุณาใส่ตำเเหน่งที่ตั้ง!"),
+                          onSaved: (value) {
+                            setState(() => widget.result['Location'] = value);
+                          },
+                          maxLength: 100,
+                          maxLines: 2,
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.020,
+                            ),
+                            Column(
+                              children: [
+                                const Text('วันที่ปรับปรุงล่าสุด',
+                                    style: TextStyle(fontSize: 18)),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                SizedBox(
+                                  height: 45,
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.168,
+                                  child: ElevatedButton.icon(
+                                    onPressed: () => pickDateStart(context),
+                                    label: Text(
+                                      getTextDateStart(),
+                                      style: const TextStyle(
+                                        fontSize: 18,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                    style: ElevatedButton.styleFrom(
+                                        primary: Colors.white,
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(20))),
+                                    icon: const Icon(
+                                      Icons.calendar_month_rounded,
+                                      color: Colors.black,
+                                      size: 30,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.020,
+                            ),
+                            Column(
+                              children: [
+                                const Text('วันที่สิ้นสุด',
+                                    style: TextStyle(fontSize: 20)),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                SizedBox(
+                                  height: 45,
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.168,
+                                  child: ElevatedButton.icon(
+                                    onPressed: () => pickDateLast(context),
+                                    label: Text(
+                                      getTextDateLast(),
+                                      style: const TextStyle(
+                                        fontSize: 18,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                    style: ElevatedButton.styleFrom(
+                                        primary: Colors.white,
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(15))),
+                                    icon: const Icon(
+                                      Icons.calendar_month_rounded,
+                                      color: Colors.black,
+                                      size: 30,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.020,
+                            ),
+                            Column(
+                              children: [
+                                const Text('สถานะการทำงาน',
+                                    style: TextStyle(fontSize: 20)),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                Container(
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(8.0),
+                                      border: Border.all(),
+                                      color: const Color.fromARGB(
+                                          255, 255, 255, 255)),
+                                  child: DropdownButtonHideUnderline(
+                                    child: DropdownButton(
+                                      // Initial Value
+                                      value: track.Status,
+                                      // Down Arrow Icon
+                                      icon:
+                                          const Icon(Icons.keyboard_arrow_down),
+                                      hint: Text(
+                                        // ignore: prefer_interpolation_to_compose_strings
+                                        "   " +
+                                            (widget.result['Status'] ??
+                                                " เลือกสถานะการทำงานของเครื่อง"),
+                                        style: const TextStyle(
+                                            color: Colors.black),
+                                      ),
+                                      // Array list of items
+                                      items: status.map((String status) {
+                                        return DropdownMenuItem(
+                                          value: status,
+                                          child: Text('   ' + status),
+                                        );
+                                      }).toList(),
+                                      // After selecting the desired option,it will
+                                      // change button value to selected value
+                                      onChanged: (String? newValue) {
+                                        setState(() {
+                                          widget.result['Status'] = newValue!;
+                                        });
+                                      },
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        const Text(
+                          'หมายเหตุ',
+                          style: TextStyle(fontSize: 20),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        TextFormField(
+                          decoration: const InputDecoration(
+                            filled: true,
+                            fillColor: Colors.white,
+                            focusedBorder: OutlineInputBorder(),
+                          ),
+                          initialValue: widget.result['Note'],
+                          onSaved: (value) {
+                            setState(() => widget.result['Note'] = value);
+                          },
+                          maxLength: 500,
+                          maxLines: 5,
+                        ),
+                        const SizedBox(
+                          height: 50,
+                        ),
+
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                                height: 40,
+                                width: 130,
+                                child: ElevatedButton(
+                                  style: ButtonStyle(
+                                      backgroundColor:
+                                          MaterialStateProperty.all<Color>(
+                                              const Color.fromARGB(
+                                                  255, 243, 33, 33)),
+                                      shape: MaterialStateProperty.all<
+                                              RoundedRectangleBorder>(
+                                          RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(15),
+                                      ))),
+                                  onPressed: () async {
+                                    if (updateTrack.currentState!.validate()) {
+                                      updateTrack.currentState!.save();
+                                      if (widget.result['Status'] != null) {
+                                        showAlertDialog(context);
+                                      } else {
+                                        Fluttertoast.showToast(
+                                            timeInSecForIosWeb: 4,
+                                            msg: "กรุณาใส่สถานะการทำงาน !",
+                                            textColor: Colors.white,
+                                            backgroundColor: Colors.redAccent,
+                                            gravity: ToastGravity.CENTER);
+                                      }
+                                    }
+                                  },
+                                  child: const Text("ยืนยัน",
+                                      style: TextStyle(
+                                          fontSize: 20,
+                                          color: Color.fromARGB(
+                                              255, 254, 253, 253)),
+                                      textAlign: TextAlign.center),
+                                )),
+                            const SizedBox(
+                              width: 30,
+                            ),
+                            SizedBox(
+                                height: 40,
+                                width: 130,
+                                child: ElevatedButton(
+                                  style: ButtonStyle(
+                                      backgroundColor:
+                                          MaterialStateProperty.all<Color>(
+                                              const Color.fromARGB(
+                                                  255, 66, 66, 67)),
+                                      shape: MaterialStateProperty.all<
+                                              RoundedRectangleBorder>(
+                                          RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(15),
+                                        side: const BorderSide(width: 0.1),
+                                        //side: const BorderSide(width: 2),
+                                      ))),
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: const Text("ยกเลิก",
+                                      style: TextStyle(
+                                          fontSize: 20,
+                                          color: Color.fromARGB(
+                                              255, 254, 253, 253)),
+                                      textAlign: TextAlign.center),
+                                )),
+                          ],
+                        ),
+                        //      Container(
+                        //        child: Row(
+                        //         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        //         children: <Widget>[
+                        //           Padding(padding: EdgeInsets.all(16.16)),
+                        //           SizedBox(
+                        //             height: 45,
+                        //             width: 300,
+                        //             child: ElevatedButton.icon(
+                        //               onPressed: () => pickDate(context),
+                        //               label: Text(
+                        //                 getTextDate(),
+                        //                 style: const TextStyle(
+                        //                   fontSize: 18,
+                        //                   color: Colors.black,
+                        //                 ),
+                        //               ),
+                        //               style: ElevatedButton.styleFrom(
+                        //                   primary: Color.fromARGB(255, 250, 248, 248),
+                        //                   shape: RoundedRectangleBorder(
+                        //                       borderRadius: BorderRadius.circular(15))),
+                        //               icon: Icon(
+                        //                 Icons.calendar_month_rounded,
+                        //                 color: Colors.black,
+                        //                 size: 30,
+                        //               ),
+                        //             ),
+
+                        //        )],
+                        // ),
+                        //      ),
+                      ]),
                 ),
-                initialValue: widget.result['Note'],
-                onSaved: (value) {
-                  setState(() => widget.result['Note'] = value);
-                },
-                maxLength: 500,
-                maxLines: 5,
-              ),
-              const SizedBox(
-                height: 50,
-              ),
-
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(
-                      height: 40,
-                      width: 130,
-                      child: ElevatedButton(
-                        style: ButtonStyle(
-                            backgroundColor:
-                                MaterialStateProperty.all<Color>(const Color.fromARGB(255, 243, 33, 33)),
-                            shape: MaterialStateProperty.all<
-                                RoundedRectangleBorder>(RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(15),
-                            ))),
-                        onPressed: () async {
-                          if (updateTrack.currentState!.validate()) {
-                            updateTrack.currentState!.save();
-                            if (widget.result['Status'] != null) {
-                              showAlertDialog(context);
-                            } else {
-                              Fluttertoast.showToast(
-                                  timeInSecForIosWeb: 4,
-                                  msg: "กรุณาใส่สถานะการทำงาน !",
-                                  textColor: Colors.white,
-                                  backgroundColor: Colors.redAccent,
-                                  gravity: ToastGravity.CENTER);
-                            }
-                          }
-                        },
-                        child: const Text("ยืนยัน",
-                            style: TextStyle(fontSize: 20, color: Color.fromARGB(255, 254, 253, 253)),
-                            textAlign: TextAlign.center),
-                      )),
-                  const SizedBox(
-                    width: 30,
-                  ),
-                  SizedBox(
-                      height: 40,
-                      width: 130,
-                      child: ElevatedButton(
-                        style: ButtonStyle(
-                            backgroundColor:
-                                MaterialStateProperty.all<Color>(const Color.fromARGB(255, 66, 66, 67)),
-                            shape: MaterialStateProperty.all<
-                                RoundedRectangleBorder>(RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(15),
-                              side: const BorderSide(width: 0.1),
-                              //side: const BorderSide(width: 2),
-                            ))),
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        child: const Text("ยกเลิก",
-                            style: TextStyle(fontSize: 20, color: Color.fromARGB(255, 254, 253, 253)),
-                            textAlign: TextAlign.center),
-                      )),
-                ],
-              ),
-              //      Container(
-              //        child: Row(
-              //         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              //         children: <Widget>[
-              //           Padding(padding: EdgeInsets.all(16.16)),
-              //           SizedBox(
-              //             height: 45,
-              //             width: 300,
-              //             child: ElevatedButton.icon(
-              //               onPressed: () => pickDate(context),
-              //               label: Text(
-              //                 getTextDate(),
-              //                 style: const TextStyle(
-              //                   fontSize: 18,
-              //                   color: Colors.black,
-              //                 ),
-              //               ),
-              //               style: ElevatedButton.styleFrom(
-              //                   primary: Color.fromARGB(255, 250, 248, 248),
-              //                   shape: RoundedRectangleBorder(
-              //                       borderRadius: BorderRadius.circular(15))),
-              //               icon: Icon(
-              //                 Icons.calendar_month_rounded,
-              //                 color: Colors.black,
-              //                 size: 30,
-              //               ),
-              //             ),
-
-              //        )],
-              // ),
-              //      ),
-            ]),
-          ),
-        )
-          ),
+              )),
         ) //        )],
         // ),
         //      ),
