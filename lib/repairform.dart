@@ -3,6 +3,7 @@ import 'dart:html';
 
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:form_field_validator/form_field_validator.dart';
 import 'package:http/http.dart';
 import 'package:intl/intl.dart';
 import 'package:search_choices/search_choices.dart';
@@ -210,7 +211,7 @@ class _RepairListState extends State<RepairList> {
                     width: 250,
                     child: Column(
                       children: [
-                        const Text('รายระเอียดการซ่อม',
+                        const Text('รายละเอียดการซ่อม',
                             style: TextStyle(fontSize: 20)),
                         TextFormField(
                           decoration: const InputDecoration(
@@ -219,6 +220,8 @@ class _RepairListState extends State<RepairList> {
                             focusedBorder: OutlineInputBorder(),
                           ),
                           initialValue: track.Repairdetail,
+                           validator: RequiredValidator(
+                                      errorText: "กรุณากรอกรายละเอียดการซ่อม"),
                           onSaved: (value) {
                             setState(() => track.Repairdetail = value);
                           },
@@ -244,11 +247,13 @@ class _RepairListState extends State<RepairList> {
                               focusedBorder: OutlineInputBorder(),
                             ),
                             initialValue: track.Company_Repair,
+                            validator: RequiredValidator(
+                                      errorText: "กรุณาใส่ชื่อบริษัทที่รับซ่อม"),
                             onSaved: (value) {
                               setState(() => track.Company_Repair = value);
                             },
 
-                            maxLength: 500,
+                            maxLength: 100,
                             maxLines: 2),
 
                       ],
@@ -308,13 +313,14 @@ class _RepairListState extends State<RepairList> {
                                 Navigator.pop(context);
                               // }
                               print("posted");
+                              }
                             } else {
                               fToast.showToast(
                                   child: toast,
                                   gravity: ToastGravity.TOP_RIGHT);
                             }
                           }
-                          }},
+                          },
                           
 
                         child: const Text("ยืนยัน",
