@@ -29,8 +29,8 @@ class PieChart2State extends State {
                   children: <Widget>[
                     CircularPercentIndicator(
                       radius: 45,
-                      lineWidth: 4.0,
-                      percent: 0.30,
+                      lineWidth: 30.0,
+                      percent: 0.10,
                       center: const Text("10%"),
                       progressColor: Colors.red,
                       animation: true,
@@ -47,7 +47,7 @@ class PieChart2State extends State {
                     //     ),
                      CircularPercentIndicator(
                       radius: 45.0,
-                      lineWidth: 4.0,
+                      lineWidth: 30.0,
                       percent: 0.30,
                       center:  const Text("30%"),
                       progressColor: Colors.orange,
@@ -59,7 +59,7 @@ class PieChart2State extends State {
                     // ),
                     CircularPercentIndicator(
                       radius: 45.0,
-                      lineWidth: 4.0,
+                      lineWidth: 30.0,
                       percent: 0.60,
                       center: const Text("60%"),
                       progressColor: Colors.yellow,
@@ -71,9 +71,9 @@ class PieChart2State extends State {
                     // ),
                     CircularPercentIndicator(
                       radius: 45.0,
-                      lineWidth: 4.0,
-                      percent: 0.90,
-                      center: const Text("90%"),
+                      lineWidth: 30.0,
+                      percent: 0.50,
+                      center: const Text("50%"),
                       progressColor: Colors.green,
                       animation: true,
                       animationDuration: 900,
