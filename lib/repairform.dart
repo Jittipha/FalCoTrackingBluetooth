@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:html';
 
 import 'package:flutter/material.dart';
@@ -33,7 +34,7 @@ class _RepairListState extends State<RepairList> {
   String day = DateFormat("dd").format(DateTime.now());
   String month = DateFormat("MM").format(DateTime.now());
   String year = DateFormat("yyyy").format(DateTime.now());
-  
+
   // ignore: non_constant_identifier_names
   String Timerepair = DateFormat("HH:mm").format(DateTime.now());
 
@@ -157,60 +158,6 @@ class _RepairListState extends State<RepairList> {
                         .toList(),
                   ),
                   SizedBox(
-                    height: 10,
-                  ),
-                  Column(
-                    children: [
-                      const Text('สถานะการทำงาน',
-                          style: TextStyle(fontSize: 20)),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8.0),
-                              border: Border.all(),
-                              color: Colors.white,
-                            ),
-                            child: Center(
-                              child: DropdownButtonHideUnderline(
-                                child: DropdownButton<String>(
-                                  value: track.Status,
-                                  icon: const Icon(Icons.arrow_downward),
-                                  style: const TextStyle(
-                                      color: Color.fromARGB(255, 13, 13, 13)),
-                                  hint: const Text(
-                                    "   " + "เลือกสถานะการทำงานของเครื่อง",
-                                    style: TextStyle(color: Colors.black),
-                                  ),
-                                  onChanged: (String? newValue) {
-                                    setState(() {
-                                      track.Status = newValue!;
-                                    });
-                                  },
-                                  items: <String>[
-                                    'กำลังใช้งาน',
-                                    'กำลังซ่อม',
-                                  ].map<DropdownMenuItem<String>>(
-                                      (String status) {
-                                    return DropdownMenuItem<String>(
-                                      value: status,
-                                      // ignore: prefer_interpolation_to_compose_strings
-                                      child: Text('   ' + status),
-                                    );
-                                  }).toList(),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  SizedBox(
                     height: 50,
                   ),
                   Row(
@@ -229,8 +176,8 @@ class _RepairListState extends State<RepairList> {
                                   focusedBorder: OutlineInputBorder(),
                                 ),
                                 initialValue: track.Company_Repair,
-                               validator: RequiredValidator(
-                                      errorText: "กรุณาใส่ชื่อบริษัท!"),
+                                validator: RequiredValidator(
+                                    errorText: "กรุณาใส่ชื่อบริษัท!"),
                                 onSaved: (value) {
                                   setState(() => track.Company_Repair = value);
                                 },
@@ -256,7 +203,7 @@ class _RepairListState extends State<RepairList> {
                               ),
                               initialValue: track.Repairdetail,
                               validator: RequiredValidator(
-                                      errorText: "กรุณาใส่รายละเอียด!"),
+                                  errorText: "กรุณาใส่รายละเอียด!"),
                               onSaved: (value) {
                                 setState(() => track.Repairdetail = value);
                               },
@@ -268,12 +215,9 @@ class _RepairListState extends State<RepairList> {
                       ),
                     ],
                   ),
-
-
                   const SizedBox(
                     height: 50,
                   ),
-
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -294,41 +238,62 @@ class _RepairListState extends State<RepairList> {
                               if (_formKey.currentState!.validate()) {
                                 _formKey.currentState!.save();
                                 // ignore: non_constant_identifier_names
-                                if (track.Status != null &&
-                                    selectedValueSingleDialog != null) {
-                                  print(selectedValueSingleDialog);
-                                  print(track.Status);
-                                  print(track.Repairdetail);
-                                  print(track.Company_Repair);
-
-                                  var res = await http.post(
-                                      Uri.parse(
-                                          'http://192.168.1.192:3000/history'),
-                                      body: {
-                                        'Track_ID': selectedValueSingleDialog,
-                                        'Day': day,
-                                        'Month': month,
-                                        'Year': year,
-                                        'Time': Timerepair,
-                                        'Repair_Description':
-                                            track.Repairdetail,
-                                        'Status': track.Status,
-                                        'Company_Repair': track.Company_Repair,
-                                      });
-                                  var data = res.body;
-                                  if (res.statusCode == 200) {
-                                    print("true");
-                                    Fluttertoast.showToast(
-                                        msg: "เพิ่มอุปกรณ์แล้ว!",
+                                if (selectedValueSingleDialog != null) {
+                                  int? count;
+                                  String? status;
+                                  _allresult.forEach(((element) => {
+                                        if (element['Track_ID'] ==
+                                            selectedValueSingleDialog)
+                                          {
+                                            count = element["Count_Improve"],
+                                            status = element["Status"],
+                                          }
+                                      }));
+                                  if (status == "กำลังซ่อม") {
+                                    Fluttertoast.showToast(                     
+                                        msg: "อยู่ระหว่างการซ่อมแซมอยู่!",
                                         gravity: ToastGravity.CENTER);
-                                    // ignore: use_build_context_synchronously
-                                    Navigator.pop(context);
-                                    // }
-                                    print("posted");
                                   } else {
-                                    fToast.showToast(
-                                        child: toast,
-                                        gravity: ToastGravity.TOP_RIGHT);
+                                    // int C = int.parse(count);
+                                    count = count! + 1;
+
+                                    print(selectedValueSingleDialog);
+
+                                    print(track.Repairdetail);
+                                    print(track.Company_Repair);
+                                    print(count);
+
+                                    var res = await http.post(
+                                        Uri.parse(
+                                            'http://192.168.1.192:3000/history'),
+                                        body: {
+                                          'Track_ID': selectedValueSingleDialog,
+                                          'Status': "กำลังซ่อม",
+                                          'Day': day,
+                                          'Month': month,
+                                          'Year': year,
+                                          'Time': Timerepair,
+                                          'Count_Improve': count.toString(),
+                                          'Repair_Description':
+                                              track.Repairdetail,
+                                          'Company_Repair':
+                                              track.Company_Repair,
+                                        });
+                                    var data = res.body;
+                                    if (res.statusCode == 200) {
+                                      print("true");
+                                      Fluttertoast.showToast(
+                                          msg: "แจ้งซ่อมสำเร็จ!",
+                                          gravity: ToastGravity.CENTER);
+                                      // ignore: use_build_context_synchronously
+                                      Navigator.pop(context);
+                                      // }
+                                      print("posted");
+                                    } else {
+                                      fToast.showToast(
+                                          child: toast,
+                                          gravity: ToastGravity.TOP_RIGHT);
+                                    }
                                   }
                                 }
                               }
@@ -371,7 +336,6 @@ class _RepairListState extends State<RepairList> {
                 ],
               ),
             ),
-
           ),
         ),
       ),
