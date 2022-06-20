@@ -134,7 +134,7 @@ class _CreateTrackState extends State<CreateTrack> {
                           validator: RequiredValidator(
                               errorText: "กรุณากรอกรหัสเครื่อง"),
                           onSaved: (value) {
-                            setState(() => track.Track_ID = value);
+                            setState(() => track.Track_ID = value?.toUpperCase());
                           },
                         ),
                       ),
@@ -426,77 +426,43 @@ class _CreateTrackState extends State<CreateTrack> {
                         SizedBox(
                           width: MediaQuery.of(context).size.width * 0.2,
                         ),
-                        Expanded(
-                          child: Text(
-                            "สถานะการทำงาน",
-                            style: TextStyle(fontSize: 15),
-                          ),
-                        ),
+                  //       Expanded(
+                  //         child: Text(
+                  //           "สถานะการทำงาน",
+                  //           style: TextStyle(fontSize: 15),
+                  //         ),
+                  //       ),
                       ]),
                   Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: <Widget>[
-                        const Padding(padding: EdgeInsets.all(16.16)),
-                        Expanded(
-                          flex: 1,
-                          child: ElevatedButton.icon(
-                            onPressed: () => pickDate(context),
-                            label: Text(
-                              getTextDate(),
-                              style: const TextStyle(
-                                fontSize: 18,
-                                color: Colors.black,
+                        const Padding(padding: EdgeInsets.fromLTRB(32, 0, 0, 0)),
+                        Container(  width: 250,
+                          child: Expanded(
+                            flex: 1,
+                            child: ElevatedButton.icon(
+                              onPressed: () => pickDate(context),
+                              label: Text(
+                                getTextDate(),
+                                style: const TextStyle(
+                                  fontSize: 18,
+                                  color: Colors.black,
+                                ),
                               ),
-                            ),
-                            style: ElevatedButton.styleFrom(
-                                padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
-                                primary:
-                                    const Color.fromARGB(255, 250, 248, 248),
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(15))),
-                            icon: const Icon(
-                              Icons.calendar_month_rounded,
-                              color: Colors.black,
-                              size: 30,
+                              style: ElevatedButton.styleFrom(
+                                  padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
+                                  primary:
+                                      const Color.fromARGB(255, 250, 248, 248),
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(15))),
+                              icon: const Icon(
+                                Icons.calendar_month_rounded,
+                                color: Colors.black,
+                                size: 30,
+                              ),
                             ),
                           ),
                         ),
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.2,
-                        ),
-                        Expanded(
-                            flex: 1,
-                            child: Container(
-                              decoration: BoxDecoration(
-                                  border: Border.all(),
-                                  color: Color.fromARGB(255, 255, 255, 255)),
-                              child: DropdownButtonHideUnderline(
-                                child: DropdownButton(
-                                  // Initial Value
-                                  value: track.Status,
-                                  // Down Arrow Icon
-                                  icon: const Icon(Icons.keyboard_arrow_down),
-                                  hint: Text(
-                                    "   " + "เลือกสถานะการทำงานของเครื่อง",
-                                    style: TextStyle(color: Colors.black),
-                                  ),
-                                  // Array list of items
-                                  items: status.map((String status) {
-                                    return DropdownMenuItem(
-                                      value: status,
-                                      child: Text('   ' + status),
-                                    );
-                                  }).toList(),
-                                  // After selecting the desired option,it will
-                                  // change button value to selected value
-                                  onChanged: (String? newValue) {
-                                    setState(() {
-                                      track.Status = newValue!;
-                                    });
-                                  },
-                                ),
-                              ),
-                            ))
                       ]),
                   SizedBox(
                     height: 20,
@@ -517,7 +483,7 @@ class _CreateTrackState extends State<CreateTrack> {
                           if (_formKey.currentState!.validate()) {
                             _formKey.currentState!.save();
                             // ignore: non_constant_identifier_names
-                            if (track.Status != null) {
+                             
                               int Count_Improve = 0;
                               print(track.Track_ID);
                               print(track.Brand);
@@ -550,7 +516,7 @@ class _CreateTrackState extends State<CreateTrack> {
                                     'Work_for': track.Work_for,
                                     'Note': track.Note ?? '',
                                     'Count_Improve': Count_Improve.toString(),
-                                    'Status': track.Status,
+                                    'Status': "กำลังใช้งาน",
                                   });
                               // ignore: unused_local_variable
                               var data = res.body;
@@ -562,11 +528,7 @@ class _CreateTrackState extends State<CreateTrack> {
                                 // ignore: use_build_context_synchronously
                                 Navigator.pop(context);
                               }
-                            } else {
-                              fToast.showToast(
-                                  child: toast,
-                                  gravity: ToastGravity.TOP_RIGHT);
-                            }
+                           
                           }
                         },
                         child: const Text("ยืนยัน",
@@ -584,29 +546,4 @@ class _CreateTrackState extends State<CreateTrack> {
       )),
     );
   }
-
-  Widget toast = Container(
-    padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
-    decoration: BoxDecoration(
-      borderRadius: BorderRadius.circular(25.0),
-      color: Colors.redAccent,
-    ),
-    child: Row(
-      mainAxisSize: MainAxisSize.min,
-      children: const [
-        Icon(
-          Icons.cancel_outlined,
-          color: Colors.white,
-          size: 25,
-        ),
-        SizedBox(
-          width: 12.0,
-        ),
-        Text(
-          "กรุณาใส่สถานะการทำงาน !",
-          style: TextStyle(color: Colors.white),
-        ),
-      ],
-    ),
-  );
 }
