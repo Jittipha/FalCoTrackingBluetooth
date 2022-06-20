@@ -1,6 +1,8 @@
-import 'package:fl_chart/fl_chart.dart';
+
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
+import 'package:trackingbluetooth/RoomEquipment.dart';
+
 
 class PieChartSample2 extends StatefulWidget {
   const PieChartSample2({Key? key}) : super(key: key);
@@ -14,9 +16,12 @@ class PieChart2State extends State {
 
   @override
   Widget build(BuildContext context) {
+    RoomEquipment();
     return Container(
+      
       child: Row(
         children: [
+          RoomEquipment(),
           AspectRatio(
             aspectRatio: 1.3,
             child: Row(
@@ -36,15 +41,12 @@ class PieChart2State extends State {
                       animation: true,
                       animationDuration: 900,
                     ),
-                    // new Padding(
-                    //   padding: EdgeInsets.symmetric(horizontal: 10.0),
-                    // ),
+                    
                     const SizedBox(
-                      height: 4,
+                      height: 20,
+                      width: 30,
                     ),
-                    // new Padding(
-                    //       padding: EdgeInsets.symmetric(horizontal: 10.0),
-                    //     ),
+                   
                      CircularPercentIndicator(
                       radius: 45.0,
                       lineWidth: 30.0,
@@ -54,9 +56,10 @@ class PieChart2State extends State {
                       animation: true,
                       animationDuration: 900,
                     ),
-                    // new Padding(
-                    //   padding: EdgeInsets.symmetric(horizontal: 10.0),
-                    // ),
+                      const SizedBox(
+                      height: 20,
+                      width: 30,
+                    ),
                     CircularPercentIndicator(
                       radius: 45.0,
                       lineWidth: 30.0,
@@ -66,9 +69,10 @@ class PieChart2State extends State {
                       animation: true,
                       animationDuration: 900,
                     ),
-                    // new Padding(
-                    //   padding: EdgeInsets.symmetric(horizontal: 10.0),
-                    // ),
+                      const SizedBox(
+                      height: 20,
+                      width: 30,
+                    ),
                     CircularPercentIndicator(
                       radius: 45.0,
                       lineWidth: 30.0,
@@ -80,9 +84,10 @@ class PieChart2State extends State {
                     )
                   ],
                 ),
-                const SizedBox(
-                  width: 28,
-                ),
+                  const SizedBox(
+                      height: 20,
+                      width: 30,
+                    ),
               ],
             ),
           ),

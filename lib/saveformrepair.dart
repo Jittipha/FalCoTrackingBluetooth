@@ -1,3 +1,6 @@
+import 'package:flutter/material.dart';
+
+import 'Background/Bg-detail copy.dart';
 import 'dart:convert';
 import 'dart:html';
 
@@ -11,14 +14,14 @@ import 'package:trackingbluetooth/Background/Bg-detail%20copy.dart';
 import 'package:trackingbluetooth/model/track.dart';
 import 'package:http/http.dart ' as http;
 
-class RepairList extends StatefulWidget {
-  const RepairList({Key? key}) : super(key: key);
+class saveformrepair extends StatefulWidget {
+  saveformrepair({Key? key}) : super(key: key);
 
   @override
-  State<RepairList> createState() => _RepairListState();
+  State<saveformrepair> createState() => _saveformrepairState();
 }
 
-class _RepairListState extends State<RepairList> {
+class _saveformrepairState extends State<saveformrepair> {
   late FToast fToast;
   bool asTabs = false;
   Track track = Track();
@@ -90,7 +93,7 @@ class _RepairListState extends State<RepairList> {
         backgroundColor: const Color.fromARGB(255, 18, 95, 116),
         title: const Center(
           child: Text(
-            "แจ้งซ่อม",
+            "ยืนยันการซ่อม",
             style: TextStyle(fontSize: 30),
           ),
         ),
@@ -161,7 +164,7 @@ class _RepairListState extends State<RepairList> {
                   ),
                   Column(
                     children: [
-                      const Text('สถานะการทำงาน',
+                      const Text('เลือกสถานะการซ่อม',
                           style: TextStyle(fontSize: 20)),
                       const SizedBox(
                         height: 10,
@@ -183,7 +186,7 @@ class _RepairListState extends State<RepairList> {
                                   style: const TextStyle(
                                       color: Color.fromARGB(255, 13, 13, 13)),
                                   hint: const Text(
-                                    "   " + "เลือกสถานะการทำงานของเครื่อง",
+                                    "   " + "เลือกสถานะการซ่อม",
                                     style: TextStyle(color: Colors.black),
                                   ),
                                   onChanged: (String? newValue) {
@@ -192,8 +195,7 @@ class _RepairListState extends State<RepairList> {
                                     });
                                   },
                                   items: <String>[
-                                    
-                                    'กำลังซ่อม',
+                                    'ซ่อมสำเร็จ',
                                   ].map<DropdownMenuItem<String>>(
                                       (String status) {
                                     return DropdownMenuItem<String>(
@@ -216,7 +218,7 @@ class _RepairListState extends State<RepairList> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      SizedBox(
+                      Container(
                         width: 250,
                         child: Column(
                           children: [
@@ -229,8 +231,6 @@ class _RepairListState extends State<RepairList> {
                                   focusedBorder: OutlineInputBorder(),
                                 ),
                                 initialValue: track.Company_Repair,
-                               validator: RequiredValidator(
-                                      errorText: "กรุณาใส่ชื่อบริษัท!"),
                                 onSaved: (value) {
                                   setState(() => track.Company_Repair = value);
                                 },
@@ -239,14 +239,14 @@ class _RepairListState extends State<RepairList> {
                           ],
                         ),
                       ),
-                      const SizedBox(
+                      SizedBox(
                         width: 20,
                       ),
-                      SizedBox(
+                      Container(
                         width: 250,
                         child: Column(
                           children: [
-                            const Text('รายละเอียดการซ่อม',
+                            const Text('รายระเอียดการซ่อม',
                                 style: TextStyle(fontSize: 20)),
                             TextFormField(
                               decoration: const InputDecoration(
@@ -255,8 +255,6 @@ class _RepairListState extends State<RepairList> {
                                 focusedBorder: OutlineInputBorder(),
                               ),
                               initialValue: track.Repairdetail,
-                              validator: RequiredValidator(
-                                      errorText: "กรุณาใส่รายละเอียด!"),
                               onSaved: (value) {
                                 setState(() => track.Repairdetail = value);
                               },
@@ -270,7 +268,7 @@ class _RepairListState extends State<RepairList> {
                   ),
 
 
-                  const SizedBox(
+                  SizedBox(
                     height: 50,
                   ),
 
@@ -279,8 +277,9 @@ class _RepairListState extends State<RepairList> {
                     children: [
                       SizedBox(
                           height: 40,
-                          width: 130,
+                          width: 160,
                           child: ElevatedButton(
+                            
                             style: ButtonStyle(
                                 backgroundColor:
                                     MaterialStateProperty.all<Color>(
@@ -333,7 +332,7 @@ class _RepairListState extends State<RepairList> {
                                 }
                               }
                             },
-                            child: const Text("ยืนยัน",
+                            child: const Text("ยืนยันการซ่อม",
                                 style: TextStyle(
                                     fontSize: 20,
                                     color: Color.fromARGB(255, 254, 253, 253)),
@@ -342,30 +341,7 @@ class _RepairListState extends State<RepairList> {
                       const SizedBox(
                         width: 30,
                       ),
-                      SizedBox(
-                          height: 40,
-                          width: 130,
-                          child: ElevatedButton(
-                            style: ButtonStyle(
-                                backgroundColor:
-                                    MaterialStateProperty.all<Color>(
-                                        const Color.fromARGB(255, 66, 66, 67)),
-                                shape: MaterialStateProperty.all<
-                                        RoundedRectangleBorder>(
-                                    RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(15),
-                                  side: const BorderSide(width: 0.1),
-                                  //side: const BorderSide(width: 2),
-                                ))),
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            child: const Text("ยกเลิก",
-                                style: TextStyle(
-                                    fontSize: 20,
-                                    color: Color.fromARGB(255, 254, 253, 253)),
-                                textAlign: TextAlign.center),
-                          )),
+                      
                     ],
                   ),
                 ],
