@@ -106,6 +106,7 @@ class _CreateTrackState extends State<CreateTrack> {
                             style: TextStyle(fontSize: 15),
                           ),
                         ),
+                        
                         SizedBox(
                           width: MediaQuery.of(context).size.width * 0.2,
                         ),

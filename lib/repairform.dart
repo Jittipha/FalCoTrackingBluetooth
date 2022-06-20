@@ -216,7 +216,7 @@ class _RepairListState extends State<RepairList> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Container(
+                      SizedBox(
                         width: 250,
                         child: Column(
                           children: [
@@ -229,6 +229,8 @@ class _RepairListState extends State<RepairList> {
                                   focusedBorder: OutlineInputBorder(),
                                 ),
                                 initialValue: track.Company_Repair,
+                               validator: RequiredValidator(
+                                      errorText: "กรุณาใส่ชื่อบริษัท!"),
                                 onSaved: (value) {
                                   setState(() => track.Company_Repair = value);
                                 },
@@ -237,14 +239,14 @@ class _RepairListState extends State<RepairList> {
                           ],
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 20,
                       ),
-                      Container(
+                      SizedBox(
                         width: 250,
                         child: Column(
                           children: [
-                            const Text('รายระเอียดการซ่อม',
+                            const Text('รายละเอียดการซ่อม',
                                 style: TextStyle(fontSize: 20)),
                             TextFormField(
                               decoration: const InputDecoration(
@@ -253,6 +255,8 @@ class _RepairListState extends State<RepairList> {
                                 focusedBorder: OutlineInputBorder(),
                               ),
                               initialValue: track.Repairdetail,
+                              validator: RequiredValidator(
+                                      errorText: "กรุณาใส่รายละเอียด!"),
                               onSaved: (value) {
                                 setState(() => track.Repairdetail = value);
                               },
@@ -266,7 +270,7 @@ class _RepairListState extends State<RepairList> {
                   ),
 
 
-                  SizedBox(
+                  const SizedBox(
                     height: 50,
                   ),
 
