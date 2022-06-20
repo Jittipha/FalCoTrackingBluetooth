@@ -1,6 +1,9 @@
+// ignore_for_file: deprecated_member_use
+
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:trackingbluetooth/Background/Bg-detail.dart';
 import 'package:http/http.dart ' as http;
 import 'package:trackingbluetooth/Detail.dart';
@@ -132,45 +135,10 @@ class _repairhistoryState extends State<repairhistory> {
                                         style: const TextStyle(
                                             color: Colors.black, fontSize: 18),
                                       ),
-                                      trailing: Row(
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: <Widget>[
-                                            Align(
-                                              alignment: Alignment.center,
-                                              child: GestureDetector(
-                                                  onTap: () {
-                                                    Navigator.push(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                          builder: (context) =>
+                                      trailing: trailng(
+                                          _allresult[index]["Status"],
+                                          _allresult[index]),
 
-                                                             saveformrepair()
-                                                              ),
-                                                    );
-                                                  },
-                                                  
-                                                  child: Container(
-                                                    decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              8.0),
-                                                      // border: Border.all(),
-                                                      color: Color.fromARGB(255, 9, 163, 158),
-                                                    ),
-                                                    height: 30,
-                                                    // width: 50,
-                                                    child: const Text(
-
-                                                      "ยืนยันการซ่อม",
-                                                      style: TextStyle(
-                                                          color: Color.fromARGB(255, 16, 16, 16),
-                                                          fontSize: 18),
-                                                    ),
-                                                  )),
-                                            ),
-                                          ]),
-
-                                      //
                                       onTap: () {
                                         Navigator.push(
                                           context,
@@ -196,5 +164,78 @@ class _repairhistoryState extends State<repairhistory> {
   String textfordate(String day, month, year) {
     String Date = "$day/$month/$year";
     return Date;
+  }
+
+  Widget trailng(String Status, Map<String, dynamic> result) {
+    if (Status != 'กำลังซ่อม') {
+      return const Text("");
+    } else {
+      return Container(
+          child: FlatButton(
+        child: Text('ยินยัน'),
+        color: Colors.greenAccent,
+        textColor: Colors.white,
+        onPressed: () {
+          showAlertDialog(context, result);
+        },
+      ));
+    }
+  }
+
+  showAlertDialog(BuildContext context, result) {
+    // set up the button
+    // ignore: deprecated_member_use
+    Widget okButton = FlatButton(
+        child: const Text("OK"),
+        onPressed: () async {
+          String day = DateFormat("dd").format(DateTime.now());
+          String month = DateFormat("MM").format(DateTime.now());
+          String year = DateFormat("yyyy").format(DateTime.now());
+          String Timerepair = DateFormat("HH:mm").format(DateTime.now());
+          var response = await http
+              .post(Uri.parse('http://192.168.1.192:3000/history'), body: {
+            'Track_ID': result["Track_ID"],
+            'Day': day,
+            'Month': month,
+            'Year': year,
+            'Time': Timerepair,
+            'Repair_Description': result["Repair_Description"],
+            'Status': "กำลังใช้งาน",
+            'Company_Repair': result["Company_Repair"],
+          });
+          if (response.statusCode == 200) {
+            Navigator.pop(context);
+            setState(() {
+              Getdata();
+            });
+          } else {
+            return print("Change Failed");
+          }
+
+          setState(() {});
+        });
+
+    // ignore: deprecated_member_use
+    Widget cancleButton = FlatButton(
+      child: const Text("CANCLE"),
+      onPressed: () {
+        Navigator.pop(context, 'Cancel');
+      },
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: const Text("อุปกรณ์นี้พร้อมใช้งานแล้ว!"),
+      content: const Text("คุณแน่ใจหรือป่าว?"),
+      actions: [cancleButton, okButton],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
   }
 }

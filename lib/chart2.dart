@@ -41,15 +41,12 @@ class PieChart2State extends State {
                       animation: true,
                       animationDuration: 900,
                     ),
-                    // new Padding(
-                    //   padding: EdgeInsets.symmetric(horizontal: 10.0),
-                    // ),
+                    
                     const SizedBox(
-                      height: 4,
+                      height: 20,
+                      width: 30,
                     ),
-                    // new Padding(
-                    //       padding: EdgeInsets.symmetric(horizontal: 10.0),
-                    //     ),
+                   
                      CircularPercentIndicator(
                       radius: 45.0,
                       lineWidth: 30.0,
@@ -59,9 +56,10 @@ class PieChart2State extends State {
                       animation: true,
                       animationDuration: 900,
                     ),
-                    // new Padding(
-                    //   padding: EdgeInsets.symmetric(horizontal: 10.0),
-                    // ),
+                      const SizedBox(
+                      height: 20,
+                      width: 30,
+                    ),
                     CircularPercentIndicator(
                       radius: 45.0,
                       lineWidth: 30.0,
@@ -71,9 +69,10 @@ class PieChart2State extends State {
                       animation: true,
                       animationDuration: 900,
                     ),
-                    // new Padding(
-                    //   padding: EdgeInsets.symmetric(horizontal: 10.0),
-                    // ),
+                      const SizedBox(
+                      height: 20,
+                      width: 30,
+                    ),
                     CircularPercentIndicator(
                       radius: 45.0,
                       lineWidth: 30.0,
@@ -85,9 +84,10 @@ class PieChart2State extends State {
                     )
                   ],
                 ),
-                const SizedBox(
-                  width: 28,
-                ),
+                  const SizedBox(
+                      height: 20,
+                      width: 30,
+                    ),
               ],
             ),
           ),
