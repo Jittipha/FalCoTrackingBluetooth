@@ -192,7 +192,7 @@ class _ListdataState extends State<Listdata> {
                                               MaterialPageRoute(
                                                   builder: (context) =>
 
-                                                      repairhistory(trackid:  _resultList[index]['Track_ID'],)),
+                                                      repairhistory(trackid:  _resultList[index]['Track_ID'], Count_Improve : _resultList[index]["Count_Improve"])),
                                             );
                                           },
                                           

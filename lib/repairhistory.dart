@@ -12,8 +12,10 @@ import 'package:trackingbluetooth/EditTrack.dart';
 import 'package:trackingbluetooth/saveformrepair.dart';
 
 class repairhistory extends StatefulWidget {
-  repairhistory({Key? key, required this.trackid}) : super(key: key);
+  repairhistory({Key? key, required this.trackid, required this.Count_Improve})
+      : super(key: key);
   String? trackid;
+  int? Count_Improve;
 
   @override
   State<repairhistory> createState() => _repairhistoryState();
@@ -22,6 +24,16 @@ class repairhistory extends StatefulWidget {
 class _repairhistoryState extends State<repairhistory> {
   //ลิสที่ค้นหาได้
   List _allresult = [];
+  bool _alreadyconfirm = false;
+  bool _checkfirstlist = false;
+
+  void updateconfirm() {
+    _alreadyconfirm = true;
+  }
+
+  void updatecheckfirstlist() {
+    _checkfirstlist = true;
+  }
 
   @override
   void initState() {
@@ -51,7 +63,7 @@ class _repairhistoryState extends State<repairhistory> {
             backgroundColor: const Color.fromARGB(255, 18, 95, 116),
             title: const Center(
               child: Text(
-                "ประวัติการซ่อม/ยืนยันการซ่อม",
+                "ประวัติการซ่อม / ยืนยันการซ่อม",
                 style: TextStyle(fontSize: 30),
               ),
             ),
@@ -124,7 +136,9 @@ class _repairhistoryState extends State<repairhistory> {
                                             textfordate(
                                                 _allresult[index]["Day"],
                                                 _allresult[index]["Month"],
-                                                _allresult[index]["Year"]),
+                                                _allresult[index]["Year"],
+                                                _allresult[index]["Time"]),
+
                                         style: const TextStyle(
                                             color: Colors.black, fontSize: 18),
                                       ),
@@ -137,7 +151,8 @@ class _repairhistoryState extends State<repairhistory> {
                                       ),
                                       trailing: trailng(
                                           _allresult[index]["Status"],
-                                          _allresult[index]),
+                                          _allresult[index],
+                                          index),
 
                                       onTap: () {
                                         Navigator.push(
@@ -161,24 +176,38 @@ class _repairhistoryState extends State<repairhistory> {
         ));
   }
 
-  String textfordate(String day, month, year) {
-    String Date = "$day/$month/$year";
+  String textfordate(String day, month, year, time) {
+    String Date = "$day/$month/$year  |  $time น.";
     return Date;
   }
 
-  Widget trailng(String Status, Map<String, dynamic> result) {
+  Widget trailng(String Status, Map<String, dynamic> result, int index) {
+    print(_alreadyconfirm);
     if (Status != 'กำลังซ่อม') {
+      if (index == 0) {
+        updatecheckfirstlist();
+      }
       return const Text("");
     } else {
-      return Container(
-          child: FlatButton(
-        child: Text('ยินยัน'),
-        color: Colors.greenAccent,
-        textColor: Colors.white,
-        onPressed: () {
-          showAlertDialog(context, result);
-        },
-      ));
+      if (_alreadyconfirm == false && _checkfirstlist == false) {
+        updateconfirm();
+
+        return Container(
+            child: FlatButton(
+          // ignore: sort_child_properties_last
+          child: const Text('ยินยันการซ่อม'),
+          color: Colors.greenAccent,
+          textColor: Colors.white,
+          onPressed: () {
+            showAlertDialog(context, result);
+          },
+        ));
+      } else {
+        return const Text(
+          "กดใช้งานแล้ว",
+          style: TextStyle(fontSize: 16, color: Colors.blueGrey),
+        );
+      }
     }
   }
 
@@ -202,6 +231,7 @@ class _repairhistoryState extends State<repairhistory> {
             'Repair_Description': result["Repair_Description"],
             'Status': "กำลังใช้งาน",
             'Company_Repair': result["Company_Repair"],
+            'Count_Improve': widget.Count_Improve.toString()
           });
           if (response.statusCode == 200) {
             Navigator.pop(context);
