@@ -106,7 +106,6 @@ class _CreateTrackState extends State<CreateTrack> {
                             style: TextStyle(fontSize: 15),
                           ),
                         ),
-                        
                         SizedBox(
                           width: MediaQuery.of(context).size.width * 0.2,
                         ),
@@ -134,7 +133,8 @@ class _CreateTrackState extends State<CreateTrack> {
                           validator: RequiredValidator(
                               errorText: "กรุณากรอกรหัสเครื่อง"),
                           onSaved: (value) {
-                            setState(() => track.Track_ID = value?.toUpperCase());
+                            setState(
+                                () => track.Track_ID = value?.toUpperCase());
                           },
                         ),
                       ),
@@ -405,8 +405,6 @@ class _CreateTrackState extends State<CreateTrack> {
                             maxLines: 3,
                             maxLength: 500,
                             initialValue: track.Note,
-                            validator: RequiredValidator(
-                                errorText: "กรุณาระบุหมายเหตุ"),
                             onSaved: (value) {
                               setState(() => track.Note = value);
                             },
@@ -426,44 +424,43 @@ class _CreateTrackState extends State<CreateTrack> {
                         SizedBox(
                           width: MediaQuery.of(context).size.width * 0.2,
                         ),
-                  //       Expanded(
-                  //         child: Text(
-                  //           "สถานะการทำงาน",
-                  //           style: TextStyle(fontSize: 15),
-                  //         ),
-                  //       ),
+                        //       Expanded(
+                        //         child: Text(
+                        //           "สถานะการทำงาน",
+                        //           style: TextStyle(fontSize: 15),
+                        //         ),
+                        //       ),
                       ]),
-                  Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: <Widget>[
-                        const Padding(padding: EdgeInsets.fromLTRB(32, 0, 0, 0)),
-                        Container(  width: 250,
-                          child: Expanded(
-                            flex: 1,
-                            child: ElevatedButton.icon(
-                              onPressed: () => pickDate(context),
-                              label: Text(
-                                getTextDate(),
-                                style: const TextStyle(
-                                  fontSize: 18,
-                                  color: Colors.black,
-                                ),
-                              ),
-                              style: ElevatedButton.styleFrom(
-                                  padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
-                                  primary:
-                                      const Color.fromARGB(255, 250, 248, 248),
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(15))),
-                              icon: const Icon(
-                                Icons.calendar_month_rounded,
-                                color: Colors.black,
-                                size: 30,
-                              ),
+                  Row(mainAxisAlignment: MainAxisAlignment.start, children: <
+                      Widget>[
+                    const Padding(padding: EdgeInsets.fromLTRB(32, 0, 0, 0)),
+                    Container(
+                      width: 250,
+                      child: Expanded(
+                        flex: 1,
+                        child: ElevatedButton.icon(
+                          onPressed: () => pickDate(context),
+                          label: Text(
+                            getTextDate(),
+                            style: const TextStyle(
+                              fontSize: 18,
+                              color: Colors.black,
                             ),
                           ),
+                          style: ElevatedButton.styleFrom(
+                              padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
+                              primary: const Color.fromARGB(255, 250, 248, 248),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15))),
+                          icon: const Icon(
+                            Icons.calendar_month_rounded,
+                            color: Colors.black,
+                            size: 30,
+                          ),
                         ),
-                      ]),
+                      ),
+                    ),
+                  ]),
                   SizedBox(
                     height: 20,
                   ),
@@ -483,52 +480,49 @@ class _CreateTrackState extends State<CreateTrack> {
                           if (_formKey.currentState!.validate()) {
                             _formKey.currentState!.save();
                             // ignore: non_constant_identifier_names
-                             
-                              int Count_Improve = 0;
-                              print(track.Track_ID);
-                              print(track.Brand);
-                              print(track.Generation);
-                              print(track.Menufacturer);
-                              print(track.Size);
-                              print(track.Working_Condition);
-                              print(track.Location);
-                              print(track.Age_of_use);
-                              print(track.Work_for);
-                              print(track.Start_Enable_Date);
-                              print(track.Note);
-                              print(track.Status);
 
-                              print(Count_Improve);
-                              var res = await http.post(
-                                  Uri.parse('http://192.168.1.192:3000/track'),
-                                  body: {
-                                    'Track_ID': track.Track_ID,
-                                    'Brand': track.Brand,
-                                    'Size': track.Size,
-                                    'Location': track.Location,
-                                    'Start_Enable_Date':
-                                        track.Start_Enable_Date,
-                                    'Working_Condition':
-                                        track.Working_Condition,
-                                    'Generation': track.Generation,
-                                    'Menufacturer': track.Menufacturer,
-                                    'Age_of_use': track.Age_of_use.toString(),
-                                    'Work_for': track.Work_for,
-                                    'Note': track.Note ?? '',
-                                    'Count_Improve': Count_Improve.toString(),
-                                    'Status': "กำลังใช้งาน",
-                                  });
-                              // ignore: unused_local_variable
-                              var data = res.body;
-                              if (res.statusCode == 200) {
-                                print("true");
-                                Fluttertoast.showToast(
-                                    msg: "เพิ่มอุปกรณ์แล้ว!",
-                                    gravity: ToastGravity.CENTER);
-                                // ignore: use_build_context_synchronously
-                                Navigator.pop(context);
-                              }
-                           
+                            int Count_Improve = 0;
+                            print(track.Track_ID);
+                            print(track.Brand);
+                            print(track.Generation);
+                            print(track.Menufacturer);
+                            print(track.Size);
+                            print(track.Working_Condition);
+                            print(track.Location);
+                            print(track.Age_of_use);
+                            print(track.Work_for);
+                            print(track.Start_Enable_Date);
+                            print(track.Note);
+                            print(track.Status);
+
+                            print(Count_Improve);
+                            var res = await http.post(
+                                Uri.parse('http://192.168.1.192:3000/track'),
+                                body: {
+                                  'Track_ID': track.Track_ID,
+                                  'Brand': track.Brand,
+                                  'Size': track.Size,
+                                  'Location': track.Location,
+                                  'Start_Enable_Date': track.Start_Enable_Date,
+                                  'Working_Condition': track.Working_Condition,
+                                  'Generation': track.Generation,
+                                  'Menufacturer': track.Menufacturer,
+                                  'Age_of_use': track.Age_of_use.toString(),
+                                  'Work_for': track.Work_for,
+                                  'Note': track.Note ?? '',
+                                  'Count_Improve': Count_Improve.toString(),
+                                  'Status': "กำลังใช้งาน",
+                                });
+                            // ignore: unused_local_variable
+                            var data = res.body;
+                            if (res.statusCode == 200) {
+                              print("true");
+                              Fluttertoast.showToast(
+                                  msg: "เพิ่มอุปกรณ์แล้ว!",
+                                  gravity: ToastGravity.CENTER);
+                              // ignore: use_build_context_synchronously
+                              Navigator.pop(context);
+                            }
                           }
                         },
                         child: const Text("ยืนยัน",
