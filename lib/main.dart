@@ -9,6 +9,7 @@ import 'package:trackingbluetooth/CreateTrack.dart';
 import 'package:trackingbluetooth/EditTrack.dart';
 
 import 'package:trackingbluetooth/MainMenu.dart';
+import 'package:trackingbluetooth/RoomEquipment.dart';
 import 'package:trackingbluetooth/chart.dart';
 import 'package:trackingbluetooth/chart2.dart';
 
@@ -36,7 +37,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const PieChartSample2(),
+      home:  mainmenu(),
     );
   }
 }

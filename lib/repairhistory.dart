@@ -6,6 +6,7 @@ import 'package:http/http.dart ' as http;
 import 'package:trackingbluetooth/Detail.dart';
 import 'package:trackingbluetooth/DetailRepair.dart';
 import 'package:trackingbluetooth/EditTrack.dart';
+import 'package:trackingbluetooth/saveformrepair.dart';
 
 class repairhistory extends StatefulWidget {
   repairhistory({Key? key, required this.trackid}) : super(key: key);
@@ -47,7 +48,7 @@ class _repairhistoryState extends State<repairhistory> {
             backgroundColor: const Color.fromARGB(255, 18, 95, 116),
             title: const Center(
               child: Text(
-                "ประวัติการซ่อม",
+                "ประวัติการซ่อม/ยืนยันการซ่อม",
                 style: TextStyle(fontSize: 30),
               ),
             ),
@@ -131,6 +132,44 @@ class _repairhistoryState extends State<repairhistory> {
                                         style: const TextStyle(
                                             color: Colors.black, fontSize: 18),
                                       ),
+                                      trailing: Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: <Widget>[
+                                            Align(
+                                              alignment: Alignment.center,
+                                              child: GestureDetector(
+                                                  onTap: () {
+                                                    Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+
+                                                             saveformrepair()
+                                                              ),
+                                                    );
+                                                  },
+                                                  
+                                                  child: Container(
+                                                    decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              8.0),
+                                                      // border: Border.all(),
+                                                      color: Color.fromARGB(255, 9, 163, 158),
+                                                    ),
+                                                    height: 30,
+                                                    // width: 50,
+                                                    child: const Text(
+
+                                                      "ยืนยันการซ่อม",
+                                                      style: TextStyle(
+                                                          color: Color.fromARGB(255, 16, 16, 16),
+                                                          fontSize: 18),
+                                                    ),
+                                                  )),
+                                            ),
+                                          ]),
+
                                       //
                                       onTap: () {
                                         Navigator.push(

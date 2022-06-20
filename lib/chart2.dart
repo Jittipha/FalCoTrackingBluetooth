@@ -1,6 +1,8 @@
-import 'package:fl_chart/fl_chart.dart';
+
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
+import 'package:trackingbluetooth/RoomEquipment.dart';
+
 
 class PieChartSample2 extends StatefulWidget {
   const PieChartSample2({Key? key}) : super(key: key);
@@ -14,9 +16,12 @@ class PieChart2State extends State {
 
   @override
   Widget build(BuildContext context) {
+    RoomEquipment();
     return Container(
+      
       child: Row(
         children: [
+          RoomEquipment(),
           AspectRatio(
             aspectRatio: 1.3,
             child: Row(
