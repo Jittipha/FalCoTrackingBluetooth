@@ -192,7 +192,7 @@ class _RepairListState extends State<RepairList> {
                                     });
                                   },
                                   items: <String>[
-                                    'กำลังใช้งาน',
+                                    
                                     'กำลังซ่อม',
                                   ].map<DropdownMenuItem<String>>(
                                       (String status) {

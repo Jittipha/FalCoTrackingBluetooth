@@ -47,7 +47,7 @@ class _repairhistoryState extends State<repairhistory> {
             backgroundColor: const Color.fromARGB(255, 18, 95, 116),
             title: const Center(
               child: Text(
-                "ประวัติการซ่อม",
+                "ประวัติการซ่อม/ยืนยันการซ่อม",
                 style: TextStyle(fontSize: 30),
               ),
             ),
@@ -131,6 +131,7 @@ class _repairhistoryState extends State<repairhistory> {
                                         style: const TextStyle(
                                             color: Colors.black, fontSize: 18),
                                       ),
+
                                       //
                                       onTap: () {
                                         Navigator.push(
