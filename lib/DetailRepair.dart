@@ -32,27 +32,26 @@ class _DetailRepairState extends State<DetailRepair> {
             child: SingleChildScrollView(
               child: Container(
                 decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        gradient:
-        
-                            //  LinearGradient(colors: [Color.fromARGB(255, 230, 246, 214), Color.fromARGB(255, 120, 187, 242)]),
-                            const LinearGradient(
-                                begin: Alignment(-1, -1),
-                                end: Alignment(2, 0),
-                                colors: [
-                              Color.fromARGB(255, 245, 246, 247),
-                              Color.fromARGB(255, 248, 246, 247)
-                            ])),
-        
-                    //        decoration: BoxDecoration(
-        
-                    // borderRadius: BorderRadius.circular(10),
-                    // color: const Color.fromARGB(250, 255, 255, 255),
-                    // ),
-                    width: 400,
-                    height: 500,
-                
-                
+                    borderRadius: BorderRadius.circular(10),
+                    gradient:
+
+                        //  LinearGradient(colors: [Color.fromARGB(255, 230, 246, 214), Color.fromARGB(255, 120, 187, 242)]),
+                        const LinearGradient(
+                            begin: Alignment(-1, -1),
+                            end: Alignment(2, 0),
+                            colors: [
+                          Color.fromARGB(255, 245, 246, 247),
+                          Color.fromARGB(255, 248, 246, 247)
+                        ])),
+
+                //        decoration: BoxDecoration(
+
+                // borderRadius: BorderRadius.circular(10),
+                // color: const Color.fromARGB(250, 255, 255, 255),
+                // ),
+                width: 400,
+                height: 500,
+
                 padding: const EdgeInsets.fromLTRB(10, 20, 10, 10),
                 child: ListView(children: <Widget>[
                   Text(
@@ -81,8 +80,8 @@ class _DetailRepairState extends State<DetailRepair> {
                   Text(
                     // ignore: prefer_interpolation_to_compose_strings
                     'วันที่ดำเนินการ : ' +
-                        textfordate(widget.result['Day'], widget.result['Month'],
-                            widget.result['Year']),
+                        textfordate(widget.result['Day'],
+                            widget.result['Month'], widget.result['Year']),
                     style: TextStyle(color: Colors.black, fontSize: 18),
                   ),
                   const SizedBox(
@@ -90,7 +89,7 @@ class _DetailRepairState extends State<DetailRepair> {
                   ),
                   Text(
                     // ignore: prefer_interpolation_to_compose_strings
-                    'เวลาที่ซ่อม : ' + widget.result['Time'],
+                    'เวลาที่ดำเนินการ : ' + widget.result['Time'] + " น.",
                     style: const TextStyle(color: Colors.black, fontSize: 18),
                   ),
                   const SizedBox(

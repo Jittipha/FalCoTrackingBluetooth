@@ -192,7 +192,7 @@ class _ListdataState extends State<Listdata> {
                                               MaterialPageRoute(
                                                   builder: (context) =>
 
-                                                      repairhistory(trackid:  _resultList[index]['Track_ID'],)),
+                                                      repairhistory(trackid:  _resultList[index]['Track_ID'], Count_Improve : _resultList[index]["Count_Improve"])),
                                             );
                                           },
                                           
@@ -244,7 +244,7 @@ class _ListdataState extends State<Listdata> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) => Detail(
-                                              result: _resultList[index],
+                                              trackid: _resultList[index]["Track_ID"],
                                             )),
                                   );
                                 },

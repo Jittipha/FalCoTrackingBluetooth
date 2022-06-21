@@ -20,6 +20,7 @@ class PieChart2State extends State {
     return Container(
       
       child: Row(
+
         children: <Widget>[
           Row(
             mainAxisSize: MainAxisSize.max,
@@ -82,6 +83,7 @@ class PieChart2State extends State {
           ),
           const SizedBox(
             width: 28,
+
           ),
         ],
       ),

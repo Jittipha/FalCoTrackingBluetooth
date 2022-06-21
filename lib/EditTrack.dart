@@ -25,6 +25,8 @@ class _EditTrackState extends State<EditTrack> {
   Track track = Track();
   DateTime date = DateTime(2022, 01, 01);
   DateTime? dateTime;
+  String? Status;
+
   //DateTime? newDate;
   String getTextDateStart() {
     if (widget.result['Last_Improve_Date'] == null ||
@@ -78,14 +80,7 @@ class _EditTrackState extends State<EditTrack> {
   }
 
   String dropdownvalue = 'กำลังใช้งาน';
-  var status = [
-    'กำลังใช้งาน',
-    'กำลังซ่อม',
-    'อยู่ระหว่างการดูแลรักษา',
-    'กำลังเปลี่ยนชิ้นส่วน',
-    'เครื่องปิด',
-    'เครื่องเสีย'
-  ];
+  var status = ['เครื่องปิด', 'เครื่องเสีย'];
 
   @override
   Widget build(BuildContext context) {
@@ -180,83 +175,6 @@ class _EditTrackState extends State<EditTrack> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            SizedBox(
-                              width: MediaQuery.of(context).size.width * 0.020,
-                            ),
-                            Column(
-                              children: [
-                                const Text('วันที่ปรับปรุงล่าสุด',
-                                    style: TextStyle(fontSize: 18)),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                SizedBox(
-                                  height: 45,
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.168,
-                                  child: ElevatedButton.icon(
-                                    onPressed: () => pickDateStart(context),
-                                    label: Text(
-                                      getTextDateStart(),
-                                      style: const TextStyle(
-                                        fontSize: 18,
-                                        color: Colors.black,
-                                      ),
-                                    ),
-                                    style: ElevatedButton.styleFrom(
-                                        primary: Colors.white,
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(20))),
-                                    icon: const Icon(
-                                      Icons.calendar_month_rounded,
-                                      color: Colors.black,
-                                      size: 30,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              width: MediaQuery.of(context).size.width * 0.020,
-                            ),
-                            Column(
-                              children: [
-                                const Text('วันที่สิ้นสุด',
-                                    style: TextStyle(fontSize: 20)),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                SizedBox(
-                                  height: 45,
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.168,
-                                  child: ElevatedButton.icon(
-                                    onPressed: () => pickDateLast(context),
-                                    label: Text(
-                                      getTextDateLast(),
-                                      style: const TextStyle(
-                                        fontSize: 18,
-                                        color: Colors.black,
-                                      ),
-                                    ),
-                                    style: ElevatedButton.styleFrom(
-                                        primary: Colors.white,
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(15))),
-                                    icon: const Icon(
-                                      Icons.calendar_month_rounded,
-                                      color: Colors.black,
-                                      size: 30,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              width: MediaQuery.of(context).size.width * 0.020,
-                            ),
                             Column(
                               children: [
                                 const Text('สถานะการทำงาน',
@@ -280,8 +198,7 @@ class _EditTrackState extends State<EditTrack> {
                                       hint: Text(
                                         // ignore: prefer_interpolation_to_compose_strings
                                         "   " +
-                                            (widget.result['Status'] ??
-                                                " เลือกสถานะการทำงานของเครื่อง"),
+                                            (Status ?? widget.result['Status']),
                                         style: const TextStyle(
                                             color: Colors.black),
                                       ),
@@ -296,7 +213,7 @@ class _EditTrackState extends State<EditTrack> {
                                       // change button value to selected value
                                       onChanged: (String? newValue) {
                                         setState(() {
-                                          widget.result['Status'] = newValue!;
+                                          Status = newValue!;
                                         });
                                       },
                                     ),
@@ -353,12 +270,14 @@ class _EditTrackState extends State<EditTrack> {
                                   onPressed: () async {
                                     if (updateTrack.currentState!.validate()) {
                                       updateTrack.currentState!.save();
-                                      if (widget.result['Status'] != null) {
+                                      if (widget.result['Status'] !=
+                                          "กำลังซ่อม") {
                                         showAlertDialog(context);
                                       } else {
                                         Fluttertoast.showToast(
                                             timeInSecForIosWeb: 4,
-                                            msg: "กรุณาใส่สถานะการทำงาน !",
+                                            msg:
+                                                "อุปกรณ์นี้กำลังซ่อมอยู่ ไม่สามารถเเก้ไขสถานะได้ !",
                                             textColor: Colors.white,
                                             backgroundColor: Colors.redAccent,
                                             gravity: ToastGravity.CENTER);
@@ -450,22 +369,20 @@ class _EditTrackState extends State<EditTrack> {
     Widget okButton = FlatButton(
         child: const Text("OK"),
         onPressed: () async {
-          int Count_Improve = widget.result['Count_Improve'];
-          if (widget.result["Status"] == "กำลังซ่อม") {
-            print('Curent_Count>>> ${widget.result['Count_Improve']}');
-            Count_Improve = Count_Improve + 1;
+          String? Date;
+          if (Status == "เครื่องปิด") {
+            Date = DateFormat("dd/MM/yyyy").format(DateTime.now());
           }
-          print('Result_Count>>> $Count_Improve');
+
           var res = await http
               .put(Uri.parse('http://192.168.1.192:3000/track'), body: {
             'Track_ID': widget.result['Track_ID'],
             'Location': widget.result['Location'],
             'Working_Condition': widget.result['Working_Condition'],
-            'Last_Improve_Date': widget.result['Last_Improve_Date'] ?? '',
-            'Count_Improve': Count_Improve.toString(),
-            'End_Date': widget.result['End_Date'] ?? '',
+            'Last_Improve_Date': '',
+            'End_Date': Date ?? '',
             'Note': widget.result['Note'] ?? '',
-            'Status': widget.result['Status'],
+            'Status': Status ?? widget.result["Status"],
           });
           if (res.statusCode == 200) {
             print("true");
