@@ -250,7 +250,7 @@ class _RepairListState extends State<RepairList> {
                                           }
                                       }));
                                   if (status == "กำลังซ่อม") {
-                                    Fluttertoast.showToast(                     
+                                    Fluttertoast.showToast(
                                         msg: "อยู่ระหว่างการซ่อมแซมอยู่!",
                                         gravity: ToastGravity.CENTER);
                                   } else {
@@ -273,11 +273,11 @@ class _RepairListState extends State<RepairList> {
                                           'Month': month,
                                           'Year': year,
                                           'Time': Timerepair,
-                                          'Count_Improve': count.toString(),
                                           'Repair_Description':
                                               track.Repairdetail,
                                           'Company_Repair':
                                               track.Company_Repair,
+                                          'Count_Improve': count.toString(),
                                         });
                                     var data = res.body;
                                     if (res.statusCode == 200) {

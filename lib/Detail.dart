@@ -19,7 +19,7 @@ class _DetailState extends State<Detail> {
     return Scaffold(
         backgroundColor: Colors.lightBlue[100],
         appBar: AppBar(
-          backgroundColor: const Color.fromARGB(255, 18, 95, 116),
+            backgroundColor: const Color.fromARGB(255, 18, 95, 116),
             title: const Center(
               child: Text(
                 "รายละเอียดอุปกรณ์",
@@ -27,7 +27,6 @@ class _DetailState extends State<Detail> {
               ),
             ),
             titleSpacing: 300),
-
         body: Background(
           child: Container(
             // height: double.infinity,
@@ -68,9 +67,9 @@ class _DetailState extends State<Detail> {
                       // ignore: prefer_interpolation_to_compose_strings
                       'รหัสเครื่อง : ' + widget.result['Track_ID'],
                       style: GoogleFonts.alike(
-                        textStyle: Theme.of(context).textTheme.displayMedium,
-                        fontSize: 20,color: Colors.black
-                      ),
+                          textStyle: Theme.of(context).textTheme.displayMedium,
+                          fontSize: 20,
+                          color: Colors.black),
                     ),
                     const SizedBox(
                       height: 5,
@@ -79,9 +78,9 @@ class _DetailState extends State<Detail> {
                       // ignore: prefer_interpolation_to_compose_strings
                       'ยี่ห้อ : ' + widget.result['Brand'],
                       style: GoogleFonts.alike(
-                        textStyle: Theme.of(context).textTheme.displayMedium,
-                        fontSize: 20,color: Colors.black
-                      ),
+                          textStyle: Theme.of(context).textTheme.displayMedium,
+                          fontSize: 20,
+                          color: Colors.black),
                     ),
                     const SizedBox(
                       height: 5,
@@ -89,10 +88,10 @@ class _DetailState extends State<Detail> {
                     Text(
                       // ignore: prefer_interpolation_to_compose_strings
                       'รุ่น : ' + widget.result['Generation'],
-                     style: GoogleFonts.alike(
-                        textStyle: Theme.of(context).textTheme.displayMedium,
-                        fontSize: 20,color: Colors.black
-                      ),
+                      style: GoogleFonts.alike(
+                          textStyle: Theme.of(context).textTheme.displayMedium,
+                          fontSize: 20,
+                          color: Colors.black),
                     ),
                     const SizedBox(
                       height: 5,
@@ -101,9 +100,9 @@ class _DetailState extends State<Detail> {
                       // ignore: prefer_interpolation_to_compose_strings
                       'ผู้ผลิต : ' + widget.result['Menufacturer'],
                       style: GoogleFonts.alike(
-                        textStyle: Theme.of(context).textTheme.displayMedium,
-                        fontSize: 20,color: Colors.black
-                      ),
+                          textStyle: Theme.of(context).textTheme.displayMedium,
+                          fontSize: 20,
+                          color: Colors.black),
                     ),
                     const SizedBox(
                       height: 5,
@@ -112,9 +111,9 @@ class _DetailState extends State<Detail> {
                       // ignore: prefer_interpolation_to_compose_strings
                       'ขนาดเครื่อง : ' + widget.result['Size'],
                       style: GoogleFonts.alike(
-                        textStyle: Theme.of(context).textTheme.displayMedium,
-                        fontSize: 20,color: Colors.black
-                      ),
+                          textStyle: Theme.of(context).textTheme.displayMedium,
+                          fontSize: 20,
+                          color: Colors.black),
                     ),
                     const SizedBox(
                       height: 5,
@@ -123,9 +122,9 @@ class _DetailState extends State<Detail> {
                       // ignore: prefer_interpolation_to_compose_strings
                       'สภาพการใช้งาน : ' + widget.result['Working_Condition'],
                       style: GoogleFonts.alike(
-                        textStyle: Theme.of(context).textTheme.displayMedium,
-                        fontSize: 20,color: Colors.black
-                      ),
+                          textStyle: Theme.of(context).textTheme.displayMedium,
+                          fontSize: 20,
+                          color: Colors.black),
                     ),
                     const SizedBox(
                       height: 5,
@@ -133,11 +132,12 @@ class _DetailState extends State<Detail> {
                     Text(
                       // ignore: prefer_interpolation_to_compose_strings
                       'อายุการใช้งาน : ' +
-                          widget.result['Age_of_use'].toString(),
+                          widget.result['Age_of_use'].toString() +
+                          ' ปี ',
                       style: GoogleFonts.alike(
-                        textStyle: Theme.of(context).textTheme.displayMedium,
-                        fontSize: 20,color: Colors.black
-                      ),
+                          textStyle: Theme.of(context).textTheme.displayMedium,
+                          fontSize: 20,
+                          color: Colors.black),
                     ),
                     const SizedBox(
                       height: 5,
@@ -146,9 +146,9 @@ class _DetailState extends State<Detail> {
                       // ignore: prefer_interpolation_to_compose_strings
                       'ตำเเหน่งที่ตั้ง : ' + widget.result['Location'],
                       style: GoogleFonts.alike(
-                        textStyle: Theme.of(context).textTheme.displayMedium,
-                        fontSize: 20,color: Colors.black
-                      ),
+                          textStyle: Theme.of(context).textTheme.displayMedium,
+                          fontSize: 20,
+                          color: Colors.black),
                     ),
                     const SizedBox(
                       height: 5,
@@ -157,9 +157,9 @@ class _DetailState extends State<Detail> {
                       // ignore: prefer_interpolation_to_compose_strings
                       'ใช้ในการ : ' + widget.result['Work_for'],
                       style: GoogleFonts.alike(
-                        textStyle: Theme.of(context).textTheme.displayMedium,
-                        fontSize: 20,color: Colors.black
-                      ),
+                          textStyle: Theme.of(context).textTheme.displayMedium,
+                          fontSize: 20,
+                          color: Colors.black),
                     ),
                     const SizedBox(
                       height: 5,
@@ -168,9 +168,19 @@ class _DetailState extends State<Detail> {
                       // ignore: prefer_interpolation_to_compose_strings
                       'วันเปิดใช้งาน : ' + widget.result['Start_Enable_Date'],
                       style: GoogleFonts.alike(
-                        textStyle: Theme.of(context).textTheme.displayMedium,
-                        fontSize: 20,color: Colors.black
-                      ),
+                          textStyle: Theme.of(context).textTheme.displayMedium,
+                          fontSize: 20,
+                          color: Colors.black),
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    Text(
+                      'สถานะของเครื่อง : ' + widget.result['Status'],
+                      style: GoogleFonts.alike(
+                          textStyle: Theme.of(context).textTheme.displayMedium,
+                          fontSize: 20,
+                          color: Colors.black),
                     ),
                     const SizedBox(
                       height: 5,
@@ -180,9 +190,9 @@ class _DetailState extends State<Detail> {
                       'จำนวนครั้งที่ซ่อม : ' +
                           (widget.result['Count_Improve'].toString()),
                       style: GoogleFonts.alike(
-                        textStyle: Theme.of(context).textTheme.displayMedium,
-                        fontSize: 20,color: Colors.black
-                      ),
+                          textStyle: Theme.of(context).textTheme.displayMedium,
+                          fontSize: 20,
+                          color: Colors.black),
                     ),
                     const SizedBox(
                       height: 5,
@@ -192,9 +202,9 @@ class _DetailState extends State<Detail> {
                       'วันที่ปรับปรุงล่าสุด : ' +
                           (widget.result['Last_Improve_Date'] ?? '- - -'),
                       style: GoogleFonts.alike(
-                        textStyle: Theme.of(context).textTheme.displayMedium,
-                        fontSize: 20,color: Colors.black
-                      ),
+                          textStyle: Theme.of(context).textTheme.displayMedium,
+                          fontSize: 20,
+                          color: Colors.black),
                     ),
                     const SizedBox(
                       height: 5,
@@ -204,9 +214,9 @@ class _DetailState extends State<Detail> {
                       'วันที่สิ้นสุดงาน : ' +
                           (widget.result['End_Date'] ?? '- - -'),
                       style: GoogleFonts.alike(
-                        textStyle: Theme.of(context).textTheme.displayMedium,
-                        fontSize: 20,color: Colors.black
-                      ),
+                          textStyle: Theme.of(context).textTheme.displayMedium,
+                          fontSize: 20,
+                          color: Colors.black),
                     ),
                     const SizedBox(
                       height: 5,
@@ -215,15 +225,14 @@ class _DetailState extends State<Detail> {
                       // ignore: prefer_interpolation_to_compose_strings
                       'หมายเหตุ : ' + (widget.result['Note'] ?? '- - -'),
                       style: GoogleFonts.alike(
-                        textStyle: Theme.of(context).textTheme.displayMedium,
-                        fontSize: 20,color: Colors.black
-                      ),
+                          textStyle: Theme.of(context).textTheme.displayMedium,
+                          fontSize: 20,
+                          color: Colors.black),
                     ),
                     const SizedBox(
                       height: 30,
                     ),
                   ]),
-
                 ),
               ),
             ),
