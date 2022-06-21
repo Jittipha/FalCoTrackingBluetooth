@@ -89,7 +89,7 @@ class _DetailRepairState extends State<DetailRepair> {
                   ),
                   Text(
                     // ignore: prefer_interpolation_to_compose_strings
-                    'เวลาที่ดำเนินการ : ' + widget.result['Time'],
+                    'เวลาที่ดำเนินการ : ' + widget.result['Time'] + " น.",
                     style: const TextStyle(color: Colors.black, fontSize: 18),
                   ),
                   const SizedBox(
