@@ -1,19 +1,44 @@
 // ignore_for_file: file_names, avoid_unnecessary_containers
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'Background/Bg-detail copy.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:http/http.dart ' as http;
 
 // ignore: must_be_immutable
 class Detail extends StatefulWidget {
-  Detail({Key? key, required this.result}) : super(key: key);
-  Map<String, dynamic> result;
+  Detail({Key? key, required this.trackid}) : super(key: key);
+  String? trackid;
 
   @override
   State<Detail> createState() => _DetailState();
 }
 
 class _DetailState extends State<Detail> {
+  late dynamic _allresult;
+
+  @override
+  void initState() {
+    super.initState();
+    Getdata();
+  }
+
+  Getdata() async {
+    var res = await http
+        .get(Uri.parse('http://192.168.1.192:3000/track/${widget.trackid}'));
+    if (res.statusCode == 200) {
+      var jsonData = jsonDecode(res.body);
+
+      setState(() {
+        _allresult = jsonData;
+      });
+    }
+
+    return 'Complete';
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,7 +90,7 @@ class _DetailState extends State<Detail> {
                   child: ListView(children: <Widget>[
                     Text(
                       // ignore: prefer_interpolation_to_compose_strings
-                      'รหัสเครื่อง : ' + widget.result['Track_ID'],
+                      'รหัสเครื่อง : ' + _allresult['Track_ID'],
                       style: GoogleFonts.alike(
                           textStyle: Theme.of(context).textTheme.displayMedium,
                           fontSize: 20,
@@ -76,7 +101,7 @@ class _DetailState extends State<Detail> {
                     ),
                     Text(
                       // ignore: prefer_interpolation_to_compose_strings
-                      'ยี่ห้อ : ' + widget.result['Brand'],
+                      'ยี่ห้อ : ' + _allresult['Brand'],
                       style: GoogleFonts.alike(
                           textStyle: Theme.of(context).textTheme.displayMedium,
                           fontSize: 20,
@@ -87,7 +112,7 @@ class _DetailState extends State<Detail> {
                     ),
                     Text(
                       // ignore: prefer_interpolation_to_compose_strings
-                      'รุ่น : ' + widget.result['Generation'],
+                      'รุ่น : ' + _allresult['Generation'],
                       style: GoogleFonts.alike(
                           textStyle: Theme.of(context).textTheme.displayMedium,
                           fontSize: 20,
@@ -98,7 +123,7 @@ class _DetailState extends State<Detail> {
                     ),
                     Text(
                       // ignore: prefer_interpolation_to_compose_strings
-                      'ผู้ผลิต : ' + widget.result['Menufacturer'],
+                      'ผู้ผลิต : ' + _allresult['Menufacturer'],
                       style: GoogleFonts.alike(
                           textStyle: Theme.of(context).textTheme.displayMedium,
                           fontSize: 20,
@@ -109,7 +134,7 @@ class _DetailState extends State<Detail> {
                     ),
                     Text(
                       // ignore: prefer_interpolation_to_compose_strings
-                      'ขนาดเครื่อง : ' + widget.result['Size'],
+                      'ขนาดเครื่อง : ' + _allresult['Size'],
                       style: GoogleFonts.alike(
                           textStyle: Theme.of(context).textTheme.displayMedium,
                           fontSize: 20,
@@ -120,7 +145,7 @@ class _DetailState extends State<Detail> {
                     ),
                     Text(
                       // ignore: prefer_interpolation_to_compose_strings
-                      'สภาพการใช้งาน : ' + widget.result['Working_Condition'],
+                      'สภาพการใช้งาน : ' + _allresult['Working_Condition'],
                       style: GoogleFonts.alike(
                           textStyle: Theme.of(context).textTheme.displayMedium,
                           fontSize: 20,
@@ -132,7 +157,7 @@ class _DetailState extends State<Detail> {
                     Text(
                       // ignore: prefer_interpolation_to_compose_strings
                       'อายุการใช้งาน : ' +
-                          widget.result['Age_of_use'].toString() +
+                         _allresult['Age_of_use'].toString() +
                           ' ปี ',
                       style: GoogleFonts.alike(
                           textStyle: Theme.of(context).textTheme.displayMedium,
@@ -144,7 +169,7 @@ class _DetailState extends State<Detail> {
                     ),
                     Text(
                       // ignore: prefer_interpolation_to_compose_strings
-                      'ตำเเหน่งที่ตั้ง : ' + widget.result['Location'],
+                      'ตำเเหน่งที่ตั้ง : ' + _allresult['Location'],
                       style: GoogleFonts.alike(
                           textStyle: Theme.of(context).textTheme.displayMedium,
                           fontSize: 20,
@@ -155,7 +180,7 @@ class _DetailState extends State<Detail> {
                     ),
                     Text(
                       // ignore: prefer_interpolation_to_compose_strings
-                      'ใช้ในการ : ' + widget.result['Work_for'],
+                      'ใช้ในการ : ' + _allresult['Work_for'],
                       style: GoogleFonts.alike(
                           textStyle: Theme.of(context).textTheme.displayMedium,
                           fontSize: 20,
@@ -166,7 +191,7 @@ class _DetailState extends State<Detail> {
                     ),
                     Text(
                       // ignore: prefer_interpolation_to_compose_strings
-                      'วันเปิดใช้งาน : ' + widget.result['Start_Enable_Date'],
+                      'วันเปิดใช้งาน : ' + _allresult['Start_Enable_Date'],
                       style: GoogleFonts.alike(
                           textStyle: Theme.of(context).textTheme.displayMedium,
                           fontSize: 20,
@@ -176,7 +201,7 @@ class _DetailState extends State<Detail> {
                       height: 5,
                     ),
                     Text(
-                      'สถานะของเครื่อง : ' + widget.result['Status'],
+                      'สถานะของเครื่อง : ' + _allresult['Status'],
                       style: GoogleFonts.alike(
                           textStyle: Theme.of(context).textTheme.displayMedium,
                           fontSize: 20,
@@ -188,7 +213,7 @@ class _DetailState extends State<Detail> {
                     Text(
                       // ignore: prefer_interpolation_to_compose_strings
                       'จำนวนครั้งที่ซ่อม : ' +
-                          (widget.result['Count_Improve'].toString()),
+                          (_allresult['Count_Improve'].toString()),
                       style: GoogleFonts.alike(
                           textStyle: Theme.of(context).textTheme.displayMedium,
                           fontSize: 20,
@@ -200,7 +225,7 @@ class _DetailState extends State<Detail> {
                     Text(
                       // ignore: prefer_interpolation_to_compose_strings
                       'วันที่ปรับปรุงล่าสุด : ' +
-                          (widget.result['Last_Improve_Date'] ?? '- - -'),
+                          (_allresult['Last_Improve_Date'] ?? '- - -'),
                       style: GoogleFonts.alike(
                           textStyle: Theme.of(context).textTheme.displayMedium,
                           fontSize: 20,
@@ -212,7 +237,7 @@ class _DetailState extends State<Detail> {
                     Text(
                       // ignore: prefer_interpolation_to_compose_strings
                       'วันที่สิ้นสุดงาน : ' +
-                          (widget.result['End_Date'] ?? '- - -'),
+                          (_allresult['End_Date'] ?? '- - -'),
                       style: GoogleFonts.alike(
                           textStyle: Theme.of(context).textTheme.displayMedium,
                           fontSize: 20,
@@ -223,7 +248,7 @@ class _DetailState extends State<Detail> {
                     ),
                     Text(
                       // ignore: prefer_interpolation_to_compose_strings
-                      'หมายเหตุ : ' + (widget.result['Note'] ?? '- - -'),
+                      'หมายเหตุ : ' + (_allresult['Note'] ?? '- - -'),
                       style: GoogleFonts.alike(
                           textStyle: Theme.of(context).textTheme.displayMedium,
                           fontSize: 20,

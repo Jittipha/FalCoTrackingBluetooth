@@ -47,7 +47,7 @@ class _RepairListState extends State<RepairList> {
 
   getdata() async {
     var res =
-        await http.get(Uri.parse('http://192.168.1.192:3000/tracks/trackid'));
+        await http.get(Uri.parse('http://192.168.1.192:3000/track/trackid'));
     if (res.statusCode == 200) {
       var jsonData = jsonDecode(res.body);
       _allresult = jsonData;

@@ -244,7 +244,7 @@ class _ListdataState extends State<Listdata> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) => Detail(
-                                              result: _resultList[index],
+                                              trackid: _resultList[index]["Track_ID"],
                                             )),
                                   );
                                 },

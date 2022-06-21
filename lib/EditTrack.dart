@@ -26,8 +26,6 @@ class _EditTrackState extends State<EditTrack> {
   DateTime date = DateTime(2022, 01, 01);
   DateTime? dateTime;
   String? Status;
-  
- 
 
   //DateTime? newDate;
   String getTextDateStart() {
@@ -82,10 +80,7 @@ class _EditTrackState extends State<EditTrack> {
   }
 
   String dropdownvalue = 'กำลังใช้งาน';
-  var status = [
-    'เครื่องปิด',
-    'เครื่องเสีย'
-  ];
+  var status = ['เครื่องปิด', 'เครื่องเสีย'];
 
   @override
   Widget build(BuildContext context) {
@@ -203,8 +198,7 @@ class _EditTrackState extends State<EditTrack> {
                                       hint: Text(
                                         // ignore: prefer_interpolation_to_compose_strings
                                         "   " +
-                                            (Status ??
-                                                widget.result['Status']),
+                                            (Status ?? widget.result['Status']),
                                         style: const TextStyle(
                                             color: Colors.black),
                                       ),
@@ -276,13 +270,14 @@ class _EditTrackState extends State<EditTrack> {
                                   onPressed: () async {
                                     if (updateTrack.currentState!.validate()) {
                                       updateTrack.currentState!.save();
-                                      if (widget.result['Status'] != "กำลังซ่อม" ) {
-                                      showAlertDialog(context);
+                                      if (widget.result['Status'] !=
+                                          "กำลังซ่อม") {
+                                        showAlertDialog(context);
                                       } else {
-
                                         Fluttertoast.showToast(
                                             timeInSecForIosWeb: 4,
-                                            msg: "อุปกรณ์นี้กำลังซ่อมอยู่ ไม่สามารถเเก้ไขสถานะได้ !",
+                                            msg:
+                                                "อุปกรณ์นี้กำลังซ่อมอยู่ ไม่สามารถเเก้ไขสถานะได้ !",
                                             textColor: Colors.white,
                                             backgroundColor: Colors.redAccent,
                                             gravity: ToastGravity.CENTER);
@@ -374,22 +369,20 @@ class _EditTrackState extends State<EditTrack> {
     Widget okButton = FlatButton(
         child: const Text("OK"),
         onPressed: () async {
-           String? Date;
-           if (
-            Status =="เครื่องปิด"
-           ) {
+          String? Date;
+          if (Status == "เครื่องปิด") {
             Date = DateFormat("dd/MM/yyyy").format(DateTime.now());
-           }
-           
+          }
+
           var res = await http
               .put(Uri.parse('http://192.168.1.192:3000/track'), body: {
             'Track_ID': widget.result['Track_ID'],
             'Location': widget.result['Location'],
             'Working_Condition': widget.result['Working_Condition'],
-            'Last_Improve_Date':'',
+            'Last_Improve_Date': '',
             'End_Date': Date ?? '',
             'Note': widget.result['Note'] ?? '',
-            'Status': Status,
+            'Status': Status ?? widget.result["Status"],
           });
           if (res.statusCode == 200) {
             print("true");
