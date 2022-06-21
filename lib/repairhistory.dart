@@ -195,7 +195,7 @@ class _repairhistoryState extends State<repairhistory> {
         return Container(
             child: FlatButton(
           // ignore: sort_child_properties_last
-          child: const Text('ยินยันการซ่อม'),
+          child: const Text('ซ่อมเสร็จสิ้น'),
           color: Colors.greenAccent,
           textColor: Colors.white,
           onPressed: () {

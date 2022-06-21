@@ -156,7 +156,9 @@ class _DetailState extends State<Detail> {
                     ),
                     Text(
                       // ignore: prefer_interpolation_to_compose_strings
-                      'อายุการใช้งาน : ' + _allresult['Age_of_use'].toString(),
+                      'อายุการใช้งาน : ' +
+                         _allresult['Age_of_use'].toString() +
+                          ' ปี ',
                       style: GoogleFonts.alike(
                           textStyle: Theme.of(context).textTheme.displayMedium,
                           fontSize: 20,
@@ -190,6 +192,16 @@ class _DetailState extends State<Detail> {
                     Text(
                       // ignore: prefer_interpolation_to_compose_strings
                       'วันเปิดใช้งาน : ' + _allresult['Start_Enable_Date'],
+                      style: GoogleFonts.alike(
+                          textStyle: Theme.of(context).textTheme.displayMedium,
+                          fontSize: 20,
+                          color: Colors.black),
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    Text(
+                      'สถานะของเครื่อง : ' + _allresult['Status'],
                       style: GoogleFonts.alike(
                           textStyle: Theme.of(context).textTheme.displayMedium,
                           fontSize: 20,
