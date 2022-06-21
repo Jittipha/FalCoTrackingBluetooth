@@ -45,6 +45,7 @@ dependencies:
   search_choices: ^2.0.20
   fl_chart: ^0.51.0
   percent_indicator: ^4.2.2
+  socket_io_client: ^1.0.2
   
 
 
