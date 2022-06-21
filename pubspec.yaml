@@ -45,6 +45,8 @@ dependencies:
   search_choices: ^2.0.20
   fl_chart: ^0.51.0
   percent_indicator: ^4.2.2
+  d_chart: ^0.0.4
+  syncfusion_flutter_charts: ^20.1.60+1
   
 
 

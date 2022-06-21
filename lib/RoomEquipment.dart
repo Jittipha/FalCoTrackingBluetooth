@@ -1,5 +1,12 @@
+// ignore_for_file: avoid_unnecessary_containers
+
+import 'dart:html';
+
+import 'package:d_chart/d_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:trackingbluetooth/chart.dart';
 import 'package:trackingbluetooth/chart2.dart';
 import 'package:trackingbluetooth/saveformrepair.dart';
 
@@ -39,16 +46,14 @@ class _RoomEquipmentState extends State<RoomEquipment> {
                   style: TextStyle(color: Colors.white),
                 ))),
             ListTile(
-                leading: const Icon(
-                  Icons.home,
-                ),
-                title: const Text('Page 1'),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => PieChartSample2()),
-                  );
-                }),
+              leading: const Icon(
+                Icons.home,
+              ),
+              title: const Text('Page 1'),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
             ListTile(
               leading: const Icon(
                 Icons.home,
@@ -80,22 +85,158 @@ class _RoomEquipmentState extends State<RoomEquipment> {
                     "https://images.pexels.com/photos/7135058/pexels-photo-7135058.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"),
                 fit: BoxFit.cover),
           ),
-          child: Column(
-            children: [
-              // PieChartSample(),
-              // Row(children: [
-              //   Container(
-              //     width: 300,
-              //     height: 300,
-              //     color: Colors.red,
-              //   ),
-              //   Container(
-              //     width: 200,
-              //     height: 300,
-              //     color: Colors.yellow,
-              //   )
-              // ]),
-            ],
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  const Text("รหัสอุปกรณ์:xxxxxxxxxxxxxx"),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      CircularPercentIndicator(
+                        radius: 45,
+                        lineWidth: 4.0,
+                        percent: 0.10,
+                        center: const Text("10°C"),
+                        progressColor: Colors.red,
+                        animation: true,
+                        animationDuration: 900,
+                        footer: const Text('อุณหภูมิเครื่อง'),
+                      ),
+                      const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 8.0),
+                      ),
+                      CircularPercentIndicator(
+                        radius: 45.0,
+                        lineWidth: 4.0,
+                        percent: 0.30,
+                        center: const Text("30%"),
+                        progressColor: Colors.blue,
+                        animation: true,
+                        animationDuration: 900,
+                        footer: const SizedBox(
+                            height: 20, width: 54, child: Text('แบตเตอรี่')),
+                      ),
+                      const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 8.0),
+                      ),
+                      CircularPercentIndicator(
+                        radius: 45.0,
+                        lineWidth: 4.0,
+                        percent: 0.60,
+                        center: const Text("60%"),
+                        progressColor: Colors.yellow,
+                        animation: true,
+                        animationDuration: 900,
+                      ),
+                      const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 8.0),
+                      ),
+                      CircularPercentIndicator(
+                        radius: 45.0,
+                        lineWidth: 4.0,
+                        percent: 0.90,
+                        center: const Text("90%"),
+                        progressColor: Colors.green,
+                        animation: true,
+                        animationDuration: 900,
+                      )
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 28,
+                  ),
+                  // const BarChartSample2(),
+                  Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: Column(
+                        children: [
+                          Column(
+                            children: [
+                              Row(
+                                children: const [
+                                  SizedBox(width: 70, child: Text('อุณหภูมิ')),
+                                  Icon(
+                                    Icons.square,
+                                    color: Colors.red,
+                                    size: 24.0,
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: const [
+                                  SizedBox(width: 70, child: Text('แบตเตอรี่')),
+                                  Icon(
+                                    Icons.square,
+                                    color: Colors.blue,
+                                    size: 24.0,
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          Container(
+                              child: SfCartesianChart(
+                                  primaryXAxis: CategoryAxis(),
+                                  series: <LineSeries<SalesData, String>>[
+                                LineSeries<SalesData, String>(
+                                    // Bind data source
+                                    dataSource: <SalesData>[
+                                      SalesData('Jan', 10),
+                                      SalesData('Feb', 60),
+                                      SalesData('Mar', 30),
+                                      SalesData('Apr', 50),
+                                      SalesData('May', 50),
+                                      SalesData('Jun', 34),
+                                      SalesData('Jul', 70),
+                                      SalesData('Aug', 80),
+                                      SalesData('Sep', 90),
+                                      SalesData('Oct', 100),
+                                      SalesData('Nov', 20),
+                                      SalesData('Dec', 30),
+                                    ],
+                                    dataLabelSettings: const DataLabelSettings(
+                                        isVisible: true),
+                                    xValueMapper: (SalesData sales, _) =>
+                                        sales.year,
+                                    yValueMapper: (SalesData sales, _) =>
+                                        sales.sales),
+                                LineSeries<SalesData, String>(
+                                    // Bind data source
+                                    dataSource: <SalesData>[
+                                      SalesData('Jan', 12),
+                                      SalesData('Feb', 40),
+                                      SalesData('Mar', 70),
+                                      SalesData('Apr', 80),
+                                      SalesData('May', 50),
+                                      SalesData('Jun', 50),
+                                      SalesData('Jul', 20),
+                                      SalesData('Aug', 10),
+                                      SalesData('Sep', 90),
+                                      SalesData('Oct', 60),
+                                      SalesData('Nov', 50),
+                                      SalesData('Dec', 100),
+                                    ],
+                                    dataLabelSettings: const DataLabelSettings(
+                                        isVisible: true),
+                                    xValueMapper: (SalesData sales, _) =>
+                                        sales.year,
+                                    yValueMapper: (SalesData sales, _) =>
+                                        sales.sales)
+                              ])),
+                        ],
+                      )),
+                ],
+              ),
+            ),
           ),
         ),
       ),
@@ -103,95 +244,8 @@ class _RoomEquipmentState extends State<RoomEquipment> {
   }
 }
 
-// class PieChartSample extends StatefulWidget {
-//   const PieChartSample({Key? key}) : super(key: key);
-
-//   @override
-//   State<StatefulWidget> createState() => PieChart2State();
-// }
-
-// class PieChart2State extends State {
- 
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-   
-      
-//       child: Row(
-//         children: [
-//           AspectRatio(
-//             aspectRatio: 1.3,
-//             child: Row(
-//               children: <Widget>[
-//                 Row(
-//                   mainAxisSize: MainAxisSize.max,
-//                   mainAxisAlignment: MainAxisAlignment.end,
-//                   crossAxisAlignment: CrossAxisAlignment.start,
-                   
-//                   children: <Widget>[
-//                     CircularPercentIndicator(
-//                       radius: 45,
-//                       lineWidth: 4.0,
-//                       percent: 0.30,
-//                       center: const Text("10%"),
-//                       progressColor: Colors.red,
-//                       animation: true,
-//                       animationDuration: 900,
-//                     ),
-//                     // new Padding(
-//                     //   padding: EdgeInsets.symmetric(horizontal: 10.0),
-//                     // ),
-//                     const SizedBox(
-//                       height: 4,
-//                     ),
-//                     // new Padding(
-//                     //       padding: EdgeInsets.symmetric(horizontal: 10.0),
-//                     //     ),
-//                      CircularPercentIndicator(
-//                       radius: 45.0,
-//                       lineWidth: 4.0,
-//                       percent: 0.30,
-//                       center:  const Text("30%"),
-//                       progressColor: Colors.orange,
-//                       animation: true,
-//                       animationDuration: 900,
-//                     ),
-//                     // new Padding(
-//                     //   padding: EdgeInsets.symmetric(horizontal: 10.0),
-//                     // ),
-//                     CircularPercentIndicator(
-//                       radius: 45.0,
-//                       lineWidth: 4.0,
-//                       percent: 0.60,
-//                       center: const Text("60%"),
-//                       progressColor: Colors.yellow,
-//                       animation: true,
-//                       animationDuration: 900,
-//                     ),
-//                     // new Padding(
-//                     //   padding: EdgeInsets.symmetric(horizontal: 10.0),
-//                     // ),
-//                     CircularPercentIndicator(
-//                       radius: 45.0,
-//                       lineWidth: 4.0,
-//                       percent: 0.90,
-//                       center: const Text("90%"),
-//                       progressColor: Colors.green,
-//                       animation: true,
-//                       animationDuration: 900,
-//                     )
-//                   ],
-//                 ),
-//                 const SizedBox(
-//                   width: 28,
-//                 ),
-//               ],
-//             ),
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-// }
-
+class SalesData {
+  SalesData(this.year, this.sales);
+  final String year;
+  final double sales;
+}
