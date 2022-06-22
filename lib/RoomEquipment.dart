@@ -9,6 +9,7 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:trackingbluetooth/chart.dart';
 import 'package:trackingbluetooth/chart2.dart';
 import 'package:trackingbluetooth/saveformrepair.dart';
+import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 import 'Background/Bg-Edit.dart';
 
@@ -20,6 +21,61 @@ class RoomEquipment extends StatefulWidget {
 }
 
 class _RoomEquipmentState extends State<RoomEquipment> {
+  late IO.Socket socket;
+  String? Temp;
+  String? bat;
+  String? hum;
+  @override
+  void initState() {
+    super.initState();
+    connect();
+  }
+
+  void connect() async {
+    // MessageModel messageModel = MessageModel(sourceId: widget.sourceChat.id.toString(),targetId: );
+    socket = IO.io("http://192.168.1.192:8000", <String, dynamic>{
+      "transports": ["websocket"],
+      "autoConnect": false,
+    });
+    socket.connect();
+    socket.onConnect((data) {
+      print("Connected");
+      socket.on("message", (msg) {
+        print(msg);
+        setState(() {
+          Temp = msg[0]["temperature"];
+          bat = msg[0]["battery"];
+          hum = msg[0]["humidity"];
+          print(Temp);
+          print(bat);
+          print(hum);
+        });
+      });
+    });
+  }
+  void get() async {
+    // MessageModel messageModel = MessageModel(sourceId: widget.sourceChat.id.toString(),targetId: );
+    socket = IO.io("http://192.168.1.192:8000", <String, dynamic>{
+      "transports": ["websocket"],
+      "autoConnect": false,
+    });
+    socket.connect();
+    socket.onConnect((data) {
+      print("Connected");
+      socket.on("getall", (msg) {
+        print(msg);
+        setState(() {
+          Temp = msg[0]["temperature"];
+          bat = msg[0]["battery"];
+          hum = msg[0]["humidity"];
+          print(Temp);
+          print(bat);
+          print(hum);
+        });
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -101,8 +157,8 @@ class _RoomEquipmentState extends State<RoomEquipment> {
                       CircularPercentIndicator(
                         radius: 45,
                         lineWidth: 4.0,
-                        percent: 0.10,
-                        center: const Text("10°C"),
+                        percent: textforpercent(Temp.toString()),
+                        center: Text(Temp.toString() + '°C'),
                         progressColor: Colors.red,
                         animation: true,
                         animationDuration: 900,
@@ -114,8 +170,8 @@ class _RoomEquipmentState extends State<RoomEquipment> {
                       CircularPercentIndicator(
                         radius: 45.0,
                         lineWidth: 4.0,
-                        percent: 0.30,
-                        center: const Text("30%"),
+                        percent: textforpercent(bat.toString()),
+                        center: Text(bat.toString() + '%'),
                         progressColor: Colors.blue,
                         animation: true,
                         animationDuration: 900,
@@ -128,24 +184,26 @@ class _RoomEquipmentState extends State<RoomEquipment> {
                       CircularPercentIndicator(
                         radius: 45.0,
                         lineWidth: 4.0,
-                        percent: 0.60,
-                        center: const Text("60%"),
+                        percent: textforpercent(hum.toString()),
+                        center: Text(hum.toString() + '%'),
                         progressColor: Colors.yellow,
                         animation: true,
                         animationDuration: 900,
+                        footer: const SizedBox(
+                            height: 20, width: 54, child: Text('ความชื้น')),
                       ),
-                      const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 8.0),
-                      ),
-                      CircularPercentIndicator(
-                        radius: 45.0,
-                        lineWidth: 4.0,
-                        percent: 0.90,
-                        center: const Text("90%"),
-                        progressColor: Colors.green,
-                        animation: true,
-                        animationDuration: 900,
-                      )
+                      // const Padding(
+                      //   padding: EdgeInsets.symmetric(horizontal: 8.0),
+                      // ),
+                      // CircularPercentIndicator(
+                      //   radius: 45.0,
+                      //   lineWidth: 4.0,
+                      //   percent: 0.90,
+                      //   center: const Text("90%"),
+                      //   progressColor: Colors.green,
+                      //   animation: true,
+                      //   animationDuration: 900,
+                      // )
                     ],
                   ),
                   const SizedBox(
@@ -241,6 +299,13 @@ class _RoomEquipmentState extends State<RoomEquipment> {
         ),
       ),
     );
+  }
+
+  textforpercent(String Temp) {
+    double a = double.parse(Temp);
+    a = a / 100;
+    a = a.abs();
+    return a;
   }
 }
 
