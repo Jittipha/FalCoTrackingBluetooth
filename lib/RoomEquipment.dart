@@ -53,28 +53,6 @@ class _RoomEquipmentState extends State<RoomEquipment> {
       });
     });
   }
-  void get() async {
-    // MessageModel messageModel = MessageModel(sourceId: widget.sourceChat.id.toString(),targetId: );
-    socket = IO.io("http://192.168.1.192:8000", <String, dynamic>{
-      "transports": ["websocket"],
-      "autoConnect": false,
-    });
-    socket.connect();
-    socket.onConnect((data) {
-      print("Connected");
-      socket.on("getall", (msg) {
-        print(msg);
-        setState(() {
-          Temp = msg[0]["temperature"];
-          bat = msg[0]["battery"];
-          hum = msg[0]["humidity"];
-          print(Temp);
-          print(bat);
-          print(hum);
-        });
-      });
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
