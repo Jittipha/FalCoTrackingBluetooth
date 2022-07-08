@@ -1,7 +1,6 @@
 // ignore_for_file: file_names, avoid_unnecessary_containers
 
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'Background/Bg-detail copy.dart';
 import 'package:google_fonts/google_fonts.dart';
