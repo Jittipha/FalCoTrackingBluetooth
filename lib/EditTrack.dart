@@ -80,7 +80,7 @@ class _EditTrackState extends State<EditTrack> {
   }
 
   String dropdownvalue = 'กำลังใช้งาน';
-  var status = ['เครื่องปิด', 'เครื่องเสีย'];
+  var status = ['เครื่องปิด'];
 
   @override
   Widget build(BuildContext context) {
@@ -387,11 +387,12 @@ class _EditTrackState extends State<EditTrack> {
           if (res.statusCode == 200) {
             print("true");
             Navigator.pop(context);
+            Navigator.pop(context);
             // ignore: use_build_context_synchronously
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const Listdata()),
-            );
+            // Navigator.push(
+            //   context,
+            //   MaterialPageRoute(builder: (context) => const Listdata()),
+            // );
           }
         });
 

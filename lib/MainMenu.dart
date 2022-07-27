@@ -1,13 +1,16 @@
 // ignore_for_file: file_names, camel_case_types, prefer_const_literals_to_create_immutables, unnecessary_const
 
+import 'dart:convert';
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:trackingbluetooth/Background/Bg.dart';
 import 'package:trackingbluetooth/CreateTrack.dart';
 import 'package:trackingbluetooth/ListData.dart';
 import 'package:trackingbluetooth/repairform.dart';
-
+import 'package:http/http.dart ' as http;
 import 'RoomEquipment.dart';
+
 class mainmenu extends StatefulWidget {
   const mainmenu({Key? key}) : super(key: key);
 
@@ -16,6 +19,19 @@ class mainmenu extends StatefulWidget {
 }
 
 class _mainmenuState extends State<mainmenu> {
+  List Device = [];
+  getmacdeive() async {
+    var jsonData;
+    var res = await http.get(Uri.parse('http://192.168.1.192:3000/iot/device'));
+    if (res.statusCode == 200) {
+      jsonData = jsonDecode(res.body);
+      setState(() {
+        Device = jsonData;
+      });
+    }
+    return jsonData;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -112,12 +128,8 @@ class _mainmenuState extends State<mainmenu> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-
-                            builder: (context) => RepairList()));
-
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => RepairList()));
                   },
                   child: Container(
                     padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
@@ -146,17 +158,20 @@ class _mainmenuState extends State<mainmenu> {
                         )),
                   ),
                 ),
-                 const SizedBox(
+                const SizedBox(
                   height: 30,
                 ),
                 GestureDetector(
-                  onTap: () {
+                  onTap: () async {
+                    await getmacdeive();
+                    print(Device);
+                    // ignore: use_build_context_synchronously
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-
-                            builder: (context) => RoomEquipment()));
-
+                            builder: (context) => RoomEquipment(
+                                  Device: Device,
+                                )));
                   },
                   child: Container(
                     padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
@@ -184,7 +199,8 @@ class _mainmenuState extends State<mainmenu> {
                               fontWeight: FontWeight.w500),
                         )),
                   ),
-            )],
+                )
+              ],
             ),
           ),
         ),

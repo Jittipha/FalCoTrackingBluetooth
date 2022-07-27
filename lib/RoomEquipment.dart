@@ -8,17 +8,16 @@ import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:trackingbluetooth/MainMenu.dart';
-import 'package:trackingbluetooth/chart.dart';
-import 'package:trackingbluetooth/chart2.dart';
+
 import 'package:trackingbluetooth/saveformrepair.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 import 'package:intl/intl.dart';
-import 'package:http/http.dart ' as http;
+
 import 'Background/Bg-Edit.dart';
 
 class RoomEquipment extends StatefulWidget {
-  const RoomEquipment({Key? key}) : super(key: key);
-
+  RoomEquipment({required this.Device});
+  List Device = [];
   @override
   State<RoomEquipment> createState() => _RoomEquipmentState();
 }
@@ -28,24 +27,29 @@ class _RoomEquipmentState extends State<RoomEquipment> {
     "transports": ["websocket"],
     "autoConnect": false,
   });
-  final List<SalesData> listtemp = [];
-  final List<SalesData> listbatt = [];
+  List<SalesData> listtemp = [];
+  List<SalesData> listbatt = [];
   List<SalesData> listhum = [];
   dynamic updateiot;
   List<String> Day = [];
-  List Data = [];
+  List Data = ['', '', '', '', '', '', ''];
   List test = [];
-  List Device = [];
-  bool _justfirst = false;
+
+  var mac;
+
   int check = 0;
+  bool onlyonce1 = false;
+  bool onlyonce2 = false;
   var messagedayandmac;
+
   @override
   void initState() {
-    // getmacdeive();
-    addlistday();
-    Sock();
-
-    addlisttemp();
+    if (socket.connected == true) {
+      socket.disconnect();
+    } else {
+      socket.connect();
+    }
+    setfirstmac();
     super.initState();
   }
 
@@ -55,12 +59,20 @@ class _RoomEquipmentState extends State<RoomEquipment> {
     super.dispose();
   }
 
+  void setfirstmac() {
+    if (selectedIndex == 0) {
+      mac = widget.Device[0]['mac'];
+    }
+    setState(() {});
+  }
+
   void addlistday() {
     for (int a = -7; a < 0; a++) {
       String day = DateFormat("yyyy-MM-dd")
           .format(DateTime.now().add(Duration(days: a)));
       Day.add(day);
     }
+
     messagedayandmac = {
       'day1': Day[0],
       'day2': Day[1],
@@ -69,127 +81,95 @@ class _RoomEquipmentState extends State<RoomEquipment> {
       'day5': Day[4],
       'day6': Day[5],
       'day7': Day[6],
-      'mac': 'AC233FA2148E'
+      'mac': mac
     };
-  }
-
-  // void getmacdeive() async {
-  //   var res = await http.get(Uri.parse('http://192.168.1.192:3000/iot/device'));
-  //   if (res.statusCode == 200) {
-  //     var jsonData = jsonDecode(res.body);
-
-  //     setState(() {
-  //       Device = jsonData;
-  //     });
-  //   }
-  // }
-
-  void Sock() async {
-    // MessageModel messageModel = MessageModel(sourceId: widget.sourceChat.id.toString(),targetId: );
-    socket.connect();
-    // if (socket.connected == true) {
-    //   socket.disconnect();
-    //   socket.connect();
-    // } else {
-    //   socket.connect();
-    // }
-
-    // socket.disconnect();
   }
 
   Future connectsocket() async {
     // socket.onConnect((data) {
     //   print("Connected");
     // });
-    socket.emit('reqiotnow', '');
+    addlistday();
+    List Dayshow = [];
+
+    var list;
+    String? splitdt;
+    String? convertstringtemp;
+    String? convertstringbat;
+    String? convertstringhum;
+    var temp;
+    var batt;
+    var hum;
+    String? check;
+
+    print('mac >>>> $mac ------ $onlyonce1 -----${socket.connected}');
+// Future.delayed(const Duration(milliseconds: 300), () {});
+    socket.emit('selectmac', mac);
+
     socket.on("message", (msg) {
-      print(msg);
+      if (!onlyonce1) {
+        print(msg);
+        if (msg[0]['mac'] == mac && msg != null) {
+          updateiot = {
+            'temp': msg[0]["temperature"],
+            'batt': msg[0]["battery"],
+            'hum': msg[0]["humidity"]
+          };
+        } else {
+          socket.emit('selectmac', mac);
+          socket.on("message", (msg) {
+            print(msg);
 
-      updateiot = {
-        'temp': msg[0]["temperature"],
-        'batt': msg[0]["battery"],
-        'hum': msg[0]["humidity"]
-      };
+            updateiot = {
+              'temp': msg[0]["temperature"],
+              'batt': msg[0]["battery"],
+              'hum': msg[0]["humidity"]
+            };
+            
+          });
+        }
+        print(' messagedayandmac  ==$messagedayandmac');
+        socket.emit('Temp', messagedayandmac);
+        socket.on(
+            'restemp',
+            (data) => {
+                  list = data[0]['dt_create'].split(' '),
+                  splitdt = list[0],
+                  if (check != splitdt)
+                    {
+                      check = splitdt,
+                      convertstringtemp =
+                          data[0]['AVG(temperature)'].toStringAsFixed(2),
+                      temp = double.parse(convertstringtemp!),
+                      convertstringbat =
+                          data[0]['AVG(battery)'].toStringAsFixed(2),
+                      batt = double.parse(convertstringbat!),
+                      convertstringhum =
+                          data[0]['AVG(humidity)'].toStringAsFixed(2),
+                      hum = double.parse(convertstringhum!),
+                      print('temp == $temp ,baat == $batt , humidity == $hum '),
+                      listtemp.add(SalesData(splitdt!, temp)),
+                      listbatt.add(SalesData(splitdt!, batt)),
+                      listhum.add(SalesData(splitdt!, hum)),
+                      //       }
+                      //   },
+                      if (this.mounted) {setState(() {})}
+                    }
+                });
 
-      if (this.mounted) {
-        setState(() {});
+        if (this.mounted) {
+          setState(() {});
+        }
+
+        onlyonce1 = true;
       }
-
-      // for (int a = 0; a < Day.length; a++) {
-      //   var message = {'day': Day[a], 'mac': 'AC233FA2148E'};
-      //   socket.emit('day', message);
-      // }
-      // socket.on('data', (data) => {Data.add(data), setState(() {})});
     });
+
     return updateiot;
   }
 
-  addlisttemp() async {
-    print(_justfirst);
-    if (_justfirst == false) {
-      List Dayshow = [];
-      Data = ['', '', '', '', '', '', ''];
-      var list;
-      String? splitdt;
-      String? convertstringtemp;
-      String? convertstringbat;
-      String? convertstringhum;
-      var temp;
-      var batt;
-      var hum;
-      socket.emit('Temp', messagedayandmac);
-      socket.on(
-          'restemp',
-          (data) => {
-                print(data),
-                list = data[0]['dt_create'].split(' '),
-                splitdt = list[0],
-                if (splitdt == Day[0])
-                  {Data[0] = data[0]}
-                else if (splitdt == Day[1])
-                  {Data[1] = data[0]}
-                else if (splitdt == Day[2])
-                  {Data[2] = data[0]}
-                else if (splitdt == Day[3])
-                  {Data[3] = data[0]}
-                else if (splitdt == Day[4])
-                  {Data[4] = data[0]}
-                else if (splitdt == Day[5])
-                  {Data[5] = data[0]}
-                else if (splitdt == Day[6])
-                  {Data[6] = data[0]},
-                for (int a = 0; a < Data.length; a++)
-                  {
-                    if (Data[a] != '')
-                      {
-                        convertstringtemp =
-                            Data[a]['AVG(temperature)'].toStringAsFixed(2),
-                        temp = double.parse(convertstringtemp!),
-                        convertstringbat =
-                            Data[a]['AVG(battery)'].toStringAsFixed(2),
-                        batt = double.parse(convertstringbat!),
-                        convertstringhum =
-                            Data[a]['AVG(humidity)'].toStringAsFixed(2),
-                        hum = double.parse(convertstringhum!),
-                        print(
-                            'temp == $temp ,baat == $batt , humidity == $hum '),
-                        listtemp.add(SalesData(Day[a], temp)),
-                        listbatt.add(SalesData(Day[a], batt)),
-                        listhum.add(SalesData(Day[a], hum)),
-                      }
-                  },
-                print('data >>>> ${Data.length}'),
-                _justfirst = true,
-                if (this.mounted) {setState(() {})}
-              });
-    }
-    print('num ==== $check');
-  }
 
-  charttemp() {
-    return listtemp;
-  }
-
+  int selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -216,22 +196,30 @@ class _RoomEquipmentState extends State<RoomEquipment> {
                     style: TextStyle(color: Colors.white),
                   ))),
               Container(
-                height: 100,
-                child: Expanded(
-                  child: ListView.builder(
-                      itemCount: Device.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return ListTile(
-                          leading: const Icon(
-                            Icons.devices,
-                          ),
-                          title: Text(Device[index]['mac']),
-                          onTap: () {
-                            Navigator.pop(context);
-                          },
-                        );
-                      }),
-                ),
+                height: 550,
+                child: ListView.builder(
+                    itemCount: widget.Device.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return ListTile(
+                        selected: selectedIndex == index,
+                        leading: const Icon(
+                          Icons.devices,
+                        ),
+                        title: Text(widget.Device[index]['mac']),
+                        onTap: () async {
+                          mac = widget.Device[index]['mac'];
+                          selectedIndex = index;
+                          onlyonce1 = false;
+                          listtemp = [];
+                          listbatt = [];
+                          listhum = [];
+                          print(mac);
+                          setState(() {});
+
+                          Navigator.pop(context);
+                        },
+                      );
+                    }),
               ),
               ListTile(
                 leading: const Icon(Icons.arrow_back_sharp),
@@ -263,7 +251,7 @@ class _RoomEquipmentState extends State<RoomEquipment> {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  const Text("รหัสอุปกรณ์:xxxxxxxxxxxxxx"),
+                  Text("รหัสอุปกรณ์ : " + mac),
                   const SizedBox(
                     height: 20,
                   ),
@@ -279,9 +267,9 @@ class _RoomEquipmentState extends State<RoomEquipment> {
                                 radius: 45,
                                 lineWidth: 4.0,
                                 percent: textforpercent(
-                                    updateiot['temp'].toString()),
-                                center:
-                                    Text(updateiot['temp'].toString() + '°C'),
+                                    snapshot.data['temp'].toString()),
+                                center: Text(
+                                    snapshot.data['temp'].toString() + '°C'),
                                 progressColor: Colors.pinkAccent,
                                 animation: true,
                                 animationDuration: 900,
@@ -294,9 +282,9 @@ class _RoomEquipmentState extends State<RoomEquipment> {
                                 radius: 45.0,
                                 lineWidth: 4.0,
                                 percent: textforpercent(
-                                    updateiot['batt'].toString()),
-                                center:
-                                    Text(updateiot['batt'].toString() + '%'),
+                                    snapshot.data['batt'].toString()),
+                                center: Text(
+                                    snapshot.data['batt'].toString() + '%'),
                                 progressColor: Colors.blue,
                                 animation: true,
                                 animationDuration: 900,
@@ -311,9 +299,10 @@ class _RoomEquipmentState extends State<RoomEquipment> {
                               CircularPercentIndicator(
                                 radius: 45.0,
                                 lineWidth: 4.0,
-                                percent:
-                                    textforpercent(updateiot['hum'].toString()),
-                                center: Text(updateiot['hum'].toString() + '%'),
+                                percent: textforpercent(
+                                    snapshot.data['hum'].toString()),
+                                center:
+                                    Text(snapshot.data['hum'].toString() + '%'),
                                 progressColor: Colors.yellow,
                                 animation: true,
                                 animationDuration: 900,

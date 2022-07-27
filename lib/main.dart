@@ -10,8 +10,7 @@ import 'package:trackingbluetooth/EditTrack.dart';
 
 import 'package:trackingbluetooth/MainMenu.dart';
 import 'package:trackingbluetooth/RoomEquipment.dart';
-import 'package:trackingbluetooth/chart.dart';
-import 'package:trackingbluetooth/chart2.dart';
+
 
 void main() {
   runApp(const MyApp());

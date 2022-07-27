@@ -49,11 +49,10 @@ class _repairhistoryState extends State<repairhistory> {
 
       setState(() {
         _allresult = jsonData;
-        print(_allresult.length);
       });
     }
 
-    return 'Complete';
+    return _allresult;
   }
 
   Widget build(BuildContext context) {
@@ -69,110 +68,128 @@ class _repairhistoryState extends State<repairhistory> {
             ),
             titleSpacing: 300),
         body: Background(
-          child: Align(
-            alignment: Alignment.topCenter,
-            child: Container(
-              height: double.infinity,
-              width: double.infinity,
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                    image: NetworkImage(
-                        "https://images.unsplash.com/photo-1651147538420-06f5e0d3f1d9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"),
-                    fit: BoxFit.cover),
-              ),
-              padding: const EdgeInsets.only(
-                left: 400,
-                right: 400,
-                top: 70,
-              ),
-              child: Container(
-                width: 1000,
-                padding: const EdgeInsets.fromLTRB(10, 20, 10, 10),
-                child: Column(children: <Widget>[
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  Expanded(
-                    child: _allresult.isEmpty
-                        ? const Center(
-                            child: Text(
-                              "ไม่มีประวัติการซ่อม",
-                              style: TextStyle(
-                                color: Color.fromARGB(255, 252, 249, 249),
-                                fontSize: 30,
-                                fontFamily: 'Raleway',
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
+          child: FutureBuilder(
+              future: Getdata(),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return Align(
+                    alignment: Alignment.topCenter,
+                    child: Container(
+                      height: double.infinity,
+                      width: double.infinity,
+                      decoration: const BoxDecoration(
+                        image: DecorationImage(
+                            image: NetworkImage(
+                                "https://images.unsplash.com/photo-1651147538420-06f5e0d3f1d9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"),
+                            fit: BoxFit.cover),
+                      ),
+                      padding: const EdgeInsets.only(
+                        left: 400,
+                        right: 400,
+                        top: 70,
+                      ),
+                      child: Container(
+                        width: 1000,
+                        padding: const EdgeInsets.fromLTRB(10, 20, 10, 10),
+                        child: Column(children: <Widget>[
+                          const SizedBox(
+                            height: 30,
+                          ),
+                          Expanded(
+                            child: _allresult.isEmpty
+                                ? const Center(
+                                    child: Text(
+                                      "ไม่มีประวัติการซ่อม",
+                                      style: TextStyle(
+                                        color:
+                                            Color.fromARGB(255, 252, 249, 249),
+                                        fontSize: 30,
+                                        fontFamily: 'Raleway',
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                  )
+                                : ListView.builder(
+                                    itemCount: _allresult.length,
+                                    itemBuilder:
+                                        ((BuildContext context, int index) {
+                                      return Padding(
+                                          padding: const EdgeInsets.all(3.0),
+                                          child: Container(
+                                            padding: const EdgeInsets.fromLTRB(
+                                                0, 0, 0, 5),
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              color: Colors.white,
+                                              // boxShadow: const [
+                                              //   BoxShadow(
+                                              //     color: Colors.grey,
+                                              //     blurRadius: 100,
+                                              //     offset: Offset(20, 10),
+                                              //      // Shadow position
+                                              //   ),
+                                              // ],
+                                            ),
+                                            child: ListTile(
+                                              contentPadding:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 20.0),
+                                              // const EdgeInsets.only(bottom: 20.0),
+                                              title: Text(
+                                                // ignore: prefer_interpolation_to_compose_strings
+                                                'วันที่ดำเนินการ : ' +
+                                                    textfordate(
+                                                        _allresult[index]
+                                                            ["Day"],
+                                                        _allresult[index]
+                                                            ["Month"],
+                                                        _allresult[index]
+                                                            ["Year"],
+                                                        _allresult[index]
+                                                            ["Time"]),
+
+                                                style: const TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 18),
+                                              ),
+                                              subtitle: Text(
+                                                // ignore: prefer_interpolation_to_compose_strings
+                                                'สถานะ : ' +
+                                                    _allresult[index]['Status'],
+                                                style: const TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 18),
+                                              ),
+                                              trailing: trailng(
+                                                  _allresult[index]["Status"],
+                                                  _allresult[index],
+                                                  index),
+
+                                              onTap: () {
+                                                Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          DetailRepair(
+                                                            result: _allresult[
+                                                                index],
+                                                          )),
+                                                );
+                                              },
+                                            ),
+                                          ));
+                                      // }return Container();
+                                    })),
                           )
-                        : ListView.builder(
-                            itemCount: _allresult.length,
-                            itemBuilder: ((BuildContext context, int index) {
-                              return Padding(
-                                  padding: const EdgeInsets.all(3.0),
-                                  child: Container(
-                                    padding:
-                                        const EdgeInsets.fromLTRB(0, 0, 0, 5),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                      color: Colors.white,
-                                      // boxShadow: const [
-                                      //   BoxShadow(
-                                      //     color: Colors.grey,
-                                      //     blurRadius: 100,
-                                      //     offset: Offset(20, 10),
-                                      //      // Shadow position
-                                      //   ),
-                                      // ],
-                                    ),
-                                    child: ListTile(
-                                      contentPadding:
-                                          const EdgeInsets.symmetric(
-                                              horizontal: 20.0),
-                                      // const EdgeInsets.only(bottom: 20.0),
-                                      title: Text(
-                                        // ignore: prefer_interpolation_to_compose_strings
-                                        'วันที่ดำเนินการ : ' +
-                                            textfordate(
-                                                _allresult[index]["Day"],
-                                                _allresult[index]["Month"],
-                                                _allresult[index]["Year"],
-                                                _allresult[index]["Time"]),
-
-                                        style: const TextStyle(
-                                            color: Colors.black, fontSize: 18),
-                                      ),
-                                      subtitle: Text(
-                                        // ignore: prefer_interpolation_to_compose_strings
-                                        'สถานะ : ' +
-                                            _allresult[index]['Status'],
-                                        style: const TextStyle(
-                                            color: Colors.black, fontSize: 18),
-                                      ),
-                                      trailing: trailng(
-                                          _allresult[index]["Status"],
-                                          _allresult[index],
-                                          index),
-
-                                      onTap: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  DetailRepair(
-                                                    result: _allresult[index],
-                                                  )),
-                                        );
-                                      },
-                                    ),
-                                  ));
-                              // }return Container();
-                            })),
-                  )
-                ]),
-              ),
-            ),
-          ),
+                        ]),
+                      ),
+                    ),
+                  );
+                } else {
+                  return CircularProgressIndicator();
+                }
+              }),
         ));
   }
 
@@ -182,16 +199,9 @@ class _repairhistoryState extends State<repairhistory> {
   }
 
   Widget trailng(String Status, Map<String, dynamic> result, int index) {
-    print(_alreadyconfirm);
-    if (Status != 'กำลังซ่อม') {
-      if (index == 0) {
-        updatecheckfirstlist();
-      }
-      return const Text("");
-    } else {
-      if (_alreadyconfirm == false && _checkfirstlist == false) {
-        updateconfirm();
-
+    print('already === $_alreadyconfirm');
+    if (index == 0) {
+      if (Status == 'กำลังซ่อม') {
         return Container(
             child: FlatButton(
           // ignore: sort_child_properties_last
@@ -203,10 +213,16 @@ class _repairhistoryState extends State<repairhistory> {
           },
         ));
       } else {
+        return const Text("");
+      }
+    } else {
+      if (Status == 'กำลังซ่อม') {
         return const Text(
           "กดใช้งานแล้ว",
           style: TextStyle(fontSize: 16, color: Colors.blueGrey),
         );
+      } else {
+        return const Text("");
       }
     }
   }
