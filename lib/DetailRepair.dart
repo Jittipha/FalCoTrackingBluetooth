@@ -1,11 +1,8 @@
-// ignore_for_file: file_names
-
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-
 import 'Background/Bg-detail copy.dart';
 
-// ignore: must_be_immutable
+
+
 class DetailRepair extends StatefulWidget {
   DetailRepair({Key? key, required this.result}) : super(key: key);
   Map<String, dynamic> result;

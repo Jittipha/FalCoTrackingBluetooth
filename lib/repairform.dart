@@ -1,11 +1,7 @@
 import 'dart:convert';
-import 'dart:developer';
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:form_field_validator/form_field_validator.dart';
-import 'package:http/http.dart';
 import 'package:intl/intl.dart';
 import 'package:search_choices/search_choices.dart';
 import 'package:trackingbluetooth/Background/Bg-detail%20copy.dart';

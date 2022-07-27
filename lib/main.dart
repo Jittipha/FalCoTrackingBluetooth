@@ -1,15 +1,6 @@
 import 'package:flutter/material.dart';
-
-import 'package:trackingbluetooth/Detail.dart';
-import 'package:trackingbluetooth/DetailRepair.dart';
-
-import 'package:trackingbluetooth/ListData.dart';
-
-import 'package:trackingbluetooth/CreateTrack.dart';
-import 'package:trackingbluetooth/EditTrack.dart';
-
 import 'package:trackingbluetooth/MainMenu.dart';
-import 'package:trackingbluetooth/RoomEquipment.dart';
+
 
 
 void main() {

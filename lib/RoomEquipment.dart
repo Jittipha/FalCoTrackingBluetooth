@@ -1,12 +1,8 @@
 // ignore_for_file: avoid_unnecessary_containers
-
-import 'dart:convert';
-import 'dart:html';
-
-import 'package:d_chart/d_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
+
 import 'package:trackingbluetooth/MainMenu.dart';
 
 import 'package:trackingbluetooth/saveformrepair.dart';
@@ -14,6 +10,11 @@ import 'package:socket_io_client/socket_io_client.dart' as IO;
 import 'package:intl/intl.dart';
 
 import 'Background/Bg-Edit.dart';
+
+import 'package:socket_io_client/socket_io_client.dart' as IO;
+import 'package:intl/intl.dart';
+import 'package:http/http.dart ' as http;
+
 
 class RoomEquipment extends StatefulWidget {
   RoomEquipment({required this.Device});

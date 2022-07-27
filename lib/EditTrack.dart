@@ -1,11 +1,8 @@
-// ignore_for_file: file_names, prefer_interpolation_to_compose_strings, non_constant_identifier_names, avoid_print, use_build_context_synchronously, duplicate_ignore
-// ignore: avoid_web_libraries_in_flutter, unused_import
-import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:intl/intl.dart';
-// ignore: unused_import
 import 'package:http/http.dart ' as http;
 import 'package:trackingbluetooth/ListData.dart';
 import 'Background/Bg-Edit.dart';
